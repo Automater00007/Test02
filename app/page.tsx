@@ -2,6 +2,7 @@ import HeroFilm from "@/components/home/HeroFilm";
 import Statement from "@/components/home/Statement";
 import Estate from "@/components/home/Estate";
 import GalleryHorizontal from "@/components/home/GalleryHorizontal";
+import StackCarousel from "@/components/home/StackCarousel";
 import Suites from "@/components/home/Suites";
 import DayTimeline from "@/components/home/DayTimeline";
 import LocationSection from "@/components/home/LocationSection";
@@ -23,6 +24,7 @@ export default async function HomePage() {
       <Statement />
       <Estate />
       <GalleryHorizontal />
+      <StackCarousel />
       <Suites />
       <DayTimeline />
       <GuestStories videos={videos} playlistUrl={playlistUrl} />

@@ -1,10 +1,13 @@
 "use client";
 
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { rooms, site } from "@/lib/content";
 import SplitText from "@/components/ui/SplitText";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 const suiteImages: Record<string, string[]> = {
   "premium-balcony-room": [
@@ -28,6 +31,14 @@ export default function Suites() {
 
   const next = () => setSlide((s) => (s + 1) % images.length);
   const prev = () => setSlide((s) => (s - 1 + images.length) % images.length);
+
+  const paraRef = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress: paraProgress } = useScroll({
+    target: paraRef,
+    offset: ["end start", "start end"],
+  });
+  const paraY = useTransform(paraProgress, [0, 1], ["-18%", "18%"]);
 
   return (
     <section className="relative py-20 md:py-32" aria-labelledby="suites-heading">
@@ -117,8 +128,11 @@ export default function Suites() {
           </div>
 
           <div className="md:col-span-7">
-            <div className="relative overflow-hidden border border-line bg-paper-2">
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
+            <div ref={paraRef} className="relative overflow-hidden border border-line bg-paper-2">
+              <motion.div
+                style={reduce ? undefined : { y: paraY, scale: 1.05 }}
+                className="relative aspect-[4/3] w-full overflow-hidden"
+              >
                 <Image
                   src={images[slide]}
                   alt={`${room.name} at Twin Towers by Defoy`}
@@ -155,7 +169,7 @@ export default function Suites() {
                     {room.name}
                   </span>
                 </div>
-              </div>
+              </motion.div>
               <div className="flex gap-2 p-3">
                 {images.map((src, i) => (
                   <button

@@ -653,6 +653,16 @@ html.lenis body {
   .rail-item.is-active { background: #d8be97; color: #0b0908; border-color: #d8be97; }
   .scroll-cue { display: none; }
   .journey-label { display: none; }
+
+  /* Mobile: normal scroll, video background, cards fade in via scroll — no sticky canvas glitch */
+  .journey-mobile { height: auto; }
+  .journey-mobile .journey-sticky { position: relative; height: auto; min-height: auto; overflow: visible; }
+  .journey-mobile .journey-editorial { position: relative; width: 100%; left: clamp(20px, 4vw, 56px); bottom: auto; padding-bottom: 60px; }
+  .journey-mobile .stage-cards { display: flex; flex-direction: column; gap: clamp(10px, 4vw, 24px); }
+  .journey-mobile .stage-card { position: relative; opacity: 0; visibility: hidden; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; pointer-events: auto; padding: 0; }
+  .journey-mobile .stage-card.is-active { opacity: 1; visibility: visible; transform: none; }
+  .journey-mobile .stage-rail { display: none; }
+  .journey-mobile .scroll-cue { display: none; }
 }
 
 

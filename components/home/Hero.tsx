@@ -26,6 +26,14 @@ export default function Hero() {
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
   const fade = useTransform(scrollYProgress, [0, 0.85], [1, 0.35]);
 
+  // Kinetic typography: each headline line drifts at its own rate as you scroll
+  const lineMoves = lines.map((_, i) =>
+    useTransform(scrollYProgress, [0, 1], [`${i * 4}%`, `${-6 - i * 3}%`])
+  );
+  const lineScales = lines.map((_, i) =>
+    useTransform(scrollYProgress, [0, 1], [1, 1 + i * 0.06])
+  );
+
   useEffect(() => {
     if (!document.documentElement.hasAttribute("data-intro")) {
       const t = window.setTimeout(() => setReady(true), 80);
@@ -117,11 +125,15 @@ export default function Hero() {
                 }}
               >
                 {lines.map((line, i) => (
-                  <span key={line.text} className="line-mask">
-                    <span
-                      className="line-inner"
-                      style={{ transitionDelay: `${140 + i * 90}ms` }}
-                    >
+                  <motion.span
+                    key={line.text}
+                    className="line-mask inline-block"
+                    style={{
+                      y: lineMoves[i],
+                      scale: lineScales[i],
+                    }}
+                  >
+                    <span className="line-inner" style={{ transitionDelay: `${140 + i * 90}ms` }}>
                       {line.italic ? (
                         <em className="font-light text-paper/90">{line.text}</em>
                       ) : (
@@ -131,7 +143,7 @@ export default function Hero() {
                         <span className="ml-[0.06em] inline-block h-[0.11em] w-[0.11em] translate-y-[-0.72em] bg-copper" />
                       )}
                     </span>
-                  </span>
+                  </motion.span>
                 ))}
               </h1>
             </div>

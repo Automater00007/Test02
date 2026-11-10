@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const STAGE_COPY = [
   { eyebrow: "The Approach", title: ["A quiet road", "through the pines."], body: "Past the stone drive and the last bend of Dehwathu, the valley opens. Two timber towers rise against the pines — a hotel that feels less discovered than arrived at.", meta: ["Dehwathu · Pahalgam"], link: { href: "#estate", label: "Explore the estate" } },
@@ -14,8 +14,36 @@ const TRANSITIONS = [{ start: 0.25, end: 0.33, from: 0, to: 1 }, { start: 0.58, 
 
 export default function HeroFilm() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [mobile] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width: 760px)").matches);
 
   useEffect(() => {
+    if (mobile) {
+      // Mobile: video plays as background; stage cards fade in via scroll (IntersectionObserver).
+      // No sticky canvas, no per-frame video drawImage — prevents the mobile glitch.
+      const video = videoRef.current;
+      if (video) {
+        video.autoplay = true;
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.play().catch(() => {});
+      }
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              (entry.target as HTMLElement).classList.add("is-active");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: "0% 0% -15% 0%", threshold: 0.1 },
+      );
+      document.querySelectorAll<HTMLElement>(".stage-card").forEach((el) => observer.observe(el));
+      return () => observer.disconnect();
+    }
+
+    // Desktop: scroll-synced canvas film with slow-mo video background.
     const journey = document.getElementById("journey");
     const sticky = document.querySelector<HTMLElement>(".journey-sticky");
     const canvas = document.getElementById("journey-canvas") as HTMLCanvasElement | null;
@@ -23,9 +51,14 @@ export default function HeroFilm() {
 
     const video = videoRef.current;
     if (!video) return;
-
     const ctx = canvas.getContext("2d", { alpha: false, desynchronized: true });
     if (!ctx) return;
+
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.play().catch(() => {});
 
     const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -78,7 +111,7 @@ export default function HeroFilm() {
 
     let dpr = 1, cw = 0, ch = 0;
     function resizeCanvas() {
-      dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 760 ? 1.25 : 1.5);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const w = Math.max(1, Math.round(sticky!.clientWidth * dpr));
       const h = Math.max(1, Math.round(sticky!.clientHeight * dpr));
       if (canvas!.width !== w || canvas!.height !== h) {
@@ -133,8 +166,7 @@ export default function HeroFilm() {
     }
     function drawJourney(p: number) {
       ctx!.globalAlpha = 1; ctx!.fillStyle = "#0a0806"; ctx!.fillRect(0, 0, cw, ch);
-      // Draw slow-mo video frame onto canvas as the moving background
-      if (video && video.readyState >= 2) ctx!.drawImage(video, 0, 0, cw, ch);
+      if (video!.readyState >= 2) ctx!.drawImage(video!, 0, 0, cw, ch);
       const res = resolveProgress(p);
       if (res.transition) drawTransition(res.transition, res.t);
       else drawStage(res.stage.id, res.local);
@@ -215,10 +247,10 @@ export default function HeroFilm() {
       video.pause();
       video.src = "";
     };
-  }, []);
+  }, [mobile]);
 
   return (
-    <section id="journey" className="journey" aria-label="A scroll film through the hotel">
+    <section id="journey" className={`journey ${mobile ? "journey-mobile" : ""}`} aria-label="A scroll film through the hotel">
       <div className="journey-sticky">
         <video
           ref={videoRef}
@@ -230,7 +262,7 @@ export default function HeroFilm() {
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        <canvas id="journey-canvas" aria-hidden="true" className="absolute inset-0 w-full h-full" />
+        {!mobile && <canvas id="journey-canvas" aria-hidden="true" className="absolute inset-0 w-full h-full" />}
         <div className="journey-editorial">
           <div className="stage-cards">
             {STAGE_COPY.map((s, i) => (
