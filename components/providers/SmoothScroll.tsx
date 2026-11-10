@@ -22,12 +22,13 @@ export default function SmoothScroll() {
     const start = () => {
       if (lenis || reduce.matches || !desktop.matches) return;
       lenis = new Lenis({
-        duration: 0.9,
-        easing: (t: number) => 1 - Math.pow(1 - t, 3),
+        duration: 1.2,
+        easing: (t: number) => 1 - Math.pow(1 - t, 4),
         smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 1.4,
+        wheelMultiplier: 0.85,
+        touchMultiplier: 2,
         syncTouch: false,
+        lerp: 0.085,
       });
 
       const raf = (time: number) => {

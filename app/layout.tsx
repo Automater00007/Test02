@@ -130,11 +130,6 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: introScript }} />
         <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('tt-theme')||'day';document.documentElement.dataset.theme=t;}catch(e){}})();`,
-          }}
-        />
-        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />

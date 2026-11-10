@@ -11,7 +11,6 @@ import {
 } from "framer-motion";
 import { nav, site } from "@/lib/content";
 import { cn } from "@/lib/utils";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 
@@ -103,7 +102,6 @@ export default function SiteNav() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <ThemeToggle />
             <Link
               href="/contact"
               className={cn(

@@ -415,8 +415,8 @@ button:hover .arrow-static,
 
 .line-inner {
   display: block;
-  transform: translate3d(0, 110%, 0);
-  transition: transform 0.9s var(--ease-out-expo);
+  transform: translate3d(0, 118%, 0);
+  transition: transform 1.15s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .is-ready .line-inner {
@@ -655,18 +655,4 @@ html.lenis body {
   .journey-label { display: none; }
 }
 
-/* Day / Night theme */
-[data-theme="night"] {
-  --color-paper: #15110f;
-  --color-paper-2: #1e1714;
-  --color-forest: #2a3a30;
-  --color-walnut: #d8be97;
-  --color-walnut-brown: #b08a4e;
-  --color-copper: #dcc3a5;
-  --color-charcoal: #f5efe6;
-  --color-warm-grey: #b6a99e;
-  --color-ink: #f5efe6;
-  --color-clay: #dcc3a5;
-  --color-line: rgba(251, 248, 243, 0.14);
-  --color-line-light: rgba(251, 248, 243, 0.1);
-}
+

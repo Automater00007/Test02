@@ -3,29 +3,30 @@
 import { useEffect, useRef } from "react";
 
 const STAGE_COPY = [
-  { eyebrow: "01 — The Approach", title: ["A quiet road", "through the pines."], body: "Past the stone drive and the last bend of Dehwathu, the valley opens. Two timber towers rise against the pines — a hotel that feels less discovered than arrived at.", meta: ["Dehwathu · Pahalgam", "Scene 01 / 04"], link: { href: "#estate", label: "Explore the estate" } },
-  { eyebrow: "02 — The Main Frame", title: ["Five storeys,", "framed in timber."], body: "White render meets red brick, black steel balconies and a steep grey roof. The twin towers hold 25 rooms, each with a balcony turned toward the mountains.", meta: ["25 rooms · 5 storeys · 2 towers", "Scene 02 / 04"], link: { href: "#estate", label: "Read the architecture" } },
-  { eyebrow: "03 — The Lawn", title: ["An alpine plateau,", "held by pine forest."], body: "The lawn is the living room of the estate: chequered stone, rope chairs, glass tables and a white fence that gives way to the valley. In every direction, the mountains hold the horizon.", meta: ["360° valley · Pine forest", "Scene 03 / 04"], link: { href: "#gallery", label: "Wander the grounds" } },
-  { eyebrow: "04 — The Attic & Suites", title: ["Warm timber,", "and the mountain", "outside."], body: "Upstairs, the day softens. King beds, warm panelling and private balconies; the attic rooms sit closest to the roof, where the light arrives early and leaves late.", meta: ["King bed · Balcony · Breakfast", "Scene 04 / 04"], link: { href: "#suites", label: "Enter the suites" } },
+  { eyebrow: "The Approach", title: ["A quiet road", "through the pines."], body: "Past the stone drive and the last bend of Dehwathu, the valley opens. Two timber towers rise against the pines — a hotel that feels less discovered than arrived at.", meta: ["Dehwathu · Pahalgam"], link: { href: "#estate", label: "Explore the estate" } },
+  { eyebrow: "The Main Frame", title: ["Five storeys,", "framed in timber."], body: "White render meets red brick, black steel balconies and a steep grey roof. The twin towers hold 25 rooms, each with a balcony turned toward the mountains.", meta: ["25 rooms · 5 storeys · 2 towers"], link: { href: "#estate", label: "Read the architecture" } },
+  { eyebrow: "The Lawn", title: ["An alpine plateau,", "held by pine forest."], body: "The lawn is the living room of the estate: chequered stone, rope chairs, glass tables and a white fence that gives way to the valley. In every direction, the mountains hold the horizon.", meta: ["360° valley · Pine forest"], link: { href: "#gallery", label: "Wander the grounds" } },
+  { eyebrow: "The Attic & Suites", title: ["Warm timber,", "and the mountain", "outside."], body: "Upstairs, the day softens. King beds, warm panelling and private balconies; the attic rooms sit closest to the roof, where the light arrives early and leaves late.", meta: ["King bed · Balcony · Breakfast"], link: { href: "#suites", label: "Enter the suites" } },
 ];
 
-const FRAME_COUNT = 40;
 const STAGES = [{ id: 0, start: 0, end: 0.25 }, { id: 1, start: 0.33, end: 0.58 }, { id: 2, start: 0.66, end: 0.88 }, { id: 3, start: 0.93, end: 1 }];
 const TRANSITIONS = [{ start: 0.25, end: 0.33, from: 0, to: 1 }, { start: 0.58, end: 0.66, from: 1, to: 2 }, { start: 0.88, end: 0.93, from: 2, to: 3 }];
 
 export default function HeroFilm() {
-  const rootRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const journey = document.getElementById("journey");
     const sticky = document.querySelector<HTMLElement>(".journey-sticky");
     const canvas = document.getElementById("journey-canvas") as HTMLCanvasElement | null;
     if (!journey || !sticky || !canvas) return;
+
+    const video = videoRef.current;
+    if (!video) return;
+
     const ctx = canvas.getContext("2d", { alpha: false, desynchronized: true });
     if (!ctx) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
     const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
@@ -48,10 +49,9 @@ export default function HeroFilm() {
       target = clamp(target + delta, 0, maxScroll);
       animating = true;
     }
-    if (!reduced && !isTouch) window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("resize", updateMax);
 
-    // frames — lazy load per stage to avoid decoding 160 images at once
     const frames: HTMLImageElement[][] = [[], [], [], []];
     const posters: HTMLImageElement[] = [1, 2, 3, 4].map((n) => {
       const img = new Image();
@@ -62,15 +62,14 @@ export default function HeroFilm() {
     function loadStage(s: number) {
       if (loadedStage[s]) return;
       loadedStage[s] = true;
-      for (let n = 1; n <= FRAME_COUNT; n++) {
+      for (let n = 1; n <= 40; n++) {
         const img = new Image();
         img.decoding = "async";
         img.src = `/frames/stage-${s + 1}/${String(n).padStart(3, "0")}.webp`;
         frames[s][n - 1] = img;
       }
     }
-    loadStage(0); // load first stage immediately
-    // load other stages when approaching
+    loadStage(0);
     function ensureStages(p: number) {
       const idx = stageAt(p);
       loadStage(idx);
@@ -122,18 +121,20 @@ export default function HeroFilm() {
       return res.stage.id;
     }
     function drawStage(stage: number, local: number) {
-      drawFrameOrPoster(stage, clamp(Math.round(local * (FRAME_COUNT - 1)), 0, FRAME_COUNT - 1));
+      drawFrameOrPoster(stage, clamp(Math.round(local * 39), 0, 39));
     }
     function easeCubic(t: number) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
     function drawTransition(tr: any, rawT: number) {
       const t = easeCubic(clamp(rawT, 0, 1));
-      drawFrameOrPoster(tr.from, FRAME_COUNT - 1, { scale: 1 + t * 0.16 });
+      drawFrameOrPoster(tr.from, 39, { scale: 1 + t * 0.16 });
       ctx!.globalAlpha = t;
       drawFrameOrPoster(tr.to, 0, { scale: 1.22 - t * 0.22 });
       ctx!.globalAlpha = 1;
     }
     function drawJourney(p: number) {
       ctx!.globalAlpha = 1; ctx!.fillStyle = "#0a0806"; ctx!.fillRect(0, 0, cw, ch);
+      // Draw slow-mo video frame onto canvas as the moving background
+      if (video && video.readyState >= 2) ctx!.drawImage(video, 0, 0, cw, ch);
       const res = resolveProgress(p);
       if (res.transition) drawTransition(res.transition, res.t);
       else drawStage(res.stage.id, res.local);
@@ -172,28 +173,17 @@ export default function HeroFilm() {
         animating = true;
       });
     });
-    if (scrub) {
-      scrub.addEventListener("input", () => {
-        const pp = Number(scrub.value) / 1000;
-        target = clamp(journey!.offsetTop + pp * (journey!.offsetHeight - window.innerHeight), 0, maxScroll);
-        animating = true;
-      });
-    }
 
     let displayProgress = 0;
     let lastFrame = performance.now();
     function tick(now: number) {
       const dt = Math.min(80, now - lastFrame);
       lastFrame = now;
-      if (!reduced && !isTouch) {
-        if (animating) {
-          const diff = target - current;
-          current += diff * 0.11;
-          if (Math.abs(diff) < 0.35) { current = target; animating = false; }
-          window.scrollTo(0, current);
-        }
-      } else {
-        current = window.scrollY; target = current;
+      if (animating) {
+        const diff = target - current;
+        current += diff * 0.11;
+        if (Math.abs(diff) < 0.35) { current = target; animating = false; }
+        window.scrollTo(0, current);
       }
       const rect = journey!.getBoundingClientRect();
       const visible = rect.top < window.innerHeight && rect.bottom > 0;
@@ -203,7 +193,7 @@ export default function HeroFilm() {
       }
       const distance = Math.max(1, journey!.offsetHeight - window.innerHeight);
       const stateP = clamp(-rect.top / distance, 0, 1);
-      displayProgress = reduced ? stateP : lerp(displayProgress, stateP, 0.22);
+      displayProgress = lerp(displayProgress, stateP, 0.15);
       if (Math.abs(displayProgress - stateP) < 0.00004) displayProgress = stateP;
       ensureStages(displayProgress);
       drawJourney(displayProgress);
@@ -217,16 +207,30 @@ export default function HeroFilm() {
     setActiveStage(stageAt(displayProgress));
     drawJourney(displayProgress);
     requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("resize", updateMax);
+      window.removeEventListener("resize", resizeCanvas);
+      video.pause();
+      video.src = "";
+    };
   }, []);
 
   return (
     <section id="journey" className="journey" aria-label="A scroll film through the hotel">
       <div className="journey-sticky">
-        <canvas id="journey-canvas" aria-hidden="true" />
-        <div className="journey-shade" aria-hidden="true" />
-        <div className="journey-top">
-          <p className="journey-label"><span />A scroll film in four movements</p>
-        </div>
+        <video
+          ref={videoRef}
+          src="/video/film-720.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <canvas id="journey-canvas" aria-hidden="true" className="absolute inset-0 w-full h-full" />
         <div className="journey-editorial">
           <div className="stage-cards">
             {STAGE_COPY.map((s, i) => (
@@ -241,7 +245,7 @@ export default function HeroFilm() {
                   ))}
                 </h1>
                 <p className="stage-body">{s.body}</p>
-                <div className="stage-meta"><span>{s.meta[0]}</span><span>{s.meta[1]}</span></div>
+                <div className="stage-meta"><span>{s.meta[0]}</span></div>
                 <a className="stage-link" href={s.link.href}><span>{s.link.label}</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
               </article>
             ))}
@@ -256,13 +260,6 @@ export default function HeroFilm() {
             </button>
           ))}
         </nav>
-        <div className="journey-controls">
-          <div className="scrub">
-            <label className="sr-only" htmlFor="scrub">Journey progress</label>
-            <input id="scrub" type="range" min="0" max="1000" defaultValue="0" step="1" />
-            <span id="scrub-value">0%</span>
-          </div>
-        </div>
         <div className="scroll-cue" id="scroll-cue"><span>Scroll to travel</span><i /></div>
       </div>
     </section>
