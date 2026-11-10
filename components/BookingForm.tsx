@@ -18,7 +18,7 @@ export default function BookingForm({ initialRoom }: { initialRoom?: string }) {
 
   const message = useMemo(() => {
     const lines = [
-      `Hello Jade River Resort, I would like to enquire about a stay.`,
+      `Hello Twin Towers by Defoy, I would like to enquire about a stay.`,
       ``,
       `Room: ${selected.name} (${formatPrice(selected.price)} / night)`,
       name ? `Name: ${name}` : null,

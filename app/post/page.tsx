@@ -8,8 +8,8 @@ import { JsonLd, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Notes from Jade River Resort: the sound of the Lidder at dawn, a slow guide to Aru Valley, and why thirteen rooms is the point.",
-  alternates: { canonical: "/jade-river-resort/post" },
+    "Notes from Twin Towers by Defoy: the sound of the valley at dawn, a slow guide to Aru Valley, and why thirteen rooms is the point.",
+  alternates: { canonical: "/twin-towers/post" },
 };
 
 export default async function BlogPage() {
@@ -20,8 +20,8 @@ export default async function BlogPage() {
     <>
       <JsonLd
         data={breadcrumb([
-          { name: "Home", path: "/jade-river-resort" },
-          { name: "Blog", path: "/jade-river-resort/post" },
+          { name: "Home", path: "/twin-towers" },
+          { name: "Blog", path: "/twin-towers/post" },
         ])}
       />
       <PageHeader

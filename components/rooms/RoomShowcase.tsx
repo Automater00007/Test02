@@ -29,7 +29,7 @@ export default function RoomShowcase() {
                   >
                     <Image
                       src={room.image}
-                      alt={`${room.name} at Jade River Resort`}
+                      alt={`${room.name} at Twin Towers by Defoy`}
                       fill
                       sizes="(min-width: 768px) 58vw, 100vw"
                       className="reveal-media object-cover transition-transform duration-[1200ms] ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"

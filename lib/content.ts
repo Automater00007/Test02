@@ -1,52 +1,53 @@
 export const site = {
-  name: "Jade River Resort",
+  name: "Twin Towers by Defoy",
   group: "Defoy Hotels & Resorts",
-  tagline: "Life, Slowed by the River.",
+  tagline: "Stay closer to what matters. A quieter kind of escape in Kashmir.",
   description:
-    "A thirteen-room luxury boutique resort on the banks of the Lidder River in Pahalgam, Kashmir. Wooden architecture, pine forest, and water at 2,130 metres.",
-  phone: "+91 9541898820",
-  phoneHref: "tel:+919541898820",
-  whatsapp: "919541898820",
-  email: "jaderiverresort@defoy.in",
-  address: "Pahalgam, Jammu & Kashmir — 192125",
-  coords: "33.882774, 75.271524",
-  lat: 33.882774,
-  lng: 75.271524,
-  coordsDisplay: "33.8828° N · 75.2715° E",
-  latDisplay: "33.8828° N",
-  lngDisplay: "75.2715° E",
-  elevation: "2,130 m",
-  roomsTotal: 13,
-  url: "https://defoyhotelsandresorts.com/jade-river-resort",
+    "A 25-room hotel on the road to Pahalgam, in Dehwathu, Kashmir. Premium Rooms with Balcony, warm timber, and the valley outside.",
+  phone: "+91 95418 98817",
+  phoneHref: "tel:+919541898817",
+  whatsapp: "919541898817",
+  email: "info@defoy.in",
+  address: "W7CF+W2P, Dehwathu, Pahalgam, Jammu and Kashmir 192401",
+  coords: "33.92305759663491, 75.27313041534288",
+  lat: 33.92305759663491,
+  lng: 75.27313041534288,
+  coordsDisplay: "33.9231° N · 75.2731° E",
+  latDisplay: "33.9231° N",
+  lngDisplay: "75.2731° E",
+  elevation: "2,200 m",
+  roomsTotal: 25,
+  url: "https://defoyhotelsandresorts.com/twin-towers",
 };
 
 export const nav = [
   { label: "Rooms", href: "/rooms" },
   { label: "Experiences", href: "/experiences" },
   { label: "Gallery", href: "/gallery" },
+  { label: "Stories", href: "/stories" },
   { label: "Blog", href: "/post" },
   { label: "Location", href: "/location" },
 ];
 
-const jade = (name: string) => `/images/jade/${name}.webp`;
+const twin = (name: string) => `/images/twin/${name}.webp`;
 
 export const img = {
-  hero: jade("gallery-07"),
-  cabin: jade("gallery-10"),
-  valley: jade("mountain-sunset"),
-  forest: jade("gallery-09"),
-  aerial: jade("gallery-09"),
-  mist: jade("mountain-sunset"),
-  green: jade("gallery-11"),
-  dark: jade("gallery-12"),
-  tree: jade("gallery-11"),
-  pines: jade("gallery-09"),
-  dock: jade("gallery-09"),
-  stars: jade("exp-bonfire"),
-  roomWarm: jade("room-premium-1"),
-  roomBed: jade("gallery-04"),
-  roomSuite: jade("gallery-06"),
-  roomLight: jade("room-duplex-4"),
+  hero: twin("exterior"),
+  cabin: twin("facade"),
+  valley: twin("lawn"),
+  forest: twin("lawn"),
+  aerial: twin("exterior"),
+  mist: twin("lawn"),
+  green: twin("lounge"),
+  dark: twin("corridor"),
+  tree: twin("lawn"),
+  pines: twin("lawn"),
+  dock: twin("balcony"),
+  stars: twin("lounge"),
+  roomWarm: twin("poster-1"),
+  roomBed: twin("balcony"),
+  roomSuite: twin("poster-1"),
+  roomLight: twin("corridor"),
 };
 
 export type Room = {
@@ -66,92 +67,47 @@ export type Room = {
 export const rooms: Room[] = [
   {
     slug: "premium-balcony-room",
-    name: "Premium Balcony Room",
-    short: "Balcony",
-    count: "9 rooms",
-    price: 6000,
+    name: "Premium Room with Balcony",
+    short: "Premium",
+    count: "25 rooms",
+    price: 5000,
     description:
-      "A private balcony, a low chair, and the sound of water finding its way through stone.",
+      "A calm, warm room with a king bed, a private balcony and enough space to unpack properly. Breakfast included, extra bed available on request.",
     long:
-      "Our most-loved room. Wake to pine light on the ceiling, step onto a private balcony, and watch the Lidder carry the morning past. Luxury bedding, quiet Wi-Fi, and room service that arrives without ceremony.",
-    image: jade("room-premium-4"),
-    gallery: [
-      jade("room-premium-4"),
-      jade("room-premium-1"),
-      jade("room-premium-2"),
-      jade("room-premium-3"),
-      jade("room-premium-5"),
-    ],
+      "All 25 rooms are Premium Rooms with Balcony — a king bed, space for an extra bed, and a private view of the lawn or the valley. The attic rooms sit on the fourth floor, closest to the roof, where the light arrives early and leaves late.",
+    image: twin("poster-1"),
+    gallery: [twin("poster-1"), twin("balcony"), twin("corridor"), twin("lounge")],
     amenities: [
-      "Private balcony",
-      "Mountain and resort views",
-      "Luxury bedding",
-      "Wi-Fi",
-      "Room service",
-      "Hot water",
-    ],
-    bestFor: "Couples and slow mornings",
-  },
-  {
-    slug: "executive-suite",
-    name: "Executive Suite",
-    short: "Suite",
-    count: "2 suites",
-    price: 8000,
-    description:
-      "More room to do nothing. A wide living space, a king bed, and a bathroom built for long baths.",
-    long:
-      "Two suites, each with a generous living room and a deep, quiet bedroom. Built for anniversaries, honeymoons, and the kind of trip where the plan is no plan at all. Premium interiors, a king bed, and a luxury bathroom.",
-    image: jade("room-suite-7"),
-    gallery: [
-      jade("room-suite-7"),
-      jade("room-suite-1"),
-      jade("room-suite-2"),
-      jade("room-suite-3"),
-      jade("room-suite-4"),
-      jade("room-suite-5"),
-      jade("room-suite-6"),
-    ],
-    amenities: [
-      "Separate living space",
       "King bed",
-      "Luxury bathroom",
-      "Premium interiors",
+      "Private balcony",
+      "Breakfast included",
+      "Extra bed on request",
       "Wi-Fi",
       "Room service",
     ],
-    bestFor: "Couples and special occasions",
+    bestFor: "Couples, families and slow mornings",
   },
   {
-    slug: "executive-duplex-family-room",
-    name: "Executive Duplex Family Room",
-    short: "Duplex",
-    count: "2 rooms",
-    price: 13000,
+    slug: "attic-room",
+    name: "Attic Room",
+    short: "Attic",
+    count: "Attic floor",
+    price: 5000,
     description:
-      "Two levels. The children take the upper floor, and you take the quiet one.",
+      "Fourth floor, closest to the roof. Warm timber, private balcony, and the mountain outside.",
     long:
-      "A two-level duplex designed for families who want to be together and also, occasionally, not. Children get their own floor, the lawn is a short walk away, and the river is the soundtrack to both.",
-    image: jade("room-duplex-7"),
-    gallery: [
-      jade("room-duplex-7"),
-      jade("room-duplex-12"),
-      jade("room-duplex-1"),
-      jade("room-duplex-2"),
-      jade("room-duplex-3"),
-      jade("room-duplex-4"),
-      jade("room-duplex-5"),
-      jade("room-duplex-6"),
-    ],
+      "The attic rooms sit on the fourth floor, closest to the roof, where the light arrives early and leaves late. King bed, warm panelling, private balcony, and a view that holds the valley.",
+    image: twin("poster-1"),
+    gallery: [twin("poster-1"), twin("balcony"), twin("corridor")],
     amenities: [
-      "Two-level duplex layout",
-      "Private floor for children",
-      "Family-friendly",
+      "King bed",
+      "Private balcony",
+      "Warm timber panelling",
+      "Breakfast included",
       "Wi-Fi",
       "Room service",
-      "Lawn access",
     ],
-    bestFor: "Families and longer stays",
+    bestFor: "Couples seeking quiet and views",
   },
 ];
 
@@ -166,86 +122,81 @@ export type Experience = {
 export const experiences: Experience[] = [
   {
     title: "Bonfire Evenings",
-    subtitle: "Fire, water, and a sky with too many stars",
+    subtitle: "Fire, pines, and a sky with too many stars",
     body:
-      "Beside the Lidder, after dark, we light a fire. Kashmiri nights are cold in the best way. Sit close. Stay as long as you like.",
-    meta: "Every clear evening · Riverside",
-    image: jade("exp-bonfire"),
+      "Beside the lawn, after dark, we light a fire. Kashmiri nights are cold in the best way. Sit close. Stay as long as you like.",
+    meta: "Every clear evening · Lawn",
+    image: twin("lounge"),
   },
   {
-    title: "River Walks",
+    title: "Valley Walks",
     subtitle: "No guide. No schedule. No destination.",
     body:
-      "Follow the water at your own pace. The path goes as far as you want it to. Some guests walk for twenty minutes; some disappear for three hours.",
+      "Follow the road toward Pahalgam at your own pace. The path goes as far as you want it to. Some guests walk for twenty minutes; some disappear for three hours.",
     meta: "Dawn to dusk · Self-guided",
-    image: jade("gallery-11"),
+    image: twin("lawn"),
   },
   {
     title: "Pahalgam Sightseeing",
     subtitle: "Aru, Betaab, Chandanwari",
     body:
-      "The valley keeps its famous places close. Mini Switzerland, the Aru meadows, the Betaab river bend, and the road to Chandanwari all sit within a short drive.",
+      "The valley keeps its famous places close. Aru meadows, Betaab river bend, and the road to Chandanwari all sit within a short drive.",
     meta: "Half and full day · By road",
-    image: jade("mountain-sunset"),
+    image: twin("exterior"),
   },
   {
     title: "Photography",
     subtitle: "Every corner already framed",
     body:
-      "Wooden facades, a stream in front, pine forest behind. The light changes every hour and never repeats itself. Bring the camera you keep meaning to use.",
+      "White render, red brick, black steel balconies, a steep grey roof, and the mountains beyond. The light changes every hour and never repeats itself.",
     meta: "Golden hour · Across the property",
-    image: jade("exp-photography"),
+    image: twin("facade"),
   },
   {
     title: "Family Moments",
-    subtitle: "Lawns, duplex rooms, unhurried days",
+    subtitle: "Lawns, balcony rooms, unhurried days",
     body:
-      "Spacious lawns and a safe, enclosed property. Children run; parents sit. The duplex rooms mean everyone has somewhere to retreat to when the day is done.",
-    meta: "All day · Lawns and duplex",
-    image: jade("exp-family"),
+      "Spacious lawns and a safe, enclosed property. Children run; parents sit. The balcony rooms mean everyone has a view to retreat to.",
+    meta: "All day · Lawns and balconies",
+    image: twin("lawn"),
   },
   {
-    title: "Pure Luxury",
+    title: "Quiet Luxury",
     subtitle: "Felt, not displayed",
     body:
       "Warm bedding at night, hot tea before you ask, a fire already lit. Luxury here is quiet, attentive, and almost invisible.",
     meta: "Included · Throughout your stay",
-    image: jade("exp-luxury"),
+    image: twin("lounge"),
   },
 ];
 
 export const gallery = [
-  { src: jade("gallery-01"), alt: "Balcony lounge looking out to the snowy Lidder valley", span: "wide" },
-  { src: jade("gallery-02"), alt: "Duplex living room with a timber staircase", span: "std" },
-  { src: jade("gallery-03"), alt: "Bedroom with a patterned bedspread and warm wood walls", span: "std" },
-  { src: jade("gallery-04"), alt: "Bedroom headboard with warm bedside lighting", span: "wide" },
-  { src: jade("gallery-05"), alt: "Private balcony facing the Pahalgam valley", span: "wide" },
-  { src: jade("gallery-06"), alt: "Suite living area opening into the bedroom", span: "std" },
-  { src: jade("gallery-07"), alt: "Jade River Resort at dusk in snow", span: "wide" },
-  { src: jade("gallery-08"), alt: "Cocktails in the resort lounge", span: "std" },
-  { src: jade("gallery-09"), alt: "Snow-covered resort below the mountains", span: "wide" },
-  { src: jade("gallery-10"), alt: "Fire pit and lit resort exterior at night", span: "wide" },
-  { src: jade("gallery-11"), alt: "Lawn and the Lidder River beside the resort", span: "wide" },
-  { src: jade("gallery-12"), alt: "Lounge with a Persian rug and warm lighting", span: "wide" },
+  { src: twin("exterior"), alt: "Twin Towers by Defoy exterior against the pines", span: "wide" },
+  { src: twin("facade"), alt: "Five storeys framed in timber and brick", span: "std" },
+  { src: twin("entrance"), alt: "Entrance canopy and stone drive", span: "std" },
+  { src: twin("lawn"), alt: "The lawn with rope chairs and the valley", span: "wide" },
+  { src: twin("lounge"), alt: "Lounge with warm lighting", span: "std" },
+  { src: twin("corridor"), alt: "Interior corridor with timber panelling", span: "std" },
+  { src: twin("balcony"), alt: "Private balcony facing the mountains", span: "wide" },
+  { src: twin("poster-1"), alt: "Hero view of the hotel", span: "wide" },
 ];
 
 export const posts = [
   {
-    slug: "the-sound-of-the-lidder-at-six",
-    title: "The sound of the Lidder at six",
+    slug: "a-quiet-road-to-pahalgam",
+    title: "A quiet road to Pahalgam",
     excerpt:
-      "Before the valley wakes, the river is the loudest thing in Pahalgam. A short note on the first hour of the day.",
+      "Past the stone drive and the last bend of Dehwathu, the valley opens. A short note on arriving.",
     date: "12 October 2025",
     read: "4 min",
-    category: "Notes from the river",
-    image: img.aerial,
-    quote: "The first hour of the day belongs to the water. Everything else arrives later.",
+    category: "Notes from the valley",
+    image: twin("exterior"),
+    quote: "The first hour of the day belongs to the mountains. Everything else arrives later.",
     body: [
-      "There is a moment, a little before six, when the valley is still holding its breath. The pines are black against a sky that has not decided on a colour yet, and the Lidder is the loudest thing in Pahalgam. Not loud in the way a city is loud. Loud in the way a room is loud when someone you love is sleeping in it.",
-      "The water comes down from the high meadows and moves through the property at a pace that has nothing to do with clocks. Guests who arrive from Delhi or Mumbai tend to wake early on the first morning, still running on the speed of their week. They stand on the balcony with a cup of tea and listen. By the third morning, they are sleeping in.",
-      "We do not schedule anything at this hour. There is hot water for tea, a chair facing the river, and a path that follows the bank for as long as you want to walk it. Some guests go twenty minutes. Some disappear until breakfast. One guest last autumn walked to the far bend and back and said it was the first time in a year he had not checked his phone.",
-      "The light changes slowly. First the water turns from grey to green, then the far ridge catches the sun, then the wooden facades warm up and the whole property looks like it has been awake for hours. By seven, the kitchen is moving and the first trays are going out.",
-      "If you come, set an alarm for one morning. Just one. Stand outside before the valley gets busy with itself. The river will already be there, doing exactly what it has always done, and for a few minutes you will have the strange feeling that nothing needs to be hurried.",
+      "There is a moment, a little before six, when the valley is still holding its breath. The pines are black against a sky that has not decided on a colour yet, and the mountains are the loudest thing in Pahalgam.",
+      "Guests who arrive from Delhi or Mumbai tend to wake early on the first morning, still running on the speed of their week. They stand on the balcony with a cup of tea and listen. By the third morning, they are sleeping in.",
+      "We do not schedule anything at this hour. There is hot water for tea, a chair facing the valley, and a road that follows the pines for as long as you want to walk it.",
+      "If you come, set an alarm for one morning. Just one. Stand outside before the valley gets busy with itself. The mountains will already be there, doing exactly what they have always done.",
     ],
   },
   {
@@ -256,32 +207,29 @@ export const posts = [
     date: "28 September 2025",
     read: "6 min",
     category: "Field guide",
-    image: img.green,
+    image: twin("lawn"),
     quote: "Aru is not a checklist. It is a meadow, a road, and the decision to stop walking.",
     body: [
-      "Aru Valley is a short drive from the resort, up a road that keeps folding back on itself. The climb is gentle enough to keep the window open. Pine gives way to open meadow, and then the valley widens and you are somewhere that feels less like a destination and more like a place someone forgot to build on.",
+      "Aru Valley is a short drive from the hotel, up a road that keeps folding back on itself. The climb is gentle enough to keep the window open. Pine gives way to open meadow, and then the valley widens.",
       "Most visitors arrive with a list: see the meadow, take the photograph, find the horse, leave. It is possible to do Aru that way. It is also possible to sit on the grass for an hour and watch the light move across the far slope, which is what we would suggest.",
-      "There are horses and small tea stalls and, depending on the season, a handful of families with picnic blankets. There is no schedule. The meadow does not have an opening time. This is the point.",
       "Go early if you want the quiet, or late if you want the light. Bring a layer — the valley is cooler than Pahalgam, and the weather changes its mind quickly. Leave the itinerary in the car.",
-      "On the way back, stop where the road meets the river and walk down to the water. You will not need directions. You will hear it.",
     ],
   },
   {
-    slug: "why-thirteen-rooms-is-the-point",
-    title: "Why thirteen rooms is the point",
+    slug: "why-twenty-five-rooms-is-the-point",
+    title: "Why twenty-five rooms is the point",
     excerpt:
       "A small property is not a limitation. It is the whole idea. On scale, attention, and knowing a guest's name.",
     date: "9 September 2025",
     read: "5 min",
     category: "Philosophy",
-    image: img.cabin,
-    quote: "Thirteen is not a number we settled on. It is the number the property could hold without becoming something else.",
+    image: twin("facade"),
+    quote: "Twenty-five is not a number we settled on. It is the number the property could hold without becoming something else.",
     body: [
       "A larger hotel can be many things to many people. It can have three restaurants, a spa, a business centre, a lobby that smells the same in every city. There is nothing wrong with that. It is simply not what this property was built to do.",
-      "Thirteen rooms means that on a full night, there are at most a few dozen people on the property. It means the kitchen knows how you take your eggs. It means the person at reception remembers which room asked for an extra blanket. It means the lawn is never crowded and the riverbank is never a queue.",
+      "Twenty-five rooms means that on a full night, there are at most a few dozen people on the property. It means the kitchen knows how you take your eggs. It means the person at reception remembers which room asked for an extra blanket.",
       "Small has its own kind of luxury. It is not the luxury of marble or chandeliers. It is the luxury of being recognised, of not repeating yourself, of a place that can adjust to the guest rather than asking the guest to adjust to the system.",
-      "There is also a practical side. A small property can afford to be quiet. It can afford to keep the music low and the lights warm. It can afford to leave the trees where they are and build around them. Everything we would have spent on scale, we spend on attention instead.",
-      "Guests sometimes ask whether we plan to expand. The honest answer is that expansion would change the thing they are asking about. Thirteen rooms is the whole idea. The river was here first; we are just keeping it company.",
+      "Guests sometimes ask whether we plan to expand. The honest answer is that expansion would change the thing they are asking about. Twenty-five rooms is the whole idea.",
     ],
   },
 ];
@@ -295,70 +243,41 @@ export const reviews: {
   date: string;
 }[] = [];
 
-
 export const faqs = [
   {
-    q: "Where is Jade River Resort located?",
-    a: "Jade River Resort is in Pahalgam, Jammu & Kashmir, India, at an elevation of 2,130 metres on the banks of the Lidder River. The address is Pahalgam, Jammu & Kashmir — 192125. Coordinates are 33.882774, 75.271524.",
+    q: "Where is Twin Towers by Defoy located?",
+    a: "Twin Towers by Defoy is in Dehwathu, on the road to Pahalgam, Jammu and Kashmir, India. Address: W7CF+W2P, Dehwathu, Pahalgam, Jammu and Kashmir 192401. Coordinates: 33.92305759663491, 75.27313041534288.",
   },
   {
-    q: "How many rooms does Jade River Resort have?",
-    a: "Thirteen. There are nine Premium Balcony Rooms, two Executive Suites, and two Executive Duplex Family Rooms. The property is intentionally small so every guest gets personal attention.",
+    q: "How many rooms does Twin Towers by Defoy have?",
+    a: "25 rooms, all in one category: Premium Room with Balcony (king bed, sleeps 2, extra bed available). The attic rooms sit on the fourth floor, closest to the roof.",
   },
   {
     q: "What are the room rates?",
-    a: "Rooms start at ₹6,000 per night for a Premium Balcony Room, ₹8,000 per night for an Executive Suite, and ₹13,000 per night for an Executive Duplex Family Room. Rates are confirmed at the time of booking.",
+    a: "Rooms start at INR 5,000 per night for a Premium Room with Balcony. Rates are confirmed at the time of booking.",
   },
   {
     q: "How do I book a stay?",
-    a: "Bookings are direct only — Jade River Resort does not use MakeMyTrip, Booking.com, or any other OTA. Use the contact page to build a WhatsApp message with your room, dates, and guest count, or message +91 9541898820 directly.",
-  },
-  {
-    q: "What is the cancellation policy?",
-    a: "Cancellation 15 or more days before arrival receives a full refund. Cancellation 15 to 10 days before arrival carries a 50% retention charge. Cancellation within 10 days of arrival carries a 100% retention charge.",
+    a: "Bookings are by WhatsApp enquiry. Message +91 95418 98817 or use the reservation form on the website. The team confirms availability and the current rate.",
   },
   {
     q: "What are the check-in and check-out times?",
-    a: "Check-in is at 2:00 PM and check-out is at 12:00 noon. A minimum 50% advance payment is required to confirm a booking.",
-  },
-  {
-    q: "What ID is required at check-in?",
-    a: "A valid government photo ID is required from every guest at check-in. Foreign nationals must present a passport and visa. PAN cards are not accepted as address or ID proof.",
+    a: "Check-in is at 2:00 PM and check-out is at 12:00 noon.",
   },
   {
     q: "How far is Srinagar Airport?",
-    a: "Srinagar Airport is approximately 96 km from the resort, or about 2.5 to 3 hours by road.",
-  },
-  {
-    q: "Is the resort suitable for families?",
-    a: "Yes. The two Executive Duplex Family Rooms have two levels so children have their own floor, and the property has spacious, safe lawns for families.",
-  },
-  {
-    q: "Are pets allowed?",
-    a: "Please contact the resort directly about pets before booking so the team can confirm what is possible for your dates. Call or message +91 9541898820.",
-  },
-  {
-    q: "Who do I contact for invoices or policy queries?",
-    a: "For group reservations, policy questions, GST, and invoices, email jaderiverresort@defoy.in or message +91 9541898820.",
+    a: "Srinagar Airport is approximately 95 km from the hotel, about 2.5 to 3 hours by road.",
   },
 ];
 
 export const stats = [
-  { value: 13, suffix: "", label: "Rooms, no more" },
-  { value: 2130, suffix: " m", label: "Above sea level" },
-  { value: 96, suffix: " km", label: "From Srinagar airport" },
-  { value: 1, suffix: "", label: "River, always" },
+  { value: 25, suffix: "", label: "Rooms, one category" },
+  { value: 5, suffix: " storeys", label: "Twin towers" },
+  { value: 2, suffix: " towers", label: "One roof" },
+  { value: 360, suffix: "°", label: "Valley views" },
 ];
 
 export const policies = [
-  {
-    title: "Cancellation",
-    items: [
-      "15 or more days before arrival — full refund.",
-      "15 to 10 days before arrival — 50% retention charge.",
-      "Within 10 days of arrival — 100% retention charge.",
-    ],
-  },
   {
     title: "Check-in & check-out",
     items: [
@@ -370,9 +289,9 @@ export const policies = [
   {
     title: "Payment",
     items: [
-      "A minimum 50% advance is required to confirm a booking.",
-      "The balance is payable at the property.",
       "Rates are confirmed at the time of booking.",
+      "Advance payment is required to confirm a reservation.",
+      "The balance is payable at the property.",
     ],
   },
   {
@@ -380,7 +299,6 @@ export const policies = [
     items: [
       "A valid government photo ID is required at check-in.",
       "Foreign nationals must present a passport and visa.",
-      "PAN cards are not accepted as address or ID proof.",
     ],
   },
 ];

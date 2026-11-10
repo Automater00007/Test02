@@ -21,7 +21,7 @@ export default function RoomHero({ room }: { room: Room }) {
         <motion.div className="absolute inset-[-10%]" style={{ y }}>
           <Image
             src={room.image}
-            alt={`${room.name} at Jade River Resort`}
+            alt={`${room.name} at Twin Towers by Defoy`}
             fill
             priority
             sizes="100vw"

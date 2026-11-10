@@ -8,8 +8,8 @@ import { JsonLd, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Contact & Direct Booking",
   description:
-    "Reserve directly with Jade River Resort, Pahalgam. Choose a room, add dates and guests, and send a pre-filled WhatsApp message to +91 9541898820. No OTAs.",
-  alternates: { canonical: "/jade-river-resort/contact" },
+    "Reserve directly with Twin Towers by Defoy, Pahalgam. Choose a room, add dates and guests, and send a pre-filled WhatsApp message to +91 95418 98817. No OTAs.",
+  alternates: { canonical: "/twin-towers/contact" },
 };
 
 export default async function ContactPage({
@@ -23,8 +23,8 @@ export default async function ContactPage({
     <>
       <JsonLd
         data={breadcrumb([
-          { name: "Home", path: "/jade-river-resort" },
-          { name: "Contact", path: "/jade-river-resort/contact" },
+          { name: "Home", path: "/twin-towers" },
+          { name: "Contact", path: "/twin-towers/contact" },
         ])}
       />
       <PageHeader
@@ -63,7 +63,7 @@ export default async function ContactPage({
               <div className="border-t border-line pt-5">
                 <p className="eyebrow text-ink/65">The resort</p>
                 <p className="mt-4 font-display text-[1.5rem] leading-tight">
-                  Jade River Resort
+                  Twin Towers by Defoy
                 </p>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/70">
                   {site.address}

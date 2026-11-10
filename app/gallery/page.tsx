@@ -8,8 +8,8 @@ import { JsonLd, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "Photographs of Jade River Resort and the Lidder valley: wooden architecture, the river, pine forest, the lawn, and the light at different hours.",
-  alternates: { canonical: "/jade-river-resort/gallery" },
+    "Photographs of Twin Towers by Defoy and the valley valley: wooden architecture, the river, pine forest, the lawn, and the light at different hours.",
+  alternates: { canonical: "/twin-towers/gallery" },
 };
 
 export default function GalleryPage() {
@@ -17,8 +17,8 @@ export default function GalleryPage() {
     <>
       <JsonLd
         data={breadcrumb([
-          { name: "Home", path: "/jade-river-resort" },
-          { name: "Gallery", path: "/jade-river-resort/gallery" },
+          { name: "Home", path: "/twin-towers" },
+          { name: "Gallery", path: "/twin-towers/gallery" },
         ])}
       />
       <PageHeader

@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import { nav, site } from "@/lib/content";
 import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 
@@ -70,10 +71,10 @@ export default function SiteNav() {
             className="group flex items-baseline gap-2.5"
           >
             <span className="font-display text-[1.4rem] leading-none tracking-[-0.045em] md:text-[1.6rem]">
-              Jade<span className="text-clay">.</span>River
+              Twin<span className="text-clay">.</span>Towers
             </span>
             <span className={cn("eyebrow hidden pb-[2px] text-[9px] lg:block", overHero ? "text-paper/80" : "text-ink/65")}>
-              Resort
+              by Defoy
             </span>
           </Link>
 
@@ -102,6 +103,7 @@ export default function SiteNav() {
           </nav>
 
           <div className="flex items-center gap-4">
+            <ThemeToggle />
             <Link
               href="/contact"
               className={cn(
@@ -138,7 +140,7 @@ export default function SiteNav() {
           >
             <div className="shell flex h-[68px] items-center justify-between md:h-[80px]">
               <span className="font-display text-[1.4rem] leading-none tracking-[-0.045em]">
-                Jade<span className="text-clay">.</span>River
+                Twin<span className="text-clay">.</span>Towers
               </span>
               <button
                 type="button"

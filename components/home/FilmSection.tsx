@@ -43,7 +43,7 @@ export default function FilmSection() {
         <motion.div className="absolute inset-[-10%] " style={{ y }}>
           <Image
             src={img.aerial}
-            alt="Aerial view of the river and pine forest around Jade River Resort"
+            alt="Aerial view of the river and pine forest around Twin Towers by Defoy"
             fill
             sizes="100vw"
             className="object-cover"
@@ -142,7 +142,7 @@ export default function FilmSection() {
                 </Link>
                 <a
                   href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-                    "Hello Jade River Resort, could you send me the latest property film?",
+                    "Hello Twin Towers by Defoy, could you send me the latest property film?",
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"

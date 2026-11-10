@@ -4,12 +4,12 @@ export default function FloatingWhatsApp() {
   return (
     <a
       href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-        "Hello Jade River Resort, I would like to enquire about a stay.",
+        "Hello Twin Towers by Defoy, I would like to enquire about a stay.",
       )}`}
       target="_blank"
       rel="noopener noreferrer"
       className="group fixed bottom-5 right-5 z-40 flex items-center gap-0 overflow-hidden rounded-full bg-forest pl-4 pr-4 text-paper shadow-[0_10px_40px_rgba(33,51,41,0.22)] transition-all duration-500 ease-[var(--ease-out-expo)] hover:gap-3 hover:pr-6 md:bottom-8 md:right-8"
-      aria-label="Chat with Jade River Resort on WhatsApp"
+      aria-label="Chat with Twin Towers by Defoy on WhatsApp"
 
     >
       <span className="flex h-12 w-12 shrink-0 items-center justify-center">

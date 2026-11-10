@@ -8,8 +8,8 @@ import { JsonLd, breadcrumb, reviewListSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Guest Reviews",
   description:
-    "Notes left by guests of Jade River Resort, Pahalgam — on the river, the balcony rooms, the duplex family rooms, the bonfire evenings, and the quiet.",
-  alternates: { canonical: "/jade-river-resort/reviews" },
+    "Notes left by guests of Twin Towers by Defoy, Pahalgam — on the river, the balcony rooms, the duplex family rooms, the bonfire evenings, and the quiet.",
+  alternates: { canonical: "/twin-towers/reviews" },
 };
 
 export default async function ReviewsPage() {
@@ -30,8 +30,8 @@ export default async function ReviewsPage() {
     <>
       <JsonLd
         data={breadcrumb([
-          { name: "Home", path: "/jade-river-resort" },
-          { name: "Reviews", path: "/jade-river-resort/reviews" },
+          { name: "Home", path: "/twin-towers" },
+          { name: "Reviews", path: "/twin-towers/reviews" },
         ])}
       />
       {averageRating && reviews.length > 0 ? (

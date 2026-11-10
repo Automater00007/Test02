@@ -20,7 +20,7 @@ export default function PageHeader({
           <div className="flex min-w-0 items-center gap-4">
             <span className="eyebrow truncate text-ink/65">{eyebrow}</span>
           </div>
-          <span className="eyebrow shrink-0 text-ink/65">Jade River Resort</span>
+          <span className="eyebrow shrink-0 text-ink/65">Twin Towers by Defoy</span>
         </div>
 
         <div className="grid gap-10 pt-12 pb-14 md:grid-cols-12 md:pt-20 md:pb-20">

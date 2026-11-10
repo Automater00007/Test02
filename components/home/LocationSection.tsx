@@ -41,15 +41,15 @@ export default function LocationSection() {
             </h2>
 
             <p className="body-copy mt-8 max-w-md" data-reveal>
-              Pahalgam sits at 2,130 metres in the Lidder valley. Srinagar Airport is
-              96 km away — roughly two and a half to three hours by road, and a
+              Pahalgam sits at 2,200 metres on the road to the valley. Srinagar Airport is
+              95 km away — roughly two and a half to three hours by road, and a
               different world by the time you arrive.
             </p>
 
             <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-line pt-8">
               <div data-reveal="zoom">
                 <dt className="eyebrow text-ink/65">Airport</dt>
-                <dd className="mt-2 text-[0.95rem]">Srinagar · 96 km</dd>
+                <dd className="mt-2 text-[0.95rem]">Srinagar · 95 km</dd>
               </div>
               <div data-reveal="zoom" style={{ ["--reveal-delay" as string]: "60ms" }}>
                 <dt className="eyebrow text-ink/65">Drive</dt>
@@ -107,7 +107,7 @@ export default function LocationSection() {
                 className="w-full"
                 fill="none"
                 role="img"
-                aria-label="Sketch of the route from Srinagar Airport to Pahalgam, where Jade River Resort sits"
+                aria-label="Sketch of the route from Srinagar Airport to Pahalgam, where Twin Towers by Defoy sits"
               >
                 {/* contour lines */}
                 {[0, 1, 2, 3, 4].map((i) => (
@@ -120,7 +120,7 @@ export default function LocationSection() {
                   />
                 ))}
 
-                {/* the Lidder, running past the property */}
+                {/* the valley, running past the property */}
                 <path
                   d="M-20 476 C 110 458, 210 486, 330 456 S 500 432, 590 458"
                   stroke="#201B17"
@@ -184,10 +184,10 @@ export default function LocationSection() {
                   PAHALGAM
                 </text>
                 <text x="300" y="320" fill="#201B17" fillOpacity="0.5" fontSize="9" fontFamily="monospace" letterSpacing="1.5">
-                  2,130 M
+                  2,200 M
                 </text>
                 <text x="410" y="168" fill="#A87850" fontSize="11" fontFamily="monospace" letterSpacing="2">
-                  JADE RIVER
+                  twin RIVER
                 </text>
                 <text x="410" y="182" fill="#201B17" fillOpacity="0.55" fontSize="9" fontFamily="monospace" letterSpacing="1.5">
                   RESORT · IN PAHALGAM

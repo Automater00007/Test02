@@ -5,6 +5,7 @@ const explore = [
   { label: "Rooms & Suites", href: "/rooms" },
   { label: "Experiences", href: "/experiences" },
   { label: "Gallery", href: "/gallery" },
+  { label: "Guest Stories", href: "/stories" },
   { label: "Blog", href: "/post" },
   { label: "Reviews", href: "/reviews" },
 ];
@@ -23,9 +24,9 @@ export default function SiteFooter() {
       <div className="shell pt-20 pb-8 md:pt-28">
         <div className="grid gap-14 md:grid-cols-12">
           <div className="md:col-span-6" data-reveal>
-            <span className="eyebrow text-paper/65">Jade River Resort</span>
+            <span className="eyebrow text-paper/65">Twin Towers by Defoy</span>
             <p className="mt-6 max-w-[20ch] font-display text-[clamp(2.2rem,4.6vw,4.4rem)] leading-[0.98] tracking-[-0.04em]">
-              Life, slowed by the <em className="text-clay">river.</em>
+              Life, slowed by the <em className="text-clay">valley.</em>
             </p>
             <p className="mt-8 max-w-sm font-mono text-[11px] uppercase leading-[2.1] tracking-[0.16em] text-paper/65">
               {site.address}
@@ -116,7 +117,7 @@ export default function SiteFooter() {
           className="whitespace-nowrap text-center font-display text-[clamp(5rem,18.5vw,19rem)] leading-[0.8] tracking-[-0.055em]"
           style={{ color: "transparent", WebkitTextStroke: "1px rgba(251,248,243,0.18)" }}
         >
-          Jade River
+          Twin Towers by Defoy
         </p>
       </div>
     </footer>

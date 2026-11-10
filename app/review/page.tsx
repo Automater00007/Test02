@@ -5,7 +5,7 @@ import ReviewForm from "@/components/ReviewForm";
 export const metadata: Metadata = {
   title: "Leave a review",
   description:
-    "Tell Jade River Resort about your stay.",
+    "Tell Twin Towers by Defoy about your stay.",
   alternates: { canonical: "/review" },
   robots: { index: false, follow: false },
 };
@@ -16,7 +16,7 @@ export default function ReviewPage() {
       <div className="shell grid gap-12 py-14 md:grid-cols-12 md:gap-8 md:py-24">
         <div className="md:col-span-5">
           <span className="eyebrow text-ink/65" data-reveal>
-            Guest notes · Jade River
+            Guest notes · Twin Towers by Defoy
           </span>
           <h1
             className="mt-4 text-[clamp(2.6rem,6vw,5rem)] leading-[0.92] tracking-[-0.045em]"

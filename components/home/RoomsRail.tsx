@@ -25,7 +25,7 @@ function RoomCard({ room, index }: { room: Room; index: number }) {
           <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-auto md:h-[54vh]">
             <Image
               src={room.image}
-              alt={`${room.name} at Jade River Resort`}
+              alt={`${room.name} at Twin Towers by Defoy`}
               fill
               sizes="(min-width: 768px) 42vw, 100vw"
               className="reveal-media object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"

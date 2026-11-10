@@ -19,7 +19,6 @@ export default function robots(): MetadataRoute.Robots {
       ...aiBots.map((bot) => ({ userAgent: bot, allow: "/" })),
     ],
     sitemap:
-      "https://defoyhotelsandresorts.com/jade-river-resort/sitemap.xml",
-    host: "https://defoyhotelsandresorts.com",
+      "https://defoyhotelsandresorts.com/twin-towers/sitemap.xml",
   };
 }

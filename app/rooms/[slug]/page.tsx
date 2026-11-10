@@ -21,10 +21,10 @@ export async function generateMetadata({
   if (!room) return { title: "Room not found" };
   return {
     title: room.name,
-    description: `${room.description} From ${formatPrice(room.price)} per night at Jade River Resort, Pahalgam. Direct booking only.`,
-    alternates: { canonical: `/jade-river-resort/rooms/${room.slug}` },
+    description: `${room.description} From ${formatPrice(room.price)} per night at Twin Towers by Defoy, Pahalgam. Direct booking only.`,
+    alternates: { canonical: `/twin-towers/rooms/${room.slug}` },
     openGraph: {
-      title: `${room.name} — Jade River Resort`,
+      title: `${room.name} — Twin Towers by Defoy`,
       description: room.description,
       images: [{ url: room.image, width: 1600, height: 900, alt: room.name }],
     },
@@ -42,7 +42,7 @@ export default async function RoomPage({
 
   const others = rooms.filter((r) => r.slug !== room.slug);
   const waText = encodeURIComponent(
-    `Hello Jade River Resort, I would like to enquire about the ${room.name} (${formatPrice(room.price)} per night).`,
+    `Hello Twin Towers by Defoy, I would like to enquire about the ${room.name} (${formatPrice(room.price)} per night).`,
   );
 
   return (
@@ -50,9 +50,9 @@ export default async function RoomPage({
       <JsonLd
         data={[
           breadcrumb([
-            { name: "Home", path: "/jade-river-resort" },
-            { name: "Rooms", path: "/jade-river-resort/rooms" },
-            { name: room.name, path: `/jade-river-resort/rooms/${room.slug}` },
+            { name: "Home", path: "/twin-towers" },
+            { name: "Rooms", path: "/twin-towers/rooms" },
+            { name: room.name, path: `/twin-towers/rooms/${room.slug}` },
           ]),
           {
             "@context": "https://schema.org",

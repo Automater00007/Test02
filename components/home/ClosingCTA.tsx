@@ -26,7 +26,7 @@ export default function ClosingCTA() {
 
           <div className="md:col-span-4">
             <p className="max-w-[30ch] text-[1rem] leading-[1.7] text-ink/75" data-reveal>
-              Thirteen rooms. One river. A direct line to the people who actually
+              Twenty-five rooms. One valley. A direct line to the people who actually
               run the place — no booking engines in between.
             </p>
 

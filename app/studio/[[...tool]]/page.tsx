@@ -9,7 +9,7 @@ export default function StudioPage() {
     return (
       <div className="mx-auto flex min-h-svh max-w-xl flex-col justify-center px-6 py-20">
         <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-ink/65">
-          Jade River Resort · CMS
+          Twin Towers by Defoy · CMS
         </p>
         <h1 className="mt-4 font-display text-[clamp(2rem,5vw,3.4rem)] leading-[1.02] tracking-[-0.03em]">
           The Studio needs a Sanity project.

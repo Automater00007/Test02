@@ -7,8 +7,8 @@ import { JsonLd, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Location & Directions",
-  description: `Jade River Resort is in Pahalgam, Jammu & Kashmir, at ${site.coords} and 2,130 metres. Srinagar Airport is 96 km away, roughly 2.5 to 3 hours by road.`,
-  alternates: { canonical: "/jade-river-resort/location" },
+  description: `Twin Towers by Defoy is in Pahalgam, Jammu & Kashmir, at ${site.coords} and 2,130 metres. Srinagar Airport is 96 km away, roughly 2.5 to 3 hours by road.`,
+  alternates: { canonical: "/twin-towers/location" },
 };
 
 const nearby = [
@@ -22,8 +22,8 @@ export default function LocationPage() {
     <>
       <JsonLd
         data={breadcrumb([
-          { name: "Home", path: "/jade-river-resort" },
-          { name: "Location", path: "/jade-river-resort/location" },
+          { name: "Home", path: "/twin-towers" },
+          { name: "Location", path: "/twin-towers/location" },
         ])}
       />
       <PageHeader
@@ -34,7 +34,7 @@ export default function LocationPage() {
             <em className="text-clay">valley road.</em>
           </>
         }
-        intro="Pahalgam sits at 2,130 metres in the Lidder valley. The last stretch of road follows the river, and then it is just the river."
+        intro="Pahalgam sits at 2,130 metres in the valley valley. The last stretch of road follows the river, and then it is just the river."
         aside={
           <div className="flex items-end justify-between border-t border-line pt-5">
             <div>
@@ -56,7 +56,7 @@ export default function LocationPage() {
       <section className="shell pb-14">
         <div className="relative overflow-hidden border border-line bg-paper-2" data-reveal="zoom">
           <iframe
-            title="Map showing Jade River Resort in Pahalgam"
+            title="Map showing Twin Towers by Defoy in Pahalgam"
             src={`https://www.google.com/maps?q=${site.coords.replace(/\s/g, "")}&z=14&output=embed`}
             className="h-[52svh] min-h-[380px] w-full grayscale-[0.85] contrast-[1.05]"
             loading="eager"
@@ -64,7 +64,7 @@ export default function LocationPage() {
           />
           <div className="pointer-events-none absolute bottom-4 left-4 bg-paper px-4 py-3">
             <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink/65">
-              Jade River Resort
+              Twin Towers by Defoy
             </p>
             <p className="mt-1 font-display text-[1.1rem] leading-none">Pahalgam, Kashmir</p>
           </div>
@@ -78,7 +78,7 @@ export default function LocationPage() {
               Getting here is part of the <em className="text-clay">slowing.</em>
             </h2>
             <p className="body-copy mt-6" data-reveal style={{ ["--reveal-delay" as string]: "80ms" }}>
-              Fly into Srinagar, then drive south through the Lidder valley. The
+              Fly into Srinagar, then drive south through the valley valley. The
               road climbs gradually, the air changes, and by the time you turn off
               toward the property, the city feels much further than three hours
               away. We can arrange a pickup with the resort team — just ask before

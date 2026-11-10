@@ -8,8 +8,8 @@ import { JsonLd, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
   description:
-    "Where is Jade River Resort, how many rooms, rates, direct booking, cancellation, check-in times, IDs, airport distance and nearby places — answered plainly.",
-  alternates: { canonical: "/jade-river-resort/faq" },
+    "Where is Twin Towers by Defoy, how many rooms, rates, direct booking, cancellation, check-in times, IDs, airport distance and nearby places — answered plainly.",
+  alternates: { canonical: "/twin-towers/faq" },
 };
 
 export default function FaqPage() {
@@ -18,8 +18,8 @@ export default function FaqPage() {
       <JsonLd
         data={[
           breadcrumb([
-            { name: "Home", path: "/jade-river-resort" },
-            { name: "FAQ", path: "/jade-river-resort/faq" },
+            { name: "Home", path: "/twin-towers" },
+            { name: "FAQ", path: "/twin-towers/faq" },
           ]),
           {
             "@context": "https://schema.org",

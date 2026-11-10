@@ -30,7 +30,7 @@ export async function generateMetadata({
     description,
     keywords: post.seo?.keywords?.length ? post.seo.keywords : undefined,
     alternates: {
-      canonical: post.seo?.canonicalUrl || `/jade-river-resort/post/${post.slug}`,
+      canonical: post.seo?.canonicalUrl || `/twin-towers/post/${post.slug}`,
     },
     robots: post.seo?.noIndex ? { index: false, follow: false } : undefined,
     openGraph: {
@@ -61,9 +61,9 @@ export default async function PostPage({
       <JsonLd
         data={[
           breadcrumb([
-            { name: "Home", path: "/jade-river-resort" },
-            { name: "Blog", path: "/jade-river-resort/post" },
-            { name: post.title, path: `/jade-river-resort/post/${post.slug}` },
+            { name: "Home", path: "/twin-towers" },
+            { name: "Blog", path: "/twin-towers/post" },
+            { name: post.title, path: `/twin-towers/post/${post.slug}` },
           ]),
           {
             "@context": "https://schema.org",
@@ -75,7 +75,7 @@ export default async function PostPage({
             dateModified: post.publishedAt,
             author: {
               "@type": "Organization",
-              name: post.author || "Jade River Resort",
+              name: post.author || "Twin Towers by Defoy",
             },
             publisher: { "@type": "Organization", name: site.name },
             mainEntityOfPage: `${site.url}/post/${post.slug}`,
@@ -161,7 +161,7 @@ export default async function PostPage({
 
             <div className="mt-14 flex flex-wrap items-center justify-between gap-6 border-t border-line pt-6">
               <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink/65">
-                Jade River Resort · Pahalgam
+                Twin Towers by Defoy · Pahalgam
               </p>
               <div className="flex gap-6">
                 <Link href="/rooms" className="link-line font-mono text-[10px] uppercase tracking-[0.18em]">

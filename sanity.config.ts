@@ -8,8 +8,8 @@ import { dataset, projectId } from "./sanity/env";
 import { schemaTypes } from "./sanity/schemaTypes";
 
 export default defineConfig({
-  name: "jade-river-resort",
-  title: "Jade River Resort CMS",
+  name: "twin-towers-defoy",
+  title: "Twin Towers by Defoy CMS",
   basePath: "/studio",
   projectId: projectId || "unconfigured",
   dataset,

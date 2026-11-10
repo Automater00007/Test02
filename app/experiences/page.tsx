@@ -9,8 +9,8 @@ import { JsonLd, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Experiences",
   description:
-    "Bonfire evenings beside the Lidder, river walks, Pahalgam sightseeing, photography, family days and quiet luxury at Jade River Resort.",
-  alternates: { canonical: "/jade-river-resort/experiences" },
+    "Bonfire evenings beside the valley, river walks, Pahalgam sightseeing, photography, family days and quiet luxury at Twin Towers by Defoy.",
+  alternates: { canonical: "/twin-towers/experiences" },
 };
 
 export default function ExperiencesPage() {
@@ -18,8 +18,8 @@ export default function ExperiencesPage() {
     <>
       <JsonLd
         data={breadcrumb([
-          { name: "Home", path: "/jade-river-resort" },
-          { name: "Experiences", path: "/jade-river-resort/experiences" },
+          { name: "Home", path: "/twin-towers" },
+          { name: "Experiences", path: "/twin-towers/experiences" },
         ])}
       />
       <PageHeader
@@ -118,7 +118,7 @@ export default function ExperiencesPage() {
               Plan your stay
             </Link>
             <a
-              href="https://wa.me/919541898820"
+              href="https://wa.me/9195418 98817"
               className="link-line self-center font-mono text-[10px] uppercase tracking-[0.2em] text-paper/70"
             >
               WhatsApp us →

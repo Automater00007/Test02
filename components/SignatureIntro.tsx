@@ -117,7 +117,7 @@ export default function SignatureIntro() {
 
           <div className="relative overflow-hidden px-2">
             <h1 className="intro-title text-center font-display text-[clamp(2.6rem,9.5vw,8.5rem)] font-light leading-[0.9] tracking-[-0.04em] text-paper">
-              Jade River
+              Twin Towers by Defoy
             </h1>
           </div>
 

@@ -28,7 +28,7 @@ export function reviewListSchema({
   return {
     "@context": "https://schema.org",
     "@type": "Hotel",
-    name: "Jade River Resort",
+    name: "Twin Towers by Defoy",
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: rating,

@@ -1,9 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope, DM_Mono } from "next/font/google";
+import { Fraunces, Manrope, DM_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import PreviewBridge from "@/components/PreviewBridge";
 import SiteChrome from "@/components/SiteChrome";
 import { site } from "@/lib/content";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -29,41 +35,41 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://defoyhotelsandresorts.com"),
   title: {
-    default: "Jade River Resort — Life, Slowed by the River",
-    template: "%s — Jade River Resort",
+    default: "Twin Towers by Defoy — A quieter kind of escape in Kashmir",
+    template: "%s — Twin Towers by Defoy",
   },
   description: site.description,
-  applicationName: "Jade River Resort",
+  applicationName: "Twin Towers by Defoy",
   authors: [{ name: "Defoy Hotels & Resorts" }],
   keywords: [
-    "Jade River Resort",
+    "Twin Towers by Defoy",
     "Pahalgam resort",
     "luxury resort Kashmir",
-    "Lidder River hotel",
+    "valley River hotel",
     "boutique hotel Pahalgam",
     "Jammu and Kashmir stay",
     "Defoy Hotels",
   ],
-  alternates: { canonical: "/jade-river-resort" },
+  alternates: { canonical: "/twin-towers" },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "/jade-river-resort",
-    siteName: "Jade River Resort",
-    title: "Jade River Resort — Life, Slowed by the River",
+    url: "/twin-towers",
+    siteName: "Twin Towers by Defoy",
+    title: "Twin Towers by Defoy — A quieter kind of escape in Kashmir",
     description: site.description,
     images: [
       {
-        url: "/images/jade/gallery-07.webp",
-        width: 1672,
-        height: 941,
-        alt: "Jade River Resort at dusk in snow",
+        url: "/images/twin/exterior.webp",
+        width: 1280,
+        height: 720,
+        alt: "Twin Towers by Defoy against the pines",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jade River Resort — Life, Slowed by the River",
+    title: "Twin Towers by Defoy — A quieter kind of escape in Kashmir",
     description: site.description,
   },
   robots: {
@@ -81,30 +87,29 @@ export const viewport: Viewport = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LodgingBusiness",
-  name: "Jade River Resort",
+  name: "Twin Towers by Defoy",
   description: site.description,
-  url: "https://defoyhotelsandresorts.com/jade-river-resort",
-  telephone: "+919541898820",
-  email: "jaderiverresort@defoy.in",
-  priceRange: "₹6,000 – ₹13,000",
-  numberOfRooms: 13,
+  url: "https://defoyhotelsandresorts.com/twin-towers",
+  telephone: "+919541898817",
+  email: "info@defoy.in",
+  priceRange: "₹5,000 – ₹5,000",
+  numberOfRooms: 25,
   parentOrganization: { "@type": "Organization", name: "Defoy Hotels & Resorts" },
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Pahalgam",
+    streetAddress: "W7CF+W2P, Dehwathu",
     addressLocality: "Pahalgam",
     addressRegion: "Jammu & Kashmir",
-    postalCode: "192125",
+    postalCode: "192401",
     addressCountry: "IN",
   },
   geo: { "@type": "GeoCoordinates", latitude: site.lat, longitude: site.lng },
   amenityFeature: [
-    { "@type": "LocationFeatureSpecification", name: "Riverside setting", value: true },
     { "@type": "LocationFeatureSpecification", name: "Private balconies", value: true },
-    { "@type": "LocationFeatureSpecification", name: "Bonfire evenings", value: true },
     { "@type": "LocationFeatureSpecification", name: "Wi-Fi", value: true },
     { "@type": "LocationFeatureSpecification", name: "Room service", value: true },
-    { "@type": "LocationFeatureSpecification", name: "Family rooms", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Breakfast included", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Family-friendly", value: true },
     { "@type": "LocationFeatureSpecification", name: "Free parking", value: true },
   ],
   checkinTime: "14:00",
@@ -120,10 +125,15 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${manrope.variable} ${dmMono.variable}`}
+      className={`${fraunces.variable} ${manrope.variable} ${dmMono.variable} ${inter.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: introScript }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('tt-theme')||'day';document.documentElement.dataset.theme=t;}catch(e){}})();`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

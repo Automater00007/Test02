@@ -62,7 +62,7 @@ export default function Hero() {
                 {/* Instant poster — never delayed, keeps LCP fast */}
                 <Image
                   src={img.hero}
-                  alt="Jade River Resort in the Lidder valley, Pahalgam"
+                  alt="Twin Towers by Defoy in the valley valley, Pahalgam"
                   fill
                   priority
                   fetchPriority="high"
@@ -179,11 +179,11 @@ export default function Hero() {
           data-reveal
           style={{ ["--reveal-delay" as string]: "90ms" }}
         >
-          A boutique property of thirteen rooms on the banks of the Lidder River.
+          A boutique property of thirteen rooms on the banks of the valley River.
           Not a hotel to tick off. A place to stay longer than you planned.
         </p>
         <a
-          href="https://wa.me/919541898820"
+          href="https://wa.me/9195418 98817"
           className="link-line justify-self-start font-mono text-[10px] uppercase tracking-[0.2em] md:col-span-2 md:col-start-11 md:justify-self-end"
           data-reveal="fade"
           style={{ ["--reveal-delay" as string]: "160ms" }}

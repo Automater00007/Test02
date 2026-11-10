@@ -2,7 +2,7 @@ import RiverDivider from "@/components/ui/RiverDivider";
 import { site } from "@/lib/content";
 
 const copy =
-  "Pahalgam is not a place you rush. The Lidder has run this valley longer than any of us. Thirteen rooms beside it — wooden walls, amber light, pine behind, water in front.";
+  "Pahalgam is not a place you rush. The valley has run this valley longer than any of us. Thirteen rooms beside it — wooden walls, amber light, pine behind, water in front.";
 
 export default function Philosophy() {
   return (

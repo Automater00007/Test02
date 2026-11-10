@@ -8,8 +8,8 @@ import { rooms } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Rooms & Suites",
   description:
-    "Thirteen rooms at Jade River Resort, Pahalgam: nine Premium Balcony Rooms, two Executive Suites, and two Executive Duplex Family Rooms. Direct booking only.",
-  alternates: { canonical: "/jade-river-resort/rooms" },
+    "Thirteen rooms at Twin Towers by Defoy, Pahalgam: nine Premium Balcony Rooms, two Executive Suites, and two Executive Duplex Family Rooms. Direct booking only.",
+  alternates: { canonical: "/twin-towers/rooms" },
 };
 
 export default function RoomsPage() {
@@ -17,8 +17,8 @@ export default function RoomsPage() {
     <>
       <JsonLd
         data={breadcrumb([
-          { name: "Home", path: "/jade-river-resort" },
-          { name: "Rooms", path: "/jade-river-resort/rooms" },
+          { name: "Home", path: "/twin-towers" },
+          { name: "Rooms", path: "/twin-towers/rooms" },
         ])}
       />
       <PageHeader
@@ -56,7 +56,7 @@ export default function RoomsPage() {
               Reserve directly
             </Link>
             <a
-              href="https://wa.me/919541898820"
+              href="https://wa.me/9195418 98817"
               className="link-line self-center font-mono text-[10px] uppercase tracking-[0.2em] text-paper/70"
             >
               WhatsApp us →

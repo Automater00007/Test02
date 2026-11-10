@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { rooms } from "@/lib/content";
 import { getAllPosts } from "@/lib/posts";
 
-const base = "https://defoyhotelsandresorts.com/jade-river-resort";
+const base = "https://defoyhotelsandresorts.com/twin-towers";
 
 export const revalidate = 3600;
 
