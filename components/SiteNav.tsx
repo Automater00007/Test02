@@ -69,7 +69,7 @@ export default function SiteNav() {
             href="/"
             className="group flex items-baseline gap-2.5"
           >
-            <span className="font-display text-[1.4rem] leading-none tracking-[-0.045em] md:text-[1.6rem]">
+            <span className="font-display text-[1.35rem] font-bold leading-none tracking-[-0.04em] md:text-[1.55rem]">
               Twin<span className="text-clay">.</span>Towers
             </span>
             <span className={cn("eyebrow hidden pb-[2px] text-[9px] lg:block", overHero ? "text-paper/80" : "text-ink/65")}>
@@ -85,7 +85,7 @@ export default function SiteNav() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "site-nav-link link-line font-mono text-[11px] uppercase tracking-[0.18em] transition-colors",
+                    "site-nav-link link-line text-[11px] font-semibold uppercase tracking-[0.15em] transition-colors",
                     active
                       ? overHero
                         ? "text-clay"
@@ -137,7 +137,7 @@ export default function SiteNav() {
             transition={{ duration: 0.75, ease: EASE }}
           >
             <div className="shell flex h-[68px] items-center justify-between md:h-[80px]">
-              <span className="font-display text-[1.4rem] leading-none tracking-[-0.045em]">
+              <span className="font-display text-[1.35rem] font-bold leading-none tracking-[-0.04em]">
                 Twin<span className="text-clay">.</span>Towers
               </span>
               <button
@@ -172,10 +172,10 @@ export default function SiteNav() {
                           onClick={() => setOpen(false)}
                           className="group flex items-baseline justify-between py-[clamp(0.7rem,2vw,1.1rem)]"
                         >
-                          <span className="font-display text-[clamp(2.2rem,7vw,4rem)] leading-[1.05] tracking-[-0.04em] transition-colors group-hover:text-clay">
+                          <span className="font-display text-[clamp(2.2rem,7vw,4rem)] font-bold leading-[1.02] tracking-[-0.04em] transition-colors group-hover:text-clay">
                             {item.label}
                           </span>
-                          <span className="font-mono text-[10px] tracking-[0.2em] text-paper/65">
+                          <span className="tabular text-[10px] font-semibold tracking-[0.2em] text-paper/65">
                             0{i + 1}
                           </span>
                         </Link>
@@ -199,7 +199,7 @@ export default function SiteNav() {
                 <div className="text-right">
                   <a
                     href={`https://wa.me/${site.whatsapp}`}
-                    className="link-line font-display text-xl italic text-paper"
+                    className="link-line font-display text-xl font-semibold text-paper"
                   >
                     {site.phone}
                   </a>

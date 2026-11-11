@@ -21,12 +21,15 @@ export const site = {
 };
 
 export const nav = [
-  { label: "Rooms", href: "/rooms" },
-  { label: "Experiences", href: "/experiences" },
+  { label: "The hotel", href: "/hotel" },
+  { label: "Stay", href: "/rooms" },
+  { label: "Dining", href: "/dining" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Stories", href: "/stories" },
-  { label: "Blog", href: "/post" },
+  { label: "Offers", href: "/offers" },
   { label: "Location", href: "/location" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Journal", href: "/post" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const twin = (name: string) => `/images/twin/${name}.webp`;

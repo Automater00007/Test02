@@ -7,55 +7,46 @@ export default async function BlogTeaser() {
   const posts = await getLatestPosts(3);
 
   return (
-    <section className="relative py-20 md:py-28" aria-labelledby="blog-heading">
+    <section className="relative bg-paper py-20 md:py-28" aria-labelledby="blog-heading">
       <div className="shell">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <span className="eyebrow text-ink/65" data-reveal>
-              08 — Blog
-            </span>
+            <div className="flex items-center gap-3" data-reveal="fade">
+              <span className="block h-px w-10 bg-crimson" />
+              <span className="eyebrow text-crimson">09 — Journal</span>
+            </div>
             <h2
               id="blog-heading"
-              className="mt-4 text-[clamp(2.3rem,5.2vw,5rem)] leading-[0.94]"
+              className="mt-6 max-w-[18ch] text-[clamp(2.2rem,5vw,4.8rem)] font-bold leading-[0.95] tracking-[-0.04em]"
               data-reveal
             >
-              Notes from the <em className="text-clay">slow side.</em>
+              Notes from the <em>slow side.</em>
             </h2>
           </div>
           <Link
             href="/post"
-            className="link-line self-start font-mono text-[10px] uppercase tracking-[0.2em] md:self-end"
+            className="link-line self-start text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-crimson md:self-end"
             data-reveal="fade"
           >
-            All blog entries →
+            All journal entries →
           </Link>
         </div>
 
         {posts.length > 0 ? (
-          <div className="mt-14 grid gap-x-6 gap-y-12 md:grid-cols-12">
+          <div className="mt-12 grid gap-x-6 gap-y-12 md:grid-cols-12">
             {posts.map((post, i) => (
               <TiltCard
                 key={post.slug}
-                max={3.2}
-                className={
-                  i === 0
-                    ? "md:col-span-6"
-                    : i === 1
-                      ? "md:col-span-3"
-                      : "md:col-span-3"
-                }
+                max={3}
+                className={i === 0 ? "md:col-span-6" : "md:col-span-3"}
               >
                 <Link
                   href={`/post/${post.slug}`}
                   className="group block"
                   data-reveal="zoom"
-                  style={{ ["--reveal-delay" as string]: `${i * 100}ms` }}
+                  style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
                 >
-                  <div
-                    className="relative aspect-[4/3] overflow-hidden bg-paper-2"
-                    data-reveal="mask"
-                    style={{ ["--reveal-delay" as string]: `${i * 100}ms` }}
-                  >
+                  <div className="relative aspect-[4/3] overflow-hidden bg-paper-2" data-reveal="mask">
                     <Image
                       src={post.image}
                       alt={post.imageAlt}
@@ -67,26 +58,32 @@ export default async function BlogTeaser() {
                       }
                       className="reveal-media object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.06]"
                     />
-                    <span className="absolute left-4 top-4 bg-paper px-3 py-1.5 font-mono text-[8px] uppercase tracking-[0.16em]">
+                    <span className="absolute left-4 top-4 bg-crimson px-2.5 py-1.5 text-[0.56rem] font-semibold uppercase tracking-[0.14em] text-ivory">
                       {post.category}
                     </span>
                   </div>
 
                   <div className="mt-5 flex items-start justify-between gap-4">
                     <div>
-                      <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink/65">
+                      <p className="tabular text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-stone">
                         {post.date} · {post.read} read
                       </p>
-                      <h3 className="mt-3 max-w-[22ch] font-display text-[clamp(1.35rem,1.9vw,2rem)] leading-[1.06] tracking-[-0.03em] transition-colors duration-500 group-hover:text-clay">
+                      <h3
+                        className={`mt-3 max-w-[24ch] font-display font-bold leading-[1.05] tracking-[-0.03em] transition-colors duration-500 group-hover:text-crimson ${
+                          i === 0
+                            ? "text-[clamp(1.5rem,2.4vw,2.3rem)]"
+                            : "text-[clamp(1.25rem,1.7vw,1.6rem)]"
+                        }`}
+                      >
                         {post.title}
                       </h3>
-                      <p className="mt-3 max-w-[36ch] text-[0.9rem] leading-relaxed text-ink/70">
+                      <p className="mt-3 max-w-[38ch] text-[0.9rem] leading-relaxed text-ink/65">
                         {post.excerpt}
                       </p>
                     </div>
-                    <span className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line transition-all duration-500 group-hover:border-walnut group-hover:bg-walnut group-hover:text-paper">
+                    <span className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line text-crimson transition-all duration-500 group-hover:border-crimson group-hover:bg-crimson group-hover:text-ivory">
                       <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="arrow-static">
-                        <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.2" />
+                        <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.4" />
                       </svg>
                     </span>
                   </div>
@@ -95,7 +92,7 @@ export default async function BlogTeaser() {
             ))}
           </div>
         ) : (
-          <p className="mt-12 max-w-md font-display text-[1.4rem] italic leading-snug text-ink/70">
+          <p className="mt-12 max-w-md text-[1.3rem] font-medium leading-snug text-ink/60">
             The first notes are being written from the property.
           </p>
         )}

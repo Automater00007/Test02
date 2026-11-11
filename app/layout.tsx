@@ -1,35 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope, DM_Mono, Inter } from "next/font/google";
+import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import PreviewBridge from "@/components/PreviewBridge";
 import SiteChrome from "@/components/SiteChrome";
 import { site } from "@/lib/content";
 
+/* Xogul type system: Manrope carries the experience, Inter carries the
+   information. No serif, no mono, no decorative faces. */
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-fraunces",
-  style: ["normal", "italic"],
-  axes: ["SOFT", "WONK", "opsz"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-manrope",
-});
-
-const dmMono = DM_Mono({
-  subsets: ["latin"],
-  weight: ["300", "400"],
-  display: "swap",
-  variable: "--font-dm-mono",
+  weight: ["500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -45,7 +34,7 @@ export const metadata: Metadata = {
     "Twin Towers by Defoy",
     "Pahalgam resort",
     "luxury resort Kashmir",
-    "valley River hotel",
+    "Pahalgam valley hotel",
     "boutique hotel Pahalgam",
     "Jammu and Kashmir stay",
     "Defoy Hotels",
@@ -116,8 +105,6 @@ const jsonLd = {
   checkoutTime: "12:00",
 };
 
-const introScript = `(function(){try{var seen=sessionStorage.getItem('jr-intro');var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(!seen&&!reduce){document.documentElement.setAttribute('data-intro','1');}}catch(e){}})();`;
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -125,10 +112,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${manrope.variable} ${dmMono.variable} ${inter.variable}`}
+      className={`${manrope.variable} ${inter.variable}`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: introScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -137,13 +123,13 @@ export default function RootLayout({
       <body>
         <a
           href="#main"
-          className="fixed left-4 top-4 z-[120] -translate-y-24 bg-forest px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-paper transition-transform focus:translate-y-0"
+          className="fixed left-4 top-4 z-[120] -translate-y-24 bg-crimson px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-ivory transition-transform focus:translate-y-0"
         >
           Skip to content
         </a>
 
         <noscript>
-          <style>{`[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}[data-reveal] .reveal-media{clip-path:none!important;transform:none!important}.intro-stage{display:none!important}`}</style>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}[data-reveal] .reveal-media{clip-path:none!important;transform:none!important}`}</style>
         </noscript>
 
         <SiteChrome>{children}</SiteChrome>

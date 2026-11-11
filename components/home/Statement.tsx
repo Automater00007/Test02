@@ -1,54 +1,95 @@
 import SplitText from "@/components/ui/SplitText";
+import KineticMarquee from "@/components/ui/KineticMarquee";
 import { site } from "@/lib/content";
+
+const facts = [
+  { k: "Rooms", v: "25, all with a balcony" },
+  { k: "Towers", v: "Two, under one roof" },
+  { k: "From", v: "₹5,000 / night" },
+  { k: "Altitude", v: "2,200 m" },
+];
 
 export default function Statement() {
   return (
-    <section className="relative py-20 md:py-28">
+    <section className="relative overflow-hidden bg-paper pt-16 md:pt-24" aria-labelledby="statement-heading">
       <div className="shell">
-        <div className="grid gap-10 md:grid-cols-12 md:gap-16">
-          <div className="md:col-span-5">
-            <span className="eyebrow text-ink/65" data-reveal>
-              The estate
+        <div
+          className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4"
+          data-reveal="fade"
+        >
+          <span className="eyebrow text-crimson">Twin Towers by Defoy</span>
+          <span className="eyebrow hidden text-stone sm:block">
+            Dehwathu · Pahalgam · Jammu &amp; Kashmir
+          </span>
+        </div>
+
+        <div className="mt-10 grid gap-12 md:mt-16 md:grid-cols-12 md:gap-10">
+          <div className="relative md:col-span-7">
+            <span
+              className="index-figure pointer-events-none absolute -top-[0.5em] -left-[0.06em] hidden select-none text-[clamp(7rem,16vw,15rem)] opacity-25 md:block"
+              aria-hidden="true"
+            >
+              25
             </span>
+
             <SplitText
-              text="Twenty-five rooms. One valley. A hotel quiet enough to hear the pines."
+              text="Twenty-five rooms and one kind of room:"
               as="h2"
               id="statement-heading"
-              className="mt-4 text-[clamp(2.4rem,5vw,4.6rem)] leading-[0.95] tracking-[-0.04em]"
+              split="chars"
+              className="relative mt-6 text-[clamp(2.5rem,6vw,5.6rem)] font-bold leading-[0.94] tracking-[-0.045em]"
             />
-          </div>
-          <div className="md:col-span-7 md:col-start-6">
-            <p className="body-copy max-w-[52ch]" data-reveal>
-              Twin Towers by Defoy is a family-run property on the road to Pahalgam — built for slow
-              mornings, long views and the kind of hospitality that remembers your name.
-            </p>
             <p
-              className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-ink/65"
+              className="relative mt-3 max-w-[24ch] font-display text-[clamp(1.9rem,4.3vw,3.8rem)] font-semibold leading-[1] tracking-[-0.04em] text-crimson"
               data-reveal
-              style={{ ["--reveal-delay" as string]: "80ms" }}
+              style={{ ["--reveal-delay" as string]: "120ms" }}
             >
-              Dehwathu · on the road to Pahalgam
+              a Premium Room with a king size bed and a balcony of its own.
             </p>
-            <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-line pt-8">
-              <div data-reveal="zoom">
-                <dt className="eyebrow text-ink/65">Rooms</dt>
-                <dd className="mt-2 text-[0.95rem]">25 Premium Rooms with Balcony</dd>
-              </div>
-              <div data-reveal="zoom" style={{ ["--reveal-delay" as string]: "60ms" }}>
-                <dt className="eyebrow text-ink/65">Storeys</dt>
-                <dd className="mt-2 text-[0.95rem]">5 storeys · 2 towers</dd>
-              </div>
-              <div data-reveal="zoom" style={{ ["--reveal-delay" as string]: "120ms" }}>
-                <dt className="eyebrow text-ink/65">From</dt>
-                <dd className="mt-2 text-[0.95rem]">INR 5,000 per night</dd>
-              </div>
-              <div data-reveal="zoom" style={{ ["--reveal-delay" as string]: "180ms" }}>
-                <dt className="eyebrow text-ink/65">Coordinates</dt>
-                <dd className="mt-2 font-mono text-[0.8rem] tracking-tight">{site.coords}</dd>
-              </div>
+          </div>
+
+          <div className="md:col-span-4 md:col-start-9">
+            <p className="body-copy" data-reveal>
+              A family-run property on the road to Pahalgam — built for slow mornings,
+              long views and the kind of hospitality that remembers your name.
+            </p>
+
+            <dl className="mt-8 grid grid-cols-2 gap-x-5 gap-y-6 border-t border-line pt-6">
+              {facts.map((f, i) => (
+                <div
+                  key={f.k}
+                  data-reveal="zoom"
+                  style={{ ["--reveal-delay" as string]: `${i * 70}ms` }}
+                >
+                  <dt className="eyebrow text-stone">{f.k}</dt>
+                  <dd className="mt-2 text-[0.92rem] font-medium leading-snug">{f.v}</dd>
+                </div>
+              ))}
             </dl>
+
+            <p
+              className="mt-8 flex items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-stone"
+              data-reveal="fade"
+            >
+              <span className="block h-px w-8 bg-crimson" />
+              {site.coordsDisplay}
+            </p>
           </div>
         </div>
+      </div>
+
+      <div className="mt-14 border-y border-line bg-blush md:mt-20">
+        <KineticMarquee
+          items={[
+            "25 rooms",
+            "Two towers",
+            "Five storeys",
+            "360° valley",
+            "Pahalgam · Kashmir",
+            "Direct bookings only",
+          ]}
+          className="py-4 text-[clamp(1.05rem,2.2vw,1.8rem)] font-display font-bold uppercase tracking-[0.02em] text-crimson md:py-5"
+        />
       </div>
     </section>
   );

@@ -25,10 +25,10 @@ export default function SiteFooter() {
         <div className="grid gap-14 md:grid-cols-12">
           <div className="md:col-span-6" data-reveal>
             <span className="eyebrow text-paper/65">Twin Towers by Defoy</span>
-            <p className="mt-6 max-w-[20ch] font-display text-[clamp(2.2rem,4.6vw,4.4rem)] leading-[0.98] tracking-[-0.04em]">
-              Life, slowed by the <em className="text-clay">valley.</em>
+            <p className="mt-6 max-w-[20ch] font-display text-[clamp(2.2rem,4.6vw,4.4rem)] font-bold leading-[0.98] tracking-[-0.04em]">
+              Life, slowed by the <span className="text-clay">valley.</span>
             </p>
-            <p className="mt-8 max-w-sm font-mono text-[11px] uppercase leading-[2.1] tracking-[0.16em] text-paper/65">
+            <p className="mt-8 max-w-sm text-[0.62rem] font-semibold uppercase leading-[2.1] tracking-[0.14em] text-paper/65">
               {site.address}
               <br />
               {site.coords}
@@ -78,7 +78,7 @@ export default function SiteFooter() {
                 >
                   {site.phone}
                 </a>
-                <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.18em] text-paper/65">
+                <p className="mt-2 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-paper/65">
                   Phone &amp; WhatsApp
                 </p>
               </li>
@@ -89,7 +89,7 @@ export default function SiteFooter() {
                 >
                   {site.email}
                 </a>
-                <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.18em] text-paper/65">
+                <p className="mt-2 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-paper/65">
                   Direct enquiries
                 </p>
               </li>
@@ -97,7 +97,7 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col gap-4 border-t border-line-light pt-6 font-mono text-[10px] uppercase tracking-[0.16em] text-paper/65 sm:flex-row sm:items-center sm:justify-between" data-reveal="fade">
+        <div className="mt-20 flex flex-col gap-4 border-t border-line-light pt-6 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-paper/65 sm:flex-row sm:items-center sm:justify-between" data-reveal="fade">
           <p>© {new Date().getFullYear()} Defoy Hotels &amp; Resorts. All rights reserved.</p>
           <div className="flex flex-wrap gap-x-8 gap-y-2">
             <Link href="/policies" className="hover:text-paper/70">
@@ -114,7 +114,7 @@ export default function SiteFooter() {
         style={{ marginBottom: "-0.16em" }}
       >
         <p
-          className="whitespace-nowrap text-center font-display text-[clamp(5rem,18.5vw,19rem)] leading-[0.8] tracking-[-0.055em]"
+          className="whitespace-nowrap text-center font-display text-[clamp(5rem,18.5vw,19rem)] font-bold leading-[0.8] tracking-[-0.055em]"
           style={{ color: "transparent", WebkitTextStroke: "1px rgba(251,248,243,0.18)" }}
         >
           Twin Towers by Defoy

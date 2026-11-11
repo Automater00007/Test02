@@ -21,39 +21,46 @@ export default function GuestNotes({
   };
 
   return (
-    <section className="relative border-t border-line-light bg-forest py-20 text-paper md:py-28" aria-labelledby="reviews-heading">
+    <section
+      className="relative overflow-hidden bg-deep py-20 text-ivory md:py-28"
+      aria-labelledby="reviews-heading"
+    >
       <div className="shell">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-7">
-            <span className="eyebrow text-paper/65" data-reveal>
-              09 — Guest notes
-            </span>
+            <div className="flex items-center gap-3" data-reveal="fade">
+              <span className="block h-px w-10 bg-ivory/50" />
+              <span className="eyebrow text-ivory/75">08 — Guest notes</span>
+            </div>
             <h2
               id="reviews-heading"
-              className="mt-4 text-[clamp(2.3rem,5.2vw,5rem)] leading-[0.94]"
+              className="mt-6 text-[clamp(2.3rem,5.2vw,5rem)] font-bold leading-[0.94] tracking-[-0.04em]"
               data-reveal
             >
-              Small numbers. <em className="text-clay">That’s the point.</em>
+              Small numbers. <em className="text-ivory/70">That&rsquo;s the point.</em>
             </h2>
           </div>
-          <p className="body-copy max-w-sm text-paper/80 md:col-span-4 md:col-start-9" data-reveal>
-            Thirteen rooms, a handful of staff, and guests who tend to stay longer
+          <p
+            className="max-w-sm text-[0.98rem] leading-[1.75] text-ivory/70 md:col-span-4 md:col-start-9"
+            data-reveal="fade"
+          >
+            Twenty-five rooms, a handful of staff, and guests who tend to stay longer
             than they planned. These are their notes.
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-2 gap-y-10 border-y border-line-light py-10 md:grid-cols-4 md:gap-6">
+        <div className="mt-14 grid grid-cols-2 gap-y-10 border-y border-ivory/15 py-10 md:grid-cols-4 md:gap-6">
           {stats.map((s, i) => (
             <div
               key={s.label}
-              className="md:border-l md:border-line-light md:pl-6 md:first:border-l-0 md:first:pl-0"
+              className="md:border-l md:border-ivory/15 md:pl-6 md:first:border-l-0 md:first:pl-0"
               data-reveal="zoom"
               style={{ ["--reveal-delay" as string]: `${i * 80}ms` }}
             >
-              <p className="font-display text-[clamp(2.6rem,4.6vw,4.6rem)] leading-none tracking-[-0.04em]">
+              <p className="tabular font-display text-[clamp(2.6rem,4.6vw,4.6rem)] font-bold leading-none tracking-[-0.04em] text-ivory">
                 <CountUp value={s.value} suffix={s.suffix} />
               </p>
-              <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.18em] text-paper/65">
+              <p className="mt-3 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-ivory/70">
                 {s.label}
               </p>
             </div>
@@ -61,13 +68,13 @@ export default function GuestNotes({
         </div>
 
         <div className="mt-12 flex items-end justify-between gap-6" data-reveal="fade">
-          <span className="eyebrow text-paper/65">Notes from guests</span>
+          <span className="eyebrow text-ivory/75">Notes from guests</span>
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => nudge(-1)}
               aria-label="Previous reviews"
-              className="flex h-10 w-10 items-center justify-center border border-line transition-colors hover:border-walnut hover:bg-walnut hover:text-paper"
+              className="flex h-10 w-10 items-center justify-center border border-ivory/25 text-ivory transition-colors hover:border-ivory hover:bg-ivory hover:text-deep"
             >
               <Arrow dir="left" />
             </button>
@@ -75,7 +82,7 @@ export default function GuestNotes({
               type="button"
               onClick={() => nudge(1)}
               aria-label="Next reviews"
-              className="flex h-10 w-10 items-center justify-center border border-line transition-colors hover:border-walnut hover:bg-walnut hover:text-paper"
+              className="flex h-10 w-10 items-center justify-center border border-ivory/25 text-ivory transition-colors hover:border-ivory hover:bg-ivory hover:text-deep"
             >
               <Arrow dir="right" />
             </button>
@@ -85,11 +92,12 @@ export default function GuestNotes({
 
       <div
         ref={rail}
-        className="no-scrollbar mt-6 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-[clamp(1.15rem,4.2vw,5rem)] pb-4"
+        data-reveal="fade"
+        className="no-scrollbar mt-6 flex snap-x snap-mandatory items-stretch gap-4 overflow-x-auto px-[clamp(1.15rem,4.2vw,5rem)] pb-4"
       >
         {reviews.length === 0 ? (
-          <article className="w-[min(84vw,420px)] shrink-0 border border-line bg-paper p-6 text-ink">
-            <p className="font-display text-[1.6rem] leading-[1.1]">
+          <article className="w-[min(84vw,420px)] shrink-0 bg-paper p-6 text-ink">
+            <p className="font-display text-[1.6rem] font-bold leading-[1.08]">
               No guest notes yet.
             </p>
             <p className="mt-4 text-[0.93rem] leading-[1.7] text-ink/70">
@@ -97,7 +105,7 @@ export default function GuestNotes({
             </p>
             <Link
               href="/reviews#write"
-              className="link-line mt-6 inline-block font-mono text-[10px] uppercase tracking-[0.18em]"
+              className="link-line mt-6 inline-block text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-crimson"
             >
               Leave a note →
             </Link>
@@ -106,21 +114,22 @@ export default function GuestNotes({
           reviews.map((review, i) => (
             <article
               key={`${review.name}-${i}`}
-              className="group w-[min(84vw,360px)] shrink-0 snap-start border border-line bg-paper p-6 text-ink transition-colors duration-500 hover:border-ink/40"
-              data-reveal="zoom"
-              style={{ ["--reveal-delay" as string]: `${(i % 3) * 70}ms` }}
+              className="group w-[min(84vw,370px)] shrink-0 snap-start bg-paper p-6 text-ink transition-transform duration-500 hover:-translate-y-1.5"
             >
               <div className="flex items-center justify-between">
-                <span className="text-[13px] tracking-[0.18em] text-clay" aria-label={`${review.rating} out of 5 stars`}>
+                <span
+                  className="text-[13px] tracking-[0.18em] text-crimson"
+                  aria-label={`${review.rating} out of 5 stars`}
+                >
                   {"★".repeat(review.rating)}
                   <span className="text-ink/15">{"★".repeat(5 - review.rating)}</span>
                 </span>
-                <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink/65">
+                <span className="text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-stone">
                   {review.date}
                 </span>
               </div>
               {review.title ? (
-                <h3 className="mt-6 font-display text-[1.45rem] leading-[1.1] tracking-[-0.03em] transition-colors duration-500 group-hover:text-clay">
+                <h3 className="mt-6 font-display text-[1.35rem] font-bold leading-[1.1] tracking-[-0.03em] transition-colors duration-500 group-hover:text-crimson">
                   {review.title}
                 </h3>
               ) : null}
@@ -128,12 +137,12 @@ export default function GuestNotes({
                 body={review.body}
                 className={`${
                   review.title ? "mt-4" : "mt-6"
-                } text-[0.93rem] leading-[1.7] text-ink/70`}
+                } text-[0.92rem] leading-[1.7] text-ink/70`}
               />
               <div className="mt-8 flex items-center justify-between border-t border-line pt-4">
-                <p className="text-[0.9rem]">{review.name}</p>
+                <p className="text-[0.88rem] font-medium">{review.name}</p>
                 {review.from ? (
-                  <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink/65">
+                  <p className="text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-stone">
                     {review.from}
                   </p>
                 ) : null}
@@ -143,10 +152,8 @@ export default function GuestNotes({
         )}
       </div>
 
-      <div className="shell mt-8 flex flex-wrap items-center justify-between gap-4" data-reveal="fade">
-        <p
-          className="max-w-md font-mono text-[9px] uppercase leading-[1.9] tracking-[0.16em] text-paper/65"
-        >
+      <div className="shell mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-ivory/15 pt-6">
+        <p className="max-w-md text-[0.6rem] font-semibold uppercase leading-[1.9] tracking-[0.14em] text-ivory/70">
           Notes left by guests who stayed with us.
         </p>
         <div className="flex flex-wrap items-center gap-6">
@@ -155,15 +162,21 @@ export default function GuestNotes({
               href={googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="link-line font-mono text-[10px] uppercase tracking-[0.2em]"
+              className="link-line text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-ivory/80 hover:text-ivory"
             >
               Reviews from Google ↗
             </a>
           ) : null}
-          <Link href="/reviews" className="link-line font-mono text-[10px] uppercase tracking-[0.2em]">
+          <Link
+            href="/reviews"
+            className="link-line text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-ivory/80 hover:text-ivory"
+          >
             All reviews
           </Link>
-          <Link href="/reviews#write" className="link-line font-mono text-[10px] uppercase tracking-[0.2em] text-walnut">
+          <Link
+            href="/reviews#write"
+            className="link-line text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-ivory"
+          >
             Leave a note →
           </Link>
         </div>

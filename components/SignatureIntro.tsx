@@ -121,7 +121,7 @@ export default function SignatureIntro() {
             </h1>
           </div>
 
-          <p className="intro-fade mt-5 text-center font-display text-[clamp(1.1rem,2.2vw,1.8rem)] italic text-paper/90">
+          <p className="intro-fade mt-5 text-center font-display text-[clamp(1.1rem,2.2vw,1.8rem)] text-paper/90">
             Life, slowed by the river.
           </p>
         </div>

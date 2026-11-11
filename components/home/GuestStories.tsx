@@ -35,13 +35,20 @@ export default function GuestStories({
 
   if (videos.length === 0) {
     return (
-      <section className="py-20 md:py-28" aria-labelledby="guest-stories-title">
-        <div className="shell text-center">
-          <span className="eyebrow text-ink/65">Guest stories</span>
-          <h2 id="guest-stories-title" className="mt-4 text-[clamp(2.3rem,4.8vw,4.6rem)] leading-[0.95] tracking-[-0.04em]">
-            Kashmir through their eyes.
+      <section className="bg-paper py-20 md:py-28" aria-labelledby="guest-stories-title">
+        <div className="shell">
+          <div className="flex items-center gap-3" data-reveal="fade">
+            <span className="block h-px w-10 bg-crimson" />
+            <span className="eyebrow text-crimson">06 — Guest stories</span>
+          </div>
+          <h2
+            id="guest-stories-title"
+            className="mt-6 max-w-[18ch] text-[clamp(2.2rem,5vw,4.6rem)] font-bold leading-[0.96] tracking-[-0.04em]"
+            data-reveal
+          >
+            {title}
           </h2>
-          <p className="body-copy mt-6 mx-auto max-w-[52ch]">
+          <p className="body-copy mt-6 max-w-[52ch]" data-reveal="fade">
             Guest stories are coming soon.
           </p>
         </div>
@@ -51,35 +58,55 @@ export default function GuestStories({
 
   return (
     <>
-      <section className="py-20 md:py-28" aria-labelledby="guest-stories-title">
+      <section className="bg-paper py-20 md:py-28" aria-labelledby="guest-stories-title">
         <div className="shell">
-          <header className="mx-auto mb-10 max-w-[680px] text-center md:mb-14">
-            <span className="eyebrow text-ink/65">Guest stories</span>
-            <h2 id="guest-stories-title" className="mt-4 text-[clamp(2.3rem,4.8vw,4.6rem)] leading-[0.95] tracking-[-0.04em]">
-              {title}
-            </h2>
-            <p className="body-copy mt-6 mx-auto max-w-[52ch]">{description}</p>
-          </header>
+          <div className="grid gap-6 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-7">
+              <div className="flex items-center gap-3" data-reveal="fade">
+                <span className="block h-px w-10 bg-crimson" />
+                <span className="eyebrow text-crimson">06 — Guest stories</span>
+              </div>
+              <h2
+                id="guest-stories-title"
+                className="mt-6 max-w-[16ch] text-[clamp(2.2rem,5vw,4.6rem)] font-bold leading-[0.96] tracking-[-0.04em]"
+                data-reveal
+              >
+                {title}
+              </h2>
+            </div>
+            <p className="body-copy md:col-span-4 md:col-start-9" data-reveal="fade">
+              {description}
+            </p>
+          </div>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {videos.map((video) => (
-              <article key={video.id} className="overflow-hidden border border-line bg-paper-2">
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {videos.map((video, i) => (
+              <article
+                key={video.id}
+                className="group overflow-hidden bg-paper-2"
+                data-reveal="zoom"
+                style={{ ["--reveal-delay" as string]: `${(i % 3) * 80}ms` }}
+              >
                 <button
                   type="button"
                   onClick={() => setActiveVideo(video.id)}
                   aria-label={`Play video: ${video.title}`}
-                  className="group block w-full text-left"
+                  className="block w-full text-left"
                 >
-                  <span className="relative block aspect-video overflow-hidden bg-paper-2">
+                  <span className="relative block aspect-[4/3] overflow-hidden bg-paper-2">
                     <img
                       src={video.thumbnail}
                       alt=""
                       loading="lazy"
                       decoding="async"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.035]"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
                     />
+                    <span className="absolute inset-0 bg-gradient-to-t from-deep/55 via-transparent to-transparent opacity-80" />
+                    <span className="absolute left-4 top-4 tabular text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-ivory/80">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
                     <span className="absolute inset-0 grid place-items-center">
-                      <span className="grid h-14 w-14 place-items-center rounded-full border border-paper/65 bg-ink/55 text-paper backdrop-blur transition group-hover:scale-105">
+                      <span className="grid h-14 w-14 place-items-center rounded-full bg-crimson text-ivory transition-transform duration-500 group-hover:scale-110">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                           <path d="M8 5v14l11-7z" />
                         </svg>
@@ -87,13 +114,13 @@ export default function GuestStories({
                     </span>
                   </span>
                   <span className="block p-5">
-                    <span className="block text-[0.95rem] font-medium leading-[1.5] text-ink">
+                    <span className="block text-[0.95rem] font-semibold leading-[1.45] text-ink transition-colors group-hover:text-crimson">
                       {video.title}
                     </span>
                     {video.publishedAt && (
                       <time
                         dateTime={video.publishedAt}
-                        className="mt-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60"
+                        className="mt-2.5 block text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-stone"
                       >
                         {new Date(video.publishedAt).toLocaleDateString("en-IN", {
                           month: "long",
@@ -107,15 +134,15 @@ export default function GuestStories({
             ))}
           </div>
 
-          <div className="mt-10 flex flex-col items-center gap-4 text-center">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60">
+          <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
+            <p className="text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone">
               More moments from Twin Towers by Defoy.
             </p>
             <a
               href={playlistUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="link-line font-mono text-[10px] uppercase tracking-[0.18em]"
+              className="link-line text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-crimson"
             >
               Watch the full playlist ↗
             </a>
@@ -125,14 +152,14 @@ export default function GuestStories({
 
       {activeVideo && (
         <div
-          className="fixed inset-0 z-[120] grid place-items-center bg-ink/80 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[120] grid place-items-center bg-deep/85 p-4 backdrop-blur-sm"
           role="presentation"
           onMouseDown={(e) => {
             if (e.target === e.currentTarget) setActiveVideo(null);
           }}
         >
           <div
-            className="relative w-full max-w-4xl overflow-hidden border border-line bg-paper"
+            className="relative w-full max-w-4xl overflow-hidden border border-ivory/20 bg-paper"
             role="dialog"
             aria-modal="true"
             aria-label="Guest story video"
@@ -141,7 +168,7 @@ export default function GuestStories({
               type="button"
               onClick={() => setActiveVideo(null)}
               aria-label="Close video"
-              className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center border border-line bg-paper text-ink transition hover:bg-ink hover:text-paper"
+              className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center bg-ivory text-deep transition hover:bg-crimson hover:text-ivory"
             >
               ×
             </button>

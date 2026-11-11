@@ -207,6 +207,17 @@ export async function getApprovedReviews(): Promise<Review[]> {
 }
 
 /**
+ * Reviews seeded from another property (or any note that names a different
+ * hotel) must never appear on the site. This is a display-level guard so a
+ * stale CMS entry cannot leak into the marketing pages.
+ */
+const FOREIGN_PROPERTY = /jade\s*river/i;
+
+function isOwnReview(review: Review) {
+  return !FOREIGN_PROPERTY.test(`${review.title ?? ""} ${review.body}`);
+}
+
+/**
  * The list the site should render: approved guest submissions first, then live
  * Google reviews. When neither exists, the curated notes shipped with the code
  * keep the section populated.
@@ -217,7 +228,7 @@ export async function getDisplayReviews(): Promise<ReviewFeed> {
     getApprovedReviews(),
   ]);
 
-  const combined = [...approved, ...google.reviews];
+  const combined = [...approved, ...google.reviews].filter(isOwnReview);
 
   if (combined.length > 0) {
     return {
@@ -229,10 +240,12 @@ export async function getDisplayReviews(): Promise<ReviewFeed> {
   }
 
   return {
-    reviews: siteReviews.map((review) => ({
-      ...review,
-      source: "site" as const,
-    })),
+    reviews: siteReviews
+      .map((review) => ({
+        ...review,
+        source: "site" as const,
+      }))
+      .filter(isOwnReview),
     rating: null,
     total: null,
     mapsUrl: null,
