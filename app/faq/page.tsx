@@ -75,7 +75,7 @@ export default function FaqPage() {
               <Link href="/policies" className="link-line font-mono text-[10px] uppercase tracking-[0.2em]">
                 Full policies →
               </Link>
-              <Link href="/rooms" className="link-line font-mono text-[10px] uppercase tracking-[0.2em]">
+              <Link href="/stay" className="link-line font-mono text-[10px] uppercase tracking-[0.2em]">
                 See the rooms →
               </Link>
             </div>

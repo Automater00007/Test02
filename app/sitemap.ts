@@ -9,15 +9,15 @@ export const revalidate = 3600;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     "",
-    "/rooms",
-    "/experiences",
+    "/hotel",
+    "/stay",
+    "/dining",
     "/gallery",
+    "/offers",
     "/location",
-    "/contact",
-    "/policies",
     "/faq",
-    "/post",
-    "/reviews",
+    "/contact",
+    "/blog",
   ].map((path) => ({
     url: `${base}${path}`,
     lastModified: new Date(),
@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const roomRoutes = rooms.map((room) => ({
-    url: `${base}/rooms/${room.slug}`,
+    url: `${base}/stay/${room.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.9,
@@ -34,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const posts = await getAllPosts();
   const postRoutes = posts.map((post) => ({
-    url: `${base}/post/${post.slug}`,
+    url: `${base}/blog/${post.slug}`,
     lastModified: new Date(post.publishedAt),
     changeFrequency: "yearly" as const,
     priority: 0.6,

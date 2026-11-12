@@ -30,7 +30,7 @@ export async function generateMetadata({
     description,
     keywords: post.seo?.keywords?.length ? post.seo.keywords : undefined,
     alternates: {
-      canonical: post.seo?.canonicalUrl || `/twin-towers/post/${post.slug}`,
+      canonical: post.seo?.canonicalUrl || `/twin-towers/blog/${post.slug}`,
     },
     robots: post.seo?.noIndex ? { index: false, follow: false } : undefined,
     openGraph: {
@@ -62,8 +62,8 @@ export default async function PostPage({
         data={[
           breadcrumb([
             { name: "Home", path: "/twin-towers" },
-            { name: "Blog", path: "/twin-towers/post" },
-            { name: post.title, path: `/twin-towers/post/${post.slug}` },
+            { name: "Blog", path: "/twin-towers/blog" },
+            { name: post.title, path: `/twin-towers/blog/${post.slug}` },
           ]),
           {
             "@context": "https://schema.org",
@@ -78,7 +78,7 @@ export default async function PostPage({
               name: post.author || "Twin Towers by Defoy",
             },
             publisher: { "@type": "Organization", name: site.name },
-            mainEntityOfPage: `${site.url}/post/${post.slug}`,
+            mainEntityOfPage: `${site.url}/blog/${post.slug}`,
           },
         ]}
       />
@@ -87,7 +87,7 @@ export default async function PostPage({
         <header className="shell">
           <div className="flex items-center justify-between gap-4 border-b border-line py-5">
             <div className="flex items-center gap-5">
-              <Link href="/post" className="eyebrow text-ink/65 hover:text-ink">
+              <Link href="/blog" className="eyebrow text-ink/65 hover:text-ink">
                 Blog
               </Link>
             </div>
@@ -164,7 +164,7 @@ export default async function PostPage({
                 Twin Towers by Defoy · Pahalgam
               </p>
               <div className="flex gap-6">
-                <Link href="/rooms" className="link-line font-mono text-[10px] uppercase tracking-[0.18em]">
+                <Link href="/stay" className="link-line font-mono text-[10px] uppercase tracking-[0.18em]">
                   See the rooms
                 </Link>
                 <Link href="/contact" className="link-line font-mono text-[10px] uppercase tracking-[0.18em] text-walnut">
@@ -180,7 +180,7 @@ export default async function PostPage({
             <div className="shell">
               <p className="eyebrow text-ink/65">Next note</p>
               <Link
-                href={`/post/${next.slug}`}
+                href={`/blog/${next.slug}`}
                 className="group mt-4 flex items-end justify-between gap-6"
               >
                 <h2 className="max-w-[18ch] text-[clamp(1.8rem,4vw,4rem)] leading-[0.98] transition-colors duration-500 group-hover:text-clay">

@@ -14,6 +14,16 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1600, 1920],
     formats: ["image/avif", "image/webp"],
   },
+  // The stay and journal sections moved from /rooms and /post. Keep the old
+  // URLs working so existing links, bookmarks and search results don't 404.
+  async redirects() {
+    return [
+      { source: "/rooms", destination: "/stay", permanent: true },
+      { source: "/rooms/:slug", destination: "/stay/:slug", permanent: true },
+      { source: "/post", destination: "/blog", permanent: true },
+      { source: "/post/:slug", destination: "/blog/:slug", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

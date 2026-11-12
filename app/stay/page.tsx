@@ -6,36 +6,36 @@ import { JsonLd, breadcrumb } from "@/lib/schema";
 import { rooms } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Rooms & Suites",
+  title: "Stay",
   description:
-    "Thirteen rooms at Twin Towers by Defoy, Pahalgam: nine Premium Balcony Rooms, two Executive Suites, and two Executive Duplex Family Rooms. Direct booking only.",
-  alternates: { canonical: "/twin-towers/rooms" },
+    "Twenty-five rooms at Twin Towers by Defoy, Pahalgam — all Premium Rooms with a king size bed and a private balcony. Direct booking only.",
+  alternates: { canonical: "/twin-towers/stay" },
 };
 
-export default function RoomsPage() {
+export default function StayPage() {
   return (
     <>
       <JsonLd
         data={breadcrumb([
           { name: "Home", path: "/twin-towers" },
-          { name: "Rooms", path: "/twin-towers/rooms" },
+          { name: "Stay", path: "/twin-towers/stay" },
         ])}
       />
       <PageHeader
-        eyebrow="Stay · 13 rooms"
+        eyebrow="Stay · 25 rooms"
         title={
           <>
-            Thirteen rooms.
+            Twenty-five rooms.
             <br />
-            Three ways to <em className="text-clay">slow down.</em>
+            One kind of <em className="text-clay">room.</em>
           </>
         }
-        intro="Nine balcony rooms, two suites, two duplex family rooms. Each one opens toward the water or the pines, and none of them are in a hurry."
+        intro="Every room is a Premium Room with a king size bed and a balcony of its own — a private place to watch the lawn, the pines and the light change."
         aside={
           <div className="flex items-end justify-between border-t border-line pt-5">
             <div>
               <p className="eyebrow text-ink/65">From</p>
-              <p className="mt-1 font-display text-[1.9rem] leading-none">₹6,000</p>
+              <p className="mt-1 font-display text-[1.9rem] leading-none">₹5,000</p>
             </div>
             <Link href="/contact" className="link-line font-mono text-[10px] uppercase tracking-[0.2em]">
               Check dates →

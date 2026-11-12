@@ -1,5 +1,4 @@
 import SplitText from "@/components/ui/SplitText";
-import KineticMarquee from "@/components/ui/KineticMarquee";
 import { site } from "@/lib/content";
 
 const facts = [
@@ -78,19 +77,7 @@ export default function Statement() {
         </div>
       </div>
 
-      <div className="mt-14 border-y border-line bg-blush md:mt-20">
-        <KineticMarquee
-          items={[
-            "25 rooms",
-            "Two towers",
-            "Five storeys",
-            "360° valley",
-            "Pahalgam · Kashmir",
-            "Direct bookings only",
-          ]}
-          className="py-4 text-[clamp(1.05rem,2.2vw,1.8rem)] font-display font-bold uppercase tracking-[0.02em] text-crimson md:py-5"
-        />
-      </div>
+      <div className="mt-14 border-y border-line md:mt-20" />
     </section>
   );
 }

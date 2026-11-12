@@ -2,11 +2,11 @@ import Link from "next/link";
 import { site } from "@/lib/content";
 
 const explore = [
-  { label: "Rooms & Suites", href: "/rooms" },
+  { label: "Stay", href: "/stay" },
   { label: "Experiences", href: "/experiences" },
   { label: "Gallery", href: "/gallery" },
   { label: "Guest Stories", href: "/stories" },
-  { label: "Blog", href: "/post" },
+  { label: "Blog", href: "/blog" },
   { label: "Reviews", href: "/reviews" },
 ];
 
@@ -26,7 +26,7 @@ export default function SiteFooter() {
           <div className="md:col-span-6" data-reveal>
             <span className="eyebrow text-paper/65">Twin Towers by Defoy</span>
             <p className="mt-6 max-w-[20ch] font-display text-[clamp(2.2rem,4.6vw,4.4rem)] font-bold leading-[0.98] tracking-[-0.04em]">
-              Life, slowed by the <span className="text-clay">valley.</span>
+              Life, slowed by the <span className="text-[#e0c9a6]">valley.</span>
             </p>
             <p className="mt-8 max-w-sm text-[0.62rem] font-semibold uppercase leading-[2.1] tracking-[0.14em] text-paper/65">
               {site.address}

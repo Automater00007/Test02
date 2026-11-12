@@ -8,7 +8,7 @@ import { JsonLd, breadcrumb, reviewListSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Guest Reviews",
   description:
-    "Notes left by guests of Twin Towers by Defoy, Pahalgam — on the river, the balcony rooms, the duplex family rooms, the bonfire evenings, and the quiet.",
+    "Notes left by guests of Twin Towers by Defoy, Pahalgam — on the balcony rooms, the mountain light, the bonfire evenings, and the quiet.",
   alternates: { canonical: "/twin-towers/reviews" },
 };
 
@@ -159,7 +159,7 @@ export default async function ReviewsPage() {
               Stayed with us? <em className="text-clay">Tell it plainly.</em>
             </h2>
             <p className="body-copy mt-6" data-reveal style={{ ["--reveal-delay" as string]: "80ms" }}>
-              A sentence about the room, the river, or the morning tea is more useful
+              A sentence about the room, the view, or the morning tea is more useful
               than a paragraph of adjectives.
             </p>
           </div>

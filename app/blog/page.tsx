@@ -8,8 +8,8 @@ import { JsonLd, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Notes from Twin Towers by Defoy: the sound of the valley at dawn, a slow guide to Aru Valley, and why thirteen rooms is the point.",
-  alternates: { canonical: "/twin-towers/post" },
+    "Notes from Twin Towers by Defoy: the sound of the valley at dawn, a slow guide to Aru Valley, and the case for doing less.",
+  alternates: { canonical: "/twin-towers/blog" },
 };
 
 export default async function BlogPage() {
@@ -21,7 +21,7 @@ export default async function BlogPage() {
       <JsonLd
         data={breadcrumb([
           { name: "Home", path: "/twin-towers" },
-          { name: "Blog", path: "/twin-towers/post" },
+          { name: "Blog", path: "/twin-towers/blog" },
         ])}
       />
       <PageHeader
@@ -66,7 +66,7 @@ export default async function BlogPage() {
         ) : (
           <>
             <Link
-              href={`/post/${lead.slug}`}
+              href={`/blog/${lead.slug}`}
               className="group grid gap-8 border-t border-line pt-8 md:grid-cols-12 md:gap-10"
             >
               <div className="md:col-span-7" data-reveal="zoom">
@@ -109,7 +109,7 @@ export default async function BlogPage() {
                 {rest.map((post, i) => (
                   <Link
                     key={post.slug}
-                    href={`/post/${post.slug}`}
+                    href={`/blog/${post.slug}`}
                     className="group border-t border-line pt-6"
                     data-reveal="zoom"
                     style={{ ["--reveal-delay" as string]: `${i * 100}ms` }}

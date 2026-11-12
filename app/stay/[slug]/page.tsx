@@ -22,7 +22,7 @@ export async function generateMetadata({
   return {
     title: room.name,
     description: `${room.description} From ${formatPrice(room.price)} per night at Twin Towers by Defoy, Pahalgam. Direct booking only.`,
-    alternates: { canonical: `/twin-towers/rooms/${room.slug}` },
+    alternates: { canonical: `/twin-towers/stay/${room.slug}` },
     openGraph: {
       title: `${room.name} — Twin Towers by Defoy`,
       description: room.description,
@@ -51,8 +51,8 @@ export default async function RoomPage({
         data={[
           breadcrumb([
             { name: "Home", path: "/twin-towers" },
-            { name: "Rooms", path: "/twin-towers/rooms" },
-            { name: room.name, path: `/twin-towers/rooms/${room.slug}` },
+            { name: "Stay", path: "/twin-towers/stay" },
+            { name: room.name, path: `/twin-towers/stay/${room.slug}` },
           ]),
           {
             "@context": "https://schema.org",
@@ -77,7 +77,7 @@ export default async function RoomPage({
               price: room.price,
               priceCurrency: "INR",
               availability: "https://schema.org/InStock",
-              url: `${site.url}/rooms/${room.slug}`,
+              url: `${site.url}/stay/${room.slug}`,
             },
           },
         ]}
@@ -211,7 +211,7 @@ export default async function RoomPage({
             {others.map((other, i) => (
               <Link
                 key={other.slug}
-                href={`/rooms/${other.slug}`}
+                href={`/stay/${other.slug}`}
                 className="group flex items-center gap-6 border-t border-line pt-6"
                 data-reveal="zoom"
                 style={{ ["--reveal-delay" as string]: `${i * 80}ms` }}

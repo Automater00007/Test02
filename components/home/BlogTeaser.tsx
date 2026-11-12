@@ -18,13 +18,13 @@ export default async function BlogTeaser() {
             <h2
               id="blog-heading"
               className="mt-6 max-w-[18ch] text-[clamp(2.2rem,5vw,4.8rem)] font-bold leading-[0.95] tracking-[-0.04em]"
-              data-reveal
+              data-reveal="tilt"
             >
               Notes from the <em>slow side.</em>
             </h2>
           </div>
           <Link
-            href="/post"
+            href="/blog"
             className="link-line self-start text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-crimson md:self-end"
             data-reveal="fade"
           >
@@ -41,12 +41,12 @@ export default async function BlogTeaser() {
                 className={i === 0 ? "md:col-span-6" : "md:col-span-3"}
               >
                 <Link
-                  href={`/post/${post.slug}`}
+                  href={`/blog/${post.slug}`}
                   className="group block"
-                  data-reveal="zoom"
+                  data-reveal="flip"
                   style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden bg-paper-2" data-reveal="mask">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-paper-2" data-reveal="mask">
                     <Image
                       src={post.image}
                       alt={post.imageAlt}

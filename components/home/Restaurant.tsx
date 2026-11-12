@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import ParallaxImage from "@/components/ui/ParallaxImage";
 import SplitText from "@/components/ui/SplitText";
 
@@ -10,25 +14,47 @@ const timings = [
 ];
 
 export default function Restaurant() {
+  const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 42%"] });
+  const eased = useSpring(scrollYProgress, { stiffness: 70, damping: 22 });
+  const clipPath = useTransform(
+    eased,
+    [0, 1],
+    ["circle(8% at 50% 50%)", "circle(140% at 50% 50%)"],
+  );
+  const scale = useTransform(eased, [0, 1], [1.24, 1]);
+  const rotateY = useTransform(eased, [0, 1], [-9, 0]);
+  const radius = useTransform(eased, [0, 1], ["2rem", "1.5rem"]);
+
   return (
     <section
+      ref={ref}
       className="relative overflow-hidden bg-paper py-20 md:py-32"
       aria-labelledby="restaurant-heading"
     >
       <div className="shell">
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
-          <div className="md:col-span-6" data-reveal="mask">
-            <div className="relative overflow-hidden bg-paper-2">
-              <ParallaxImage
-                src="/images/twin/restaurant.webp"
-                alt="The restaurant at Twin Towers by Defoy"
-                width={1600}
-                height={900}
-                sizes="(min-width: 768px) 50vw, 100vw"
-                speed={0.08}
-                className="reveal-media aspect-[4/3]"
-              />
-            </div>
+          <div className="md:col-span-6" style={{ perspective: 1200 }}>
+            <motion.div
+              className="relative overflow-hidden rounded-3xl bg-paper-2 shadow-[0_30px_80px_-40px_rgba(42,26,14,0.4)]"
+              style={
+                reduce
+                  ? undefined
+                  : ({ clipPath, scale, rotateY, borderRadius: radius, transformPerspective: 1300 } as never)
+              }
+            >
+                <ParallaxImage
+                  src="/images/twin/restaurant.webp"
+                  alt="The restaurant at Twin Towers by Defoy"
+                  width={1600}
+                  height={900}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  speed={0.08}
+                  className="reveal-media aspect-[4/3]"
+                />
+                <span className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-ivory/20" />
+            </motion.div>
           </div>
 
           <div className="md:col-span-5 md:col-start-8">

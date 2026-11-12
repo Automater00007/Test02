@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const nearby = [
   { name: "Aru Valley", note: "Meadows and a quiet road" },
-  { name: "Betaab Valley", note: "The river bend" },
+  { name: "Betaab Valley", note: "The valley bend" },
   { name: "Chandanwari", note: "The road toward Amarnath" },
 ];
 
@@ -34,7 +34,7 @@ export default function LocationPage() {
             <em className="text-clay">valley road.</em>
           </>
         }
-        intro="Pahalgam sits at 2,130 metres in the valley valley. The last stretch of road follows the river, and then it is just the river."
+        intro="Pahalgam sits at 2,130 metres in the valley. The last stretch of road follows the valley, and then it is just the mountains."
         aside={
           <div className="flex items-end justify-between border-t border-line pt-5">
             <div>

@@ -1,11 +1,13 @@
 import HeroFilm from "@/components/home/HeroFilm";
 import Statement from "@/components/home/Statement";
+import BuildingExplorer from "@/components/home/BuildingExplorer";
 import Estate from "@/components/home/Estate";
-import GalleryHorizontal from "@/components/home/GalleryHorizontal";
+import CoverFlowGallery from "@/components/home/CoverFlowGallery";
 import StackCarousel from "@/components/home/StackCarousel";
 import Suites from "@/components/home/Suites";
 import StayFeatures from "@/components/home/StayFeatures";
 import Restaurant from "@/components/home/Restaurant";
+import BalconyView from "@/components/home/BalconyView";
 import DayTimeline from "@/components/home/DayTimeline";
 import LocationSection from "@/components/home/LocationSection";
 import GuestNotes from "@/components/home/GuestNotes";
@@ -25,12 +27,14 @@ export default async function HomePage() {
     <>
       <HeroFilm />
       <Statement />
+      <BuildingExplorer />
       <Estate />
-      <GalleryHorizontal />
+      <CoverFlowGallery />
       <StackCarousel />
       <Suites />
       <StayFeatures />
       <Restaurant />
+      <BalconyView />
       <DayTimeline />
       <GuestStories videos={videos} playlistUrl={playlistUrl} />
       <LocationSection />

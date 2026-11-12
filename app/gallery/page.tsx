@@ -8,7 +8,7 @@ import { JsonLd, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "Photographs of Twin Towers by Defoy and the valley valley: wooden architecture, the river, pine forest, the lawn, and the light at different hours.",
+    "Photographs of Twin Towers by Defoy and the valley: wooden architecture, pine forest, the lawn, and the light at different hours.",
   alternates: { canonical: "/twin-towers/gallery" },
 };
 

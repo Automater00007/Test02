@@ -33,7 +33,7 @@ export default async function ContactPage({
           <>
             Tell us when.
             <br />
-            We’ll keep the <em className="text-clay">river ready.</em>
+            We’ll keep the <em className="text-clay">valley ready.</em>
           </>
         }
         intro="No booking engine, no OTA, no commission. Choose a room and send us the details — the message opens directly in WhatsApp with the resort team."

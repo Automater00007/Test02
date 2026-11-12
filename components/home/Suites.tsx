@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
-  AnimatePresence,
   motion,
   useReducedMotion,
   useScroll,
@@ -38,11 +37,19 @@ export default function Suites() {
 
   const paraRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+
+  // automatic image choreography
+  useEffect(() => {
+    if (reduce) return;
+    const id = setInterval(() => setSlide((sl) => (sl + 1) % images.length), 4500);
+    return () => clearInterval(id);
+  }, [images.length, reduce]);
   const { scrollYProgress } = useScroll({
     target: paraRef,
     offset: ["start end", "end start"],
   });
   const paraY = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
+  const tiltY = useTransform(scrollYProgress, [0, 0.5, 1], [5, 0, -5]);
 
   return (
     <section className="relative bg-paper py-20 md:py-32" aria-labelledby="suites-heading">
@@ -96,32 +103,45 @@ export default function Suites() {
 
         <div className="mt-8 grid gap-10 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-7">
-            <div ref={paraRef} className="relative overflow-hidden bg-paper-2" data-reveal="zoom">
+            <motion.div
+              ref={paraRef}
+              className="relative overflow-hidden rounded-2xl bg-paper-2"
+              data-reveal="zoom"
+              style={
+                reduce
+                  ? { perspective: 1400, transformStyle: "preserve-3d" }
+                  : { perspective: 1400, transformStyle: "preserve-3d", rotateY: tiltY }
+              }
+            >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <motion.div
                   style={reduce ? undefined : { y: paraY, scale: 1.06 }}
                   className="absolute inset-0"
                 >
-                  <AnimatePresence initial={false} mode="popLayout">
+                  {images.map((src, i) => (
                     <motion.div
-                      key={`${room.slug}-${slide}`}
-                      initial={{ opacity: 0, scale: 1.05 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                      key={`${room.slug}-${src}`}
+                      initial={false}
+                      animate={{
+                        opacity: i === slide ? 1 : 0,
+                        scale: i === slide ? 1 : 1.08,
+                        rotateY: i === slide ? 0 : 4,
+                      }}
+                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                       className="absolute inset-0"
                     >
                       <Image
-                        src={images[slide]}
+                        src={src}
                         alt={`${room.name} at Twin Towers by Defoy`}
                         width={1600}
                         height={900}
                         sizes="(min-width: 768px) 700px, 100vw"
                         quality={82}
+                        loading={i === 0 ? "eager" : "lazy"}
                         className="absolute inset-0 h-full w-full object-cover"
                       />
                     </motion.div>
-                  </AnimatePresence>
+                  ))}
                 </motion.div>
 
                 <div className="absolute inset-0 bg-gradient-to-t from-deep/45 via-transparent to-transparent" />
@@ -175,7 +195,7 @@ export default function Suites() {
                   </button>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
 
           <div className="md:col-span-4 md:col-start-9">

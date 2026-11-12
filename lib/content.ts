@@ -22,13 +22,13 @@ export const site = {
 
 export const nav = [
   { label: "The hotel", href: "/hotel" },
-  { label: "Stay", href: "/rooms" },
+  { label: "Stay", href: "/stay" },
   { label: "Dining", href: "/dining" },
   { label: "Gallery", href: "/gallery" },
   { label: "Offers", href: "/offers" },
   { label: "Location", href: "/location" },
   { label: "FAQ", href: "/faq" },
-  { label: "Journal", href: "/post" },
+  { label: "Journal", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -181,7 +181,11 @@ export const gallery = [
   { src: twin("lounge"), alt: "Lounge with warm lighting", span: "std" },
   { src: twin("corridor"), alt: "Interior corridor with timber panelling", span: "std" },
   { src: twin("balcony"), alt: "Private balcony facing the mountains", span: "wide" },
+  { src: twin("reception"), alt: "Reception desk in warm timber", span: "std" },
+  { src: twin("approach"), alt: "The approach to the property", span: "wide" },
   { src: twin("poster-1"), alt: "Hero view of the hotel", span: "wide" },
+  { src: twin("poster-2"), alt: "The house in the afternoon light", span: "std" },
+  { src: twin("suite-king-2"), alt: "Premium Room in warm daylight", span: "std" },
 ];
 
 export const posts = [

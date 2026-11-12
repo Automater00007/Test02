@@ -7,6 +7,7 @@ import {
   useReducedMotion,
   useScroll,
   useSpring,
+  useTransform,
 } from "framer-motion";
 import { site } from "@/lib/content";
 import { mapsHref } from "@/lib/utils";
@@ -24,14 +25,21 @@ const facts = [
 export default function LocationSection() {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 85%", "end 55%"],
   });
   const draw = useSpring(scrollYProgress, { stiffness: 80, damping: 24 });
+  const mapRotateX = useTransform(scrollYProgress, [0, 0.5, 1], [2.5, 0, -1.5]);
+  const mapRotateY = useTransform(scrollYProgress, [0, 0.5, 1], [-2, 0, 2]);
+  const mapScale = useTransform(scrollYProgress, [0, 1], [0.965, 1]);
 
   return (
-    <section className="relative bg-paper py-20 md:py-32" aria-labelledby="location-heading">
+    <section
+      className="relative overflow-x-clip bg-paper py-20 md:py-32"
+      aria-labelledby="location-heading"
+    >
       <div className="shell">
         <div className="grid gap-12 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-5">
@@ -90,12 +98,25 @@ export default function LocationSection() {
           </div>
 
           <div className="md:col-span-6 md:col-start-7" ref={ref}>
-            <div className="relative overflow-hidden bg-sand p-4 md:p-6" data-reveal="zoom">
+            <motion.div
+              className="location-map relative overflow-hidden rounded-3xl bg-sand p-4 md:p-6"
+              style={
+                reduce
+                  ? undefined
+                  : {
+                      rotateX: mapRotateX,
+                      rotateY: mapRotateY,
+                      scale: mapScale,
+                      transformPerspective: 1600,
+                      transformOrigin: "center center",
+                    }
+              }
+            >
               <div className="flex items-center justify-between pb-4">
-                <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-ink/60">
+                <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-ink/75">
                   Route sketch
                 </span>
-                <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-ink/60">
+                <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-ink/75">
                   Not to scale
                 </span>
               </div>
@@ -134,7 +155,7 @@ export default function LocationSection() {
 
                 <motion.path
                   d="M70 430 C 150 395, 165 340, 250 318 S 365 285, 410 230"
-                  stroke="#A3001B"
+                  stroke="#432911"
                   strokeWidth="1.8"
                   style={{ pathLength: reduce ? 1 : draw }}
                 />
@@ -149,7 +170,7 @@ export default function LocationSection() {
                 />
                 <path
                   d="M410 230 L438 206"
-                  stroke="#A3001B"
+                  stroke="#432911"
                   strokeWidth="1.4"
                   strokeDasharray="2 4"
                 />
@@ -160,12 +181,12 @@ export default function LocationSection() {
                 <circle cx="410" cy="230" r="4" fill="#211C1C" />
                 <circle cx="410" cy="230" r="11" stroke="#211C1C" strokeOpacity="0.2" />
 
-                <circle cx="438" cy="206" r="5" fill="#A3001B" />
+                <circle cx="438" cy="206" r="5" fill="#432911" />
                 <motion.circle
                   cx="438"
                   cy="206"
                   r="10"
-                  stroke="#A3001B"
+                  stroke="#432911"
                   strokeOpacity="0.5"
                   initial={false}
                   animate={reduce ? {} : { r: [10, 24], opacity: [0.6, 0] }}
@@ -181,7 +202,7 @@ export default function LocationSection() {
                 <text x="300" y="320" fill="#211C1C" fillOpacity="0.5" fontSize="9" fontFamily="Inter, sans-serif" letterSpacing="1.5">
                   2,200 M
                 </text>
-                <text x="410" y="168" fill="#A3001B" fontSize="11" fontFamily="Inter, sans-serif" fontWeight="700" letterSpacing="2">
+                <text x="410" y="168" fill="#432911" fontSize="11" fontFamily="Inter, sans-serif" fontWeight="700" letterSpacing="2">
                   TWIN TOWERS
                 </text>
                 <text x="410" y="182" fill="#211C1C" fillOpacity="0.55" fontSize="9" fontFamily="Inter, sans-serif" letterSpacing="1.5">
@@ -194,7 +215,7 @@ export default function LocationSection() {
 
               <div className="flex items-end justify-between border-t border-ink/10 pt-4">
                 <div>
-                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-ink/60">
+                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-ink/75">
                     Exact location
                   </p>
                   <p className="tabular mt-1 text-[0.72rem] font-medium tracking-tight">
@@ -205,9 +226,9 @@ export default function LocationSection() {
                   <span className="block h-2 w-2 bg-crimson" />
                 </span>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="mt-7 grid grid-cols-2 gap-x-6 gap-y-1">
+            <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-1">
               {attractions.map((a, i) => (
                 <div
                   key={a}

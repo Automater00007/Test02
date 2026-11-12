@@ -9,7 +9,7 @@ import { JsonLd, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Experiences",
   description:
-    "Bonfire evenings beside the valley, river walks, Pahalgam sightseeing, photography, family days and quiet luxury at Twin Towers by Defoy.",
+    "Bonfire evenings beside the valley, valley walks, Pahalgam sightseeing, photography, family days and quiet luxury at Twin Towers by Defoy.",
   alternates: { canonical: "/twin-towers/experiences" },
 };
 

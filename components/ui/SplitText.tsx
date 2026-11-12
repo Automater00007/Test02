@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 
 interface Props {
   text: string;
@@ -14,12 +15,12 @@ interface Props {
 
 /**
  * Kinetic headline. Each unit sits inside an overflow-hidden mask and lifts
- * from below with a soft expo ease.
+ * from below, tilted slightly in 3D, with a soft expo ease.
  *
- * Character mode groups letters into words so a line can never break
- * mid-word. The viewport trigger lives on the outer mask span — the inner
- * span is translated outside the clip, so observing the inner element would
- * report zero visible area and never fire.
+ * A single `useInView` observer on the heading itself drives every unit, so the
+ * animation can never be missed because an inner, translated span reports zero
+ * visible area. A short safety timer reveals the copy if the observer has not
+ * fired by the time the page settles.
  */
 export default function SplitText({
   text,
@@ -30,21 +31,41 @@ export default function SplitText({
   split = "words",
 }: Props) {
   const reduce = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, {
+    once: true,
+    amount: 0.12,
+    margin: "0px 0px -5% 0px",
+  });
+  const [force, setForce] = useState(false);
   const Tag = as;
 
+  useEffect(() => {
+    const t = window.setTimeout(() => setForce(true), 1600);
+    return () => window.clearTimeout(t);
+  }, []);
+
   if (reduce) {
+    const Plain = as;
     return (
-      <Tag className={className} id={id}>
+      <Plain className={className} id={id}>
         {text}
-      </Tag>
+      </Plain>
     );
   }
 
+  const show = inView || force;
+
   if (split === "words") {
     return (
-      <Tag className={className} id={id} aria-label={text}>
+      <Tag
+        ref={ref as never}
+        className={className}
+        id={id}
+        aria-label={text}
+      >
         {text.split(" ").map((word, i) => (
-          <Unit key={i} index={i} delay={delay} stagger={0.055} gap>
+          <Unit key={i} index={i} delay={delay} stagger={0.055} show={show} gap>
             {word}
           </Unit>
         ))}
@@ -55,7 +76,12 @@ export default function SplitText({
   let charIndex = 0;
 
   return (
-    <Tag className={className} id={id} aria-label={text}>
+    <Tag
+      ref={ref as never}
+      className={className}
+      id={id}
+      aria-label={text}
+    >
       {text.split(" ").map((word, wi) => (
         <span
           key={wi}
@@ -66,7 +92,13 @@ export default function SplitText({
           {Array.from(word).map((char, ci) => {
             const index = charIndex++;
             return (
-              <Unit key={ci} index={index} delay={delay} stagger={0.02}>
+              <Unit
+                key={ci}
+                index={index}
+                delay={delay}
+                stagger={0.018}
+                show={show}
+              >
                 {char}
               </Unit>
             );
@@ -82,12 +114,14 @@ function Unit({
   index,
   delay,
   stagger,
+  show,
   gap = false,
 }: {
   children: React.ReactNode;
   index: number;
   delay: number;
   stagger: number;
+  show: boolean;
   gap?: boolean;
 }) {
   const at = delay + index * stagger;
@@ -96,19 +130,29 @@ function Unit({
     <motion.span
       aria-hidden="true"
       className="inline-block overflow-hidden align-bottom"
-      style={{ marginRight: gap ? "0.24em" : undefined }}
+      style={{
+        marginRight: gap ? "0.24em" : undefined,
+        paddingBottom: "0.12em",
+        marginBottom: "-0.12em",
+        perspective: 900,
+      }}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
+      animate={show ? "show" : "hidden"}
     >
       <motion.span
-        className="inline-block"
+        className="inline-block will-change-transform"
+        style={{ transformStyle: "preserve-3d" }}
         variants={{
-          hidden: { y: "115%", opacity: 0 },
+          hidden: { y: "118%", opacity: 0, rotateX: -42 },
           show: {
             y: "0%",
             opacity: 1,
-            transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: at },
+            rotateX: 0,
+            transition: {
+              duration: 0.95,
+              ease: [0.16, 1, 0.3, 1],
+              delay: at,
+            },
           },
         }}
       >

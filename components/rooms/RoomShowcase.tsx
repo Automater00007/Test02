@@ -23,7 +23,7 @@ export default function RoomShowcase() {
               >
                 <TiltCard max={4}>
                   <Link
-                    href={`/rooms/${room.slug}`}
+                    href={`/stay/${room.slug}`}
                     className="group relative block aspect-[4/3] overflow-hidden bg-paper-2"
 
                   >
@@ -88,7 +88,7 @@ export default function RoomShowcase() {
                     </p>
                   </div>
                   <Link
-                    href={`/rooms/${room.slug}`}
+                    href={`/stay/${room.slug}`}
                     className="link-line font-mono text-[10px] uppercase tracking-[0.2em]"
 
                   >

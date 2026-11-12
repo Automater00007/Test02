@@ -8,9 +8,9 @@
 
 @theme {
   /* Core brand */
-  --color-crimson: #a3001b; /* Crimson Maroon — brand fields, buttons, icons */
+  --color-crimson: #432911; /* Deep Walnut — brand fields, buttons, icons */
   --color-ivory: #f5efe6; /* Warm Ivory — premium backgrounds */
-  --color-deep: #760014; /* Deep Maroon — dark bands, footers, overlays */
+  --color-deep: #2a1a0e; /* Espresso — dark bands, footers, overlays */
 
   /* Extended */
   --color-paper: #fbf8f3; /* Soft Paper Ivory — main background */
@@ -24,13 +24,13 @@
 
   /* Legacy aliases kept so every existing utility keeps working.
      These now resolve to the Xogul palette. */
-  --color-forest: #760014; /* was forest green -> Deep Maroon */
-  --color-walnut: #a3001b; /* was walnut -> Crimson Maroon */
-  --color-walnut-brown: #8a0016;
-  --color-copper: #a3001b;
+  --color-forest: #2a1a0e; /* was forest green -> Deep Maroon */
+  --color-walnut: #432911; /* Deep Walnut */
+  --color-walnut-brown: #2a1a0e;
+  --color-copper: #432911;
   --color-warm-grey: #746a66;
   --color-ink: #211c1c;
-  --color-clay: #a3001b;
+  --color-clay: #432911;
 
   --color-line: rgba(33, 28, 28, 0.14);
   --color-line-light: rgba(245, 239, 230, 0.22);
@@ -390,6 +390,52 @@
   transform: translate3d(2.2rem, 0, 0) scale(var(--reveal-scale));
 }
 
+[data-reveal="tilt"] {
+  --reveal-distance: 2.4rem;
+  --reveal-scale: 0.94;
+  transform: translate3d(0, var(--reveal-distance), 0) rotateX(12deg) scale(var(--reveal-scale));
+  transform-origin: center bottom;
+}
+
+[data-reveal="tilt"].is-in {
+  transform: translate3d(0, 0, 0) rotateX(0deg) scale(1);
+}
+
+[data-reveal="flip"] {
+  --reveal-distance: 0rem;
+  --reveal-scale: 0.92;
+  transform: perspective(1200px) rotateY(-14deg) translate3d(-1.2rem, 0, 0) scale(var(--reveal-scale));
+  transform-origin: left center;
+}
+
+[data-reveal="flip"].is-in {
+  transform: perspective(1200px) rotateY(0deg) translate3d(0, 0, 0) scale(1);
+}
+
+[data-reveal="rise"] {
+  --reveal-distance: 3.2rem;
+  --reveal-scale: 1;
+}
+
+[data-reveal="expand"] {
+  --reveal-distance: 0rem;
+  --reveal-scale: 0.86;
+}
+
+[data-reveal="blur"] {
+  --reveal-distance: 1.2rem;
+  --reveal-scale: 0.98;
+  filter: blur(10px);
+  transition:
+    opacity var(--reveal-duration) var(--ease-out-expo) var(--reveal-delay),
+    transform calc(var(--reveal-duration) * 1.08) var(--ease-out-expo) var(--reveal-delay),
+    filter var(--reveal-duration) var(--ease-out-expo) var(--reveal-delay);
+}
+
+[data-reveal="blur"].is-in {
+  filter: blur(0);
+}
+
 [data-reveal="mask"] {
   opacity: 1;
   transform: none;
@@ -407,6 +453,20 @@
 [data-reveal].is-in {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Variant end-states must follow the base `.is-in` rule so their rotation is
+   not flattened back to a plain translate. */
+[data-reveal="tilt"].is-in {
+  transform: translate3d(0, 0, 0) rotateX(0deg) scale(1);
+}
+
+[data-reveal="flip"].is-in {
+  transform: perspective(1200px) rotateY(0deg) translate3d(0, 0, 0) scale(1);
+}
+
+[data-reveal="blur"].is-in {
+  filter: blur(0);
 }
 
 [data-reveal].is-settled {
@@ -452,6 +512,17 @@
     --reveal-scale: 0.82;
   }
 
+  [data-reveal="tilt"] {
+    --reveal-distance: 1.4rem;
+    --reveal-scale: 0.96;
+    transform: translate3d(0, var(--reveal-distance), 0) rotateX(6deg) scale(var(--reveal-scale));
+  }
+
+  [data-reveal="flip"] {
+    --reveal-scale: 0.95;
+    transform: perspective(900px) rotateY(-7deg) translate3d(-0.6rem, 0, 0) scale(var(--reveal-scale));
+  }
+
   .reveal-media {
     transform: scale(1.14);
   }
@@ -483,6 +554,20 @@ button:hover .arrow-static,
   [data-reveal="mask"] .reveal-media {
     clip-path: none;
     transform: none;
+  }
+}
+
+/* Hero scroll cue */
+.hero-scroll-cue {
+  animation: hero-cue 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes hero-cue {
+  0% {
+    transform: translate3d(0, -120%, 0);
+  }
+  100% {
+    transform: translate3d(0, 260%, 0);
   }
 }
 
@@ -560,8 +645,8 @@ button:hover .arrow-static,
   pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgba(118, 0, 20, 0.32) 0%,
-    rgba(118, 0, 20, 0.05) 38%,
+    rgba(42, 26, 14, 0.32) 0%,
+    rgba(42, 26, 14, 0.05) 38%,
     rgba(33, 28, 28, 0.18) 100%
   );
 }
@@ -601,6 +686,7 @@ html.lenis body {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
+    filter: none !important;
   }
 
   .line-inner {

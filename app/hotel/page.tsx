@@ -95,7 +95,7 @@ export default function HotelPage() {
           <Link href="/contact" className="btn">
             Reserve directly
           </Link>
-          <Link href="/rooms" className="link-line text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-crimson">
+          <Link href="/stay" className="link-line text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-crimson">
             See the rooms →
           </Link>
         </div>

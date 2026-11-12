@@ -18,7 +18,7 @@ function RoomCard({ room, index }: { room: Room; index: number }) {
   return (
     <TiltCard max={4} className="h-full">
       <Link
-        href={`/rooms/${room.slug}`}
+        href={`/stay/${room.slug}`}
         className="group flex h-full flex-col"
       >
         <div className="relative overflow-hidden bg-forest">
@@ -174,7 +174,7 @@ export default function RoomsRail() {
                 0{active + 1} <span className="text-paper/65">/ 03</span>
               </span>
               <Link
-                href="/rooms"
+                href="/stay"
                 className="link-line font-mono text-[10px] uppercase tracking-[0.2em] text-paper/70"
               >
                 All rooms
@@ -329,7 +329,7 @@ export default function RoomsRail() {
 
         <div className="mt-8 px-[clamp(1.15rem,4.2vw,5rem)]">
           <Link
-            href="/rooms"
+            href="/stay"
             className="btn w-full justify-center border-paper/30 text-paper"
             data-reveal="zoom"
             style={{ ["--reveal-delay" as string]: "140ms" }}

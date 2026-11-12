@@ -29,7 +29,7 @@ export default function ReviewPage() {
             data-reveal
             style={{ ["--reveal-delay" as string]: "80ms" }}
           >
-            A sentence about the room, the river, or the morning tea is more
+            A sentence about the room, the view, or the morning tea is more
             useful than a paragraph of adjectives.
           </p>
 

@@ -1,9 +1,15 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { faqs } from "@/lib/content";
 import SplitText from "@/components/ui/SplitText";
 
 export default function HomeFaq() {
+  const reduce = useReducedMotion();
   const items = faqs.slice(0, 5);
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
     <section
@@ -33,25 +39,60 @@ export default function HomeFaq() {
           </div>
 
           <div className="md:col-span-7 md:col-start-6">
-            <ul className="divide-y divide-line border-y border-line">
-              {items.map((f, i) => (
-                <li key={f.q} data-reveal="fade" style={{ ["--reveal-delay" as string]: `${i * 60}ms` }}>
-                  <details className="group py-5">
-                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-left">
+            <div className="relative overflow-hidden rounded-2xl border border-line bg-paper">
+              <span className="absolute bottom-8 left-[21px] top-8 w-px bg-line" aria-hidden="true" />
+              {items.map((f, i) => {
+                const isOpen = open === i;
+                return (
+                  <div key={f.q} className="relative border-b border-line last:border-b-0">
+                    <motion.span
+                      className="absolute left-[15px] top-[26px] z-10 h-2.5 w-2.5 rounded-full border-2"
+                      animate={{
+                        backgroundColor: isOpen ? "#432911" : "#fbf8f3",
+                        borderColor: isOpen ? "#432911" : "#ded5cc",
+                        scale: isOpen ? 1.15 : 1,
+                      }}
+                      transition={{ duration: 0.3 }}
+                      aria-hidden="true"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setOpen(isOpen ? null : i)}
+                      className="flex w-full items-start justify-between gap-6 py-5 pl-12 pr-6 text-left"
+                      aria-expanded={isOpen}
+                      aria-controls={`home-faq-panel-${i}`}
+                    >
                       <span className="text-[1.05rem] font-semibold leading-snug tracking-[-0.01em]">
                         {f.q}
                       </span>
-                      <span className="mt-1 shrink-0 text-crimson transition-transform duration-300 group-open:rotate-45">
+                      <motion.span
+                        animate={{ rotate: isOpen ? 45 : 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="mt-1 shrink-0 text-crimson"
+                      >
                         +
-                      </span>
-                    </summary>
-                    <p className="mt-4 max-w-[60ch] text-[0.93rem] leading-[1.7] text-ink/70">
-                      {f.a}
-                    </p>
-                  </details>
-                </li>
-              ))}
-            </ul>
+                      </motion.span>
+                    </button>
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          id={`home-faq-panel-${i}`}
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <p className="max-w-[60ch] pb-6 pl-12 pr-6 text-[0.93rem] leading-[1.7] text-ink/70">
+                            {f.a}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

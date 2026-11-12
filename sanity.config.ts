@@ -54,7 +54,7 @@ export default defineConfig({
           const slug = await client.fetch<string | null>(
             `*[_type == "post" && defined(slug.current)] | order(_updatedAt desc)[0].slug.current`,
           );
-          return slug ? `/post/${slug}` : "/post";
+          return slug ? `/blog/${slug}` : "/blog";
         },
         previewMode: { enable: "/api/draft" },
       },
@@ -68,7 +68,7 @@ export default defineConfig({
                     locations: [
                       {
                         title: "Blog post",
-                        href: `/post/${value.slug}`,
+                        href: `/blog/${value.slug}`,
                       },
                     ],
                   }
