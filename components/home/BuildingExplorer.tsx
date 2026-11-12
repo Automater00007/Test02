@@ -98,7 +98,7 @@ export default function BuildingExplorer() {
                     key={f.label}
                     type="button"
                     onClick={() => setActive(i)}
-                    onMouseEnter={() => setPaused(true)}
+                    onMouseEnter={() => { setPaused(true); setActive((a) => (a + 1) % floors.length); }}
                     onMouseLeave={() => setPaused(false)}
                     aria-pressed={isActive}
                     className="group flex w-full items-baseline gap-4 border-b border-line py-3.5 text-left"
@@ -144,7 +144,7 @@ export default function BuildingExplorer() {
             <div
               className="relative flex min-h-[420px] items-center justify-center md:min-h-[560px]"
               data-reveal="zoom"
-              onMouseEnter={() => setPaused(true)}
+              onMouseEnter={() => { setPaused(true); setActive((a) => (a + 1) % floors.length); }}
               onMouseLeave={() => setPaused(false)}
             >
               {/* soft floor shadow */}

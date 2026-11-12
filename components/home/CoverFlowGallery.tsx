@@ -89,7 +89,7 @@ export default function CoverFlowGallery() {
             go(-1);
           }
         }}
-        onMouseEnter={() => setPaused(true)}
+        onMouseEnter={() => { setPaused(true); go(1); }}
         onMouseLeave={() => setPaused(false)}
         onFocus={() => setPaused(true)}
         onBlur={() => setPaused(false)}

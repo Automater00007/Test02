@@ -113,7 +113,10 @@ export default function Suites() {
                   : { perspective: 1400, transformStyle: "preserve-3d", rotateY: tiltY }
               }
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div
+                className="relative aspect-[4/3] overflow-hidden"
+                onMouseEnter={() => next()}
+              >
                 <motion.div
                   style={reduce ? undefined : { y: paraY, scale: 1.06 }}
                   className="absolute inset-0"

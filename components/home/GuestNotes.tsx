@@ -78,7 +78,7 @@ export default function GuestNotes({
           className="relative mx-auto mt-16 h-[440px] w-full max-w-[560px]"
           style={{ perspective: 1600 }}
           aria-live="polite"
-          onMouseEnter={() => setPaused(true)}
+          onMouseEnter={() => { setPaused(true); setActive((a) => (a + 1) % list.length); }}
           onMouseLeave={() => setPaused(false)}
           onFocus={() => setPaused(true)}
           onBlur={() => setPaused(false)}

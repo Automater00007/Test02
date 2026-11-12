@@ -64,7 +64,10 @@ export default function StayFeatures() {
           </div>
 
           <div className="md:col-span-6 md:col-start-7" style={{ perspective: 1600 }}>
-            <div className="relative h-[380px] w-full md:h-[420px]">
+            <div
+              className="relative h-[380px] w-full md:h-[420px]"
+              onMouseEnter={() => setActive((a) => (a + 1) % features.length)}
+            >
               {/* floating depth layers behind the deck */}
               <motion.div
                 className="pointer-events-none absolute -left-6 top-2 hidden h-28 w-36 overflow-hidden rounded-2xl border-4 border-paper shadow-[0_20px_50px_-20px_rgba(42,26,14,0.35)] md:block"

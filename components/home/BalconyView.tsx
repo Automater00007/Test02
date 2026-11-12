@@ -104,7 +104,7 @@ export default function BalconyView() {
                     key={s.key}
                     type="button"
                     onClick={() => setActive(i)}
-                    onMouseEnter={() => setPaused(true)}
+                    onMouseEnter={() => { setPaused(true); setActive((a) => (a + 1) % scenes.length); }}
                     onMouseLeave={() => setPaused(false)}
                     aria-pressed={isActive}
                     className="group flex w-full items-center gap-4 border-b border-line py-3.5 text-left"
@@ -145,7 +145,7 @@ export default function BalconyView() {
             <div
               className="relative"
               data-reveal="mask"
-              onMouseEnter={() => setPaused(true)}
+              onMouseEnter={() => { setPaused(true); setActive((a) => (a + 1) % scenes.length); }}
               onMouseLeave={() => setPaused(false)}
             >
               <motion.div

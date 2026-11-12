@@ -26,10 +26,10 @@ const HERO_IMAGES = [
   "/images/twin/entrance.webp",
 ];
 
-const CYCLE = 3500;
-const HOLD = 150;
-const EXPAND = 250;
-const SETTLE = 600;
+const CYCLE = 7000;
+const HOLD = 1200;
+const EXPAND = 900;
+const SETTLE = 1200;
 
 const VERT = `
 attribute vec2 aPos;
@@ -91,7 +91,10 @@ void main() {
   vec2 p = (vUv - center) * vec2(canvasAspect, 1.0);
   float d = length(p);
 
-  float radius = mix(0.055, 2.35, uReveal);
+  // A gentle angular wobble gives the expanding disc a soft, liquid edge.
+  float angle = atan(p.y, p.x);
+  float wobble = 1.0 + 0.07 * sin(angle * 7.0 + uReveal * 10.0);
+  float radius = mix(0.055, 2.35, uReveal) * wobble;
   float mask = 1.0 - smoothstep(radius - uEdge, radius + uEdge, d);
 
   vec2 dir = vUv - center;
@@ -99,10 +102,10 @@ void main() {
   float settleScale = mix(1.06, 1.0, uSettle);
   uvB = (uvB - 0.5) / settleScale + 0.5;
   uvB = coverUv(uvB, canvasAspect, uTexAspect);
-  vec3 colB = blur9(uTexB, uvB, 0.016 * uBlur);
+  vec3 colB = blur9(uTexB, uvB, 0.024 * uBlur);
 
-  float ring = exp(-pow((d - radius) / 0.014, 2.0));
-  vec3 glow = vec3(1.0, 0.93, 0.82) * ring * uGlow * 0.55;
+  float ring = exp(-pow((d - radius) / 0.022, 2.0));
+  vec3 glow = vec3(1.0, 0.95, 0.85) * ring * uGlow * 0.9;
 
   vec3 col = mix(colA, colB, mask) + glow * mask;
 
@@ -191,7 +194,7 @@ export default function HeroLens() {
 
     gl.uniform1i(uniforms.uTexA, 0);
     gl.uniform1i(uniforms.uTexB, 1);
-    gl.uniform1f(uniforms.uEdge, 0.0035);
+    gl.uniform1f(uniforms.uEdge, 0.006);
     gl.uniform2f(uniforms.uCenter, 0.5, 0.48);
     gl.uniform2f(uniforms.uDrift, 0.055, 0.045);
 
@@ -262,23 +265,23 @@ export default function HeroLens() {
 
       let reveal = 0;
       let blur = 1;
-      let mag = 1.45;
+      let mag = 1.7;
       let glow = 0;
       let settle = 0;
 
       if (t < HOLD) {
         reveal = 0;
         blur = 1;
-        mag = 1.45;
+        mag = 1.7;
         glow = 0;
         settle = 0;
       } else if (t < HOLD + EXPAND) {
         const p = (t - HOLD) / EXPAND;
         const e = 1 - Math.pow(1 - p, 3);
         reveal = e;
-        blur = 1 - e;
-        mag = 1.45 - 0.45 * e;
-        glow = Math.min(1, p * 2.4);
+        blur = 1 - e * 0.85;
+        mag = 1.7 - 0.7 * e;
+        glow = Math.min(1, p * 1.6);
         settle = 0;
       } else if (t < HOLD + EXPAND + SETTLE) {
         const p = (t - HOLD - EXPAND) / SETTLE;

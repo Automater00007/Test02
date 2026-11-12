@@ -157,6 +157,7 @@ export default function DayTimeline() {
                         return (
                           <motion.figure
                             key={s.title}
+                            onMouseEnter={() => setActive(i)}
                             className="absolute inset-0 overflow-hidden rounded-[26px] bg-paper shadow-[0_40px_100px_-40px_rgba(42,26,14,0.5)]"
                             style={{ transformStyle: "preserve-3d", transformOrigin: "center center" }}
                             animate={{
