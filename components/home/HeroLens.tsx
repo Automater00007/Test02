@@ -27,7 +27,7 @@ const HERO_IMAGES = [
 ];
 
 const CYCLE = 7000;
-const HOLD = 1200;
+const HOLD = 200;
 const EXPAND = 900;
 const SETTLE = 1200;
 
@@ -57,6 +57,7 @@ uniform float uBlur;
 uniform float uMag;
 uniform float uGlow;
 uniform float uEdge;
+uniform float uTime;
 
 vec2 coverUv(vec2 uv, float canvasAspect, float texAspect) {
   vec2 s = vec2(1.0);
@@ -91,16 +92,17 @@ void main() {
   vec2 p = (vUv - center) * vec2(canvasAspect, 1.0);
   float d = length(p);
 
-  // A gentle angular wobble gives the expanding disc a soft, liquid edge.
-  float angle = atan(p.y, p.x);
-  float wobble = 1.0 + 0.07 * sin(angle * 7.0 + uReveal * 10.0);
-  float radius = mix(0.055, 2.35, uReveal) * wobble;
+  // Clean circular disc — the liquid feel comes from refraction/blur, not the edge shape.
+  float radius = mix(0.055, 2.35, uReveal);
   float mask = 1.0 - smoothstep(radius - uEdge, radius + uEdge, d);
 
   vec2 dir = vUv - center;
   vec2 uvB = center + dir / max(uMag, 0.001);
   float settleScale = mix(1.06, 1.0, uSettle);
   uvB = (uvB - 0.5) / settleScale + 0.5;
+  // Liquid refraction: a subtle animated ripple inside the lens.
+  float rippleAmt = 0.022 * uBlur * (1.0 - smoothstep(0.0, radius, d * 0.9));
+  uvB += (dir / max(length(dir), 0.0001)) * rippleAmt * sin(d * 34.0 - uTime * 2.8);
   uvB = coverUv(uvB, canvasAspect, uTexAspect);
   vec3 colB = blur9(uTexB, uvB, 0.024 * uBlur);
 
@@ -190,6 +192,7 @@ export default function HeroLens() {
       uMag: gl.getUniformLocation(program, "uMag"),
       uGlow: gl.getUniformLocation(program, "uGlow"),
       uEdge: gl.getUniformLocation(program, "uEdge"),
+      uTime: gl.getUniformLocation(program, "uTime"),
     };
 
     gl.uniform1i(uniforms.uTexA, 0);
@@ -309,6 +312,7 @@ export default function HeroLens() {
       gl.uniform1f(uniforms.uBlur, blur);
       gl.uniform1f(uniforms.uMag, mag);
       gl.uniform1f(uniforms.uGlow, glow);
+      gl.uniform1f(uniforms.uTime, now / 1000.0);
 
       gl.drawArrays(gl.TRIANGLES, 0, 6);
     };
