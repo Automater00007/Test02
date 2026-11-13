@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import SplitText from "@/components/ui/SplitText";
 import { pickImages } from "@/lib/imagePool";
+import { useAutoRotate } from "@/lib/useAutoRotate";
 
 const features = [
   { title: "Breakfast", body: "A warm breakfast included with every stay, served in the dining room or on your balcony." },
@@ -19,13 +19,12 @@ const floats = pickImages(7, 2);
 
 export default function StayFeatures() {
   const reduce = useReducedMotion();
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    if (reduce) return;
-    const id = window.setInterval(() => setActive((a) => (a + 1) % features.length), 2800);
-    return () => window.clearInterval(id);
-  }, [reduce]);
+  const {
+    index: active,
+    select,
+    advance,
+    hoverProps,
+  } = useAutoRotate(features.length, 3400, reduce);
 
   return (
     <section
@@ -66,7 +65,7 @@ export default function StayFeatures() {
           <div className="md:col-span-6 md:col-start-7" style={{ perspective: 1600 }}>
             <div
               className="relative h-[380px] w-full md:h-[420px]"
-              onMouseEnter={() => setActive((a) => (a + 1) % features.length)}
+              {...hoverProps(advance)}
             >
               {/* floating depth layers behind the deck */}
               <motion.div
@@ -101,7 +100,6 @@ export default function StayFeatures() {
                       rotateX: offset * 3.2,
                       rotateY: -offset * 5,
                       rotateZ: offset * 1.2 * (offset % 2 === 0 ? 1 : -1),
-                      filter: `blur(${offset * 0.7}px)`,
                       zIndex: hidden ? 0 : features.length - offset,
                     }}
                     transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
@@ -130,7 +128,7 @@ export default function StayFeatures() {
                 <button
                   key={f.title}
                   type="button"
-                  onClick={() => setActive(i)}
+                  onClick={() => select(i)}
                   aria-label={`Show ${f.title}`}
                   aria-current={i === active}
                   className={`h-1.5 rounded-full transition-all duration-500 ${

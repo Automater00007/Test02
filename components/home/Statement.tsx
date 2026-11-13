@@ -24,19 +24,23 @@ export default function Statement() {
 
         <div className="mt-10 grid gap-12 md:mt-16 md:grid-cols-12 md:gap-10">
           <div className="relative md:col-span-7">
-            <span
-              className="index-figure pointer-events-none absolute -top-[0.5em] -left-[0.06em] hidden select-none text-[clamp(7rem,16vw,15rem)] opacity-25 md:block"
-              aria-hidden="true"
-            >
-              25
-            </span>
+            <div className="flex items-center gap-4">
+              <span
+                className="index-figure block select-none text-[clamp(3rem,6vw,5.2rem)] leading-none"
+                aria-hidden="true"
+              >
+                25
+              </span>
+              <span className="h-px flex-1 bg-line" aria-hidden="true" />
+              <span className="eyebrow text-stone">Rooms</span>
+            </div>
 
             <SplitText
               text="Twenty-five rooms and one kind of room:"
               as="h2"
               id="statement-heading"
               split="chars"
-              className="relative mt-6 text-[clamp(2.5rem,6vw,5.6rem)] font-bold leading-[0.94] tracking-[-0.045em]"
+              className="relative mt-5 text-[clamp(2.5rem,6vw,5.6rem)] font-bold leading-[0.94] tracking-[-0.045em]"
             />
             <p
               className="relative mt-3 max-w-[24ch] font-display text-[clamp(1.9rem,4.3vw,3.8rem)] font-semibold leading-[1] tracking-[-0.04em] text-crimson"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -9,6 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import SplitText from "@/components/ui/SplitText";
+import { useAutoRotate } from "@/lib/useAutoRotate";
 
 const scenes = [
   {
@@ -52,8 +53,12 @@ const scenes = [
 export default function BalconyView() {
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const {
+    index: active,
+    select,
+    advance,
+    hoverProps,
+  } = useAutoRotate(scenes.length, 4200, reduce);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -63,20 +68,12 @@ export default function BalconyView() {
   const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [5, 0, -5]);
   const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [-4, 0, 4]);
 
-  useEffect(() => {
-    if (reduce || paused) return;
-    const id = window.setInterval(
-      () => setActive((a) => (a + 1) % scenes.length),
-      3800,
-    );
-    return () => window.clearInterval(id);
-  }, [reduce, paused]);
-
   return (
     <section
       ref={sectionRef}
       className="relative overflow-hidden bg-paper py-20 md:py-32"
       aria-labelledby="balcony-heading"
+      {...hoverProps()}
     >
       <div className="shell">
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
@@ -103,9 +100,8 @@ export default function BalconyView() {
                   <button
                     key={s.key}
                     type="button"
-                    onClick={() => setActive(i)}
-                    onMouseEnter={() => { setPaused(true); setActive((a) => (a + 1) % scenes.length); }}
-                    onMouseLeave={() => setPaused(false)}
+                    onClick={() => select(i)}
+                    onMouseEnter={() => select(i)}
                     aria-pressed={isActive}
                     className="group flex w-full items-center gap-4 border-b border-line py-3.5 text-left"
                   >
@@ -145,8 +141,7 @@ export default function BalconyView() {
             <div
               className="relative"
               data-reveal="mask"
-              onMouseEnter={() => { setPaused(true); setActive((a) => (a + 1) % scenes.length); }}
-              onMouseLeave={() => setPaused(false)}
+              {...hoverProps(advance)}
             >
               <motion.div
                 className="relative overflow-hidden rounded-3xl bg-paper-2 shadow-[0_40px_100px_-40px_rgba(42,26,14,0.45)]"

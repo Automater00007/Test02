@@ -43,7 +43,7 @@ export default function FilmSection() {
         <motion.div className="absolute inset-[-10%] " style={{ y }}>
           <Image
             src={img.aerial}
-            alt="Aerial view of the river and pine forest around Twin Towers by Defoy"
+            alt="Aerial view of the valley and pine forest around Twin Towers by Defoy"
             fill
             sizes="100vw"
             className="object-cover"

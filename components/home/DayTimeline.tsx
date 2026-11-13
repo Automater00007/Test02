@@ -40,6 +40,7 @@ export default function DayTimeline() {
   const reduce = useReducedMotion();
   const stageRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const holdUntil = useRef(0);
   const { scrollYProgress } = useScroll({
     target: stageRef,
     offset: ["start start", "end end"],
@@ -47,10 +48,18 @@ export default function DayTimeline() {
 
   useEffect(() => {
     const unsub = scrollYProgress.on("change", (v) => {
+      // A hover just chose a stage — let it stay for a beat before scroll
+      // takes over again.
+      if (performance.now() < holdUntil.current) return;
       setActive(Math.min(steps.length - 1, Math.max(0, Math.floor(v * steps.length))));
     });
     return () => unsub();
   }, [scrollYProgress]);
+
+  const pick = (i: number) => {
+    holdUntil.current = performance.now() + 1800;
+    setActive(i);
+  };
 
   return (
     <section className="relative overflow-x-clip bg-paper-2" aria-labelledby="day-heading">
@@ -138,11 +147,16 @@ export default function DayTimeline() {
                       {steps[active].body}
                     </motion.p>
 
-                    <div className="mt-9 flex gap-1.5" aria-hidden="true">
+                    <div className="mt-9 flex gap-1.5">
                       {steps.map((s, i) => (
-                        <span
+                        <button
                           key={s.title}
-                          className={`h-1 flex-1 rounded-full transition-colors duration-500 ${
+                          type="button"
+                          onClick={() => pick(i)}
+                          onMouseEnter={() => pick(i)}
+                          aria-label={`Show ${s.title}`}
+                          aria-pressed={i === active}
+                          className={`h-1.5 flex-1 rounded-full transition-colors duration-500 ${
                             i <= active ? "bg-crimson" : "bg-ink/12"
                           }`}
                         />
@@ -157,7 +171,6 @@ export default function DayTimeline() {
                         return (
                           <motion.figure
                             key={s.title}
-                            onMouseEnter={() => setActive(i)}
                             className="absolute inset-0 overflow-hidden rounded-[26px] bg-paper shadow-[0_40px_100px_-40px_rgba(42,26,14,0.5)]"
                             style={{ transformStyle: "preserve-3d", transformOrigin: "center center" }}
                             animate={{

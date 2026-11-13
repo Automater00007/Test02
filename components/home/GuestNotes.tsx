@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { stats } from "@/lib/content";
 import type { Review } from "@/lib/googleReviews";
 import CountUp from "@/components/ui/CountUp";
 import ReviewText from "@/components/ReviewText";
+import { useAutoRotate } from "@/lib/useAutoRotate";
 
 export default function GuestNotes({
   reviews,
@@ -17,14 +17,13 @@ export default function GuestNotes({
 }) {
   const reduce = useReducedMotion();
   const list = reviews.length > 0 ? reviews : [];
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    if (reduce || paused || list.length < 2) return;
-    const id = setInterval(() => setActive((a) => (a + 1) % list.length), 4200);
-    return () => clearInterval(id);
-  }, [reduce, paused, list.length]);
+  const {
+    index: active,
+    select,
+    advance,
+    setPaused,
+    hoverProps,
+  } = useAutoRotate(list.length, 4800, reduce);
 
   return (
     <section
@@ -78,8 +77,7 @@ export default function GuestNotes({
           className="relative mx-auto mt-16 h-[440px] w-full max-w-[560px]"
           style={{ perspective: 1600 }}
           aria-live="polite"
-          onMouseEnter={() => { setPaused(true); setActive((a) => (a + 1) % list.length); }}
-          onMouseLeave={() => setPaused(false)}
+          {...hoverProps(advance)}
           onFocus={() => setPaused(true)}
           onBlur={() => setPaused(false)}
         >
@@ -110,7 +108,6 @@ export default function GuestNotes({
                     rotateY: -offset * 5,
                     rotateZ: offset * 1.1 * (offset % 2 === 0 ? 1 : -1),
                     z: -offset * 85,
-                    filter: `blur(${offset * 0.8}px)`,
                     zIndex: hidden ? 0 : list.length - offset,
                   }}
                   transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
@@ -156,7 +153,7 @@ export default function GuestNotes({
               <button
                 key={`${review.name}-dot-${i}`}
                 type="button"
-                onClick={() => setActive(i)}
+                onClick={() => select(i)}
                 aria-label={`Show review ${i + 1}`}
                 aria-current={i === active}
                 className={`h-1.5 rounded-full transition-all duration-500 ${

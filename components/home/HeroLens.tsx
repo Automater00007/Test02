@@ -27,7 +27,7 @@ const HERO_IMAGES = [
 ];
 
 const CYCLE = 7000;
-const HOLD = 200;
+const HOLD = 80;
 const EXPAND = 900;
 const SETTLE = 1200;
 

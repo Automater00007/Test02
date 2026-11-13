@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   motion,
   useReducedMotion,
@@ -29,21 +29,35 @@ const suiteImages: Record<string, string[]> = {
 export default function Suites() {
   const [active, setActive] = useState(0);
   const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const lastChange = useRef(0);
   const room = rooms[active];
   const images = suiteImages[room.slug] ?? [room.image];
 
-  const next = () => setSlide((s) => (s + 1) % images.length);
-  const prev = () => setSlide((s) => (s - 1 + images.length) % images.length);
+  const goSlide = useCallback(
+    (dir: number) => {
+      lastChange.current = performance.now();
+      setSlide((s) => (s + dir + images.length) % images.length);
+    },
+    [images.length],
+  );
+  const next = () => goSlide(1);
+  const prev = () => goSlide(-1);
 
   const paraRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
   // automatic image choreography
   useEffect(() => {
-    if (reduce) return;
-    const id = setInterval(() => setSlide((sl) => (sl + 1) % images.length), 4500);
+    if (reduce || paused || images.length < 2) return;
+    const id = setInterval(() => {
+      // If the pointer just changed the slide, let that change land first.
+      if (performance.now() - lastChange.current < 2500) return;
+      lastChange.current = performance.now();
+      setSlide((sl) => (sl + 1) % images.length);
+    }, 4500);
     return () => clearInterval(id);
-  }, [images.length, reduce]);
+  }, [images.length, reduce, paused]);
   const { scrollYProgress } = useScroll({
     target: paraRef,
     offset: ["start end", "end start"],
@@ -89,6 +103,7 @@ export default function Suites() {
               onClick={() => {
                 setActive(i);
                 setSlide(0);
+                lastChange.current = performance.now();
               }}
               className={`relative w-full px-5 py-3 text-center text-[0.68rem] font-semibold uppercase tracking-[0.12em] transition-colors duration-300 sm:w-auto ${
                 i === active
@@ -107,16 +122,22 @@ export default function Suites() {
               ref={paraRef}
               className="relative overflow-hidden rounded-2xl bg-paper-2"
               data-reveal="zoom"
+              onPointerEnter={(e) => {
+                if (e.pointerType === "touch") return;
+                setPaused(true);
+                next();
+              }}
+              onPointerLeave={(e) => {
+                if (e.pointerType === "touch") return;
+                setPaused(false);
+              }}
               style={
                 reduce
                   ? { perspective: 1400, transformStyle: "preserve-3d" }
                   : { perspective: 1400, transformStyle: "preserve-3d", rotateY: tiltY }
               }
             >
-              <div
-                className="relative aspect-[4/3] overflow-hidden"
-                onMouseEnter={() => next()}
-              >
+              <div className="relative aspect-[4/3] overflow-hidden">
                 <motion.div
                   style={reduce ? undefined : { y: paraY, scale: 1.06 }}
                   className="absolute inset-0"

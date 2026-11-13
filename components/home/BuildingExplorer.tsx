@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -9,6 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import SplitText from "@/components/ui/SplitText";
+import { useAutoRotate } from "@/lib/useAutoRotate";
 
 const floors = [
   {
@@ -46,8 +47,12 @@ const floors = [
 export default function BuildingExplorer() {
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const {
+    index: active,
+    select,
+    advance,
+    hoverProps,
+  } = useAutoRotate(floors.length, 3600, reduce);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -57,20 +62,12 @@ export default function BuildingExplorer() {
   const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [8, 0, -4]);
   const floatY = useTransform(scrollYProgress, [0, 1], [18, -18]);
 
-  useEffect(() => {
-    if (reduce || paused) return;
-    const id = window.setInterval(
-      () => setActive((a) => (a + 1) % floors.length),
-      3200,
-    );
-    return () => window.clearInterval(id);
-  }, [reduce, paused]);
-
   return (
     <section
       ref={sectionRef}
       className="relative overflow-hidden bg-paper py-20 md:py-32"
       aria-labelledby="building-heading"
+      {...hoverProps()}
     >
       <div className="shell">
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
@@ -97,9 +94,8 @@ export default function BuildingExplorer() {
                   <button
                     key={f.label}
                     type="button"
-                    onClick={() => setActive(i)}
-                    onMouseEnter={() => { setPaused(true); setActive((a) => (a + 1) % floors.length); }}
-                    onMouseLeave={() => setPaused(false)}
+                    onClick={() => select(i)}
+                    onMouseEnter={() => select(i)}
                     aria-pressed={isActive}
                     className="group flex w-full items-baseline gap-4 border-b border-line py-3.5 text-left"
                   >
@@ -144,8 +140,7 @@ export default function BuildingExplorer() {
             <div
               className="relative flex min-h-[420px] items-center justify-center md:min-h-[560px]"
               data-reveal="zoom"
-              onMouseEnter={() => { setPaused(true); setActive((a) => (a + 1) % floors.length); }}
-              onMouseLeave={() => setPaused(false)}
+              {...hoverProps(advance)}
             >
               {/* soft floor shadow */}
               <div className="absolute bottom-10 left-1/2 h-10 w-[70%] -translate-x-1/2 rounded-[50%] bg-ink/10 blur-2xl" />
@@ -169,7 +164,7 @@ export default function BuildingExplorer() {
                       <motion.button
                         key={f.label}
                         type="button"
-                        onClick={() => setActive(i)}
+                        onClick={() => select(i)}
                         aria-label={`Explore the ${f.label} floor`}
                         className="relative mx-auto block w-[82%] overflow-hidden rounded-xl border border-line bg-paper text-left"
                         style={{ transformStyle: "preserve-3d" }}

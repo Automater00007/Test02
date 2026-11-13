@@ -211,7 +211,7 @@ export async function getApprovedReviews(): Promise<Review[]> {
  * hotel) must never appear on the site. This is a display-level guard so a
  * stale CMS entry cannot leak into the marketing pages.
  */
-const FOREIGN_PROPERTY = /jade\s*river/i;
+const FOREIGN_PROPERTY = /jade\s*river|\briver(side)?\b/i;
 
 function isOwnReview(review: Review) {
   return !FOREIGN_PROPERTY.test(`${review.title ?? ""} ${review.body}`);

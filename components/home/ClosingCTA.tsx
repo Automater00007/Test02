@@ -2,15 +2,13 @@ import Link from "next/link";
 import { site } from "@/lib/content";
 import Magnetic from "@/components/ui/Magnetic";
 import SplitText from "@/components/ui/SplitText";
-import CtaBackground from "@/components/home/CtaBackground";
 
 export default function ClosingCTA() {
   return (
     <section
-      className="relative overflow-hidden bg-paper-2 text-ink"
+      className="relative overflow-hidden bg-ivory text-ink"
       aria-labelledby="cta-heading"
     >
-      <CtaBackground />
       <div className="shell relative z-10 py-20 md:py-28">
         <div className="grid gap-12 md:grid-cols-12 md:items-end">
           <div className="relative md:col-span-7">
@@ -39,9 +37,9 @@ export default function ClosingCTA() {
               <Magnetic>
                 <Link href="/contact" className="btn">
                   Reserve directly
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="arrow-static">
-                  <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.4" />
-                </svg>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="arrow-static">
+                    <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.4" />
+                  </svg>
                 </Link>
               </Magnetic>
               <a
@@ -55,36 +53,30 @@ export default function ClosingCTA() {
             </div>
           </div>
 
-          <div className="relative hidden md:block md:col-span-5" data-reveal="flip">
-            {/* Building line drawing */}
-            <svg
-              viewBox="0 0 260 200"
-              className="w-full opacity-70"
-              fill="none"
-              aria-hidden="true"
-            >
-              <line x1="20" y1="180" x2="240" y2="180" stroke="#432911" strokeWidth="1" />
-              {/* left tower */}
-              <rect x="40" y="40" width="60" height="140" stroke="#432911" strokeWidth="1" />
-              <line x1="40" y1="70" x2="100" y2="70" stroke="#432911" strokeWidth="0.6" />
-              <line x1="40" y1="100" x2="100" y2="100" stroke="#432911" strokeWidth="0.6" />
-              <line x1="40" y1="130" x2="100" y2="130" stroke="#432911" strokeWidth="0.6" />
-              {/* right tower */}
-              <rect x="130" y="55" width="70" height="125" stroke="#432911" strokeWidth="1" />
-              <line x1="130" y1="85" x2="200" y2="85" stroke="#432911" strokeWidth="0.6" />
-              <line x1="130" y1="115" x2="200" y2="115" stroke="#432911" strokeWidth="0.6" />
-              <line x1="130" y1="145" x2="200" y2="145" stroke="#432911" strokeWidth="0.6" />
-              {/* shared roof */}
-              <path d="M30 40 L110 28 L210 42" stroke="#432911" strokeWidth="1" />
-              <text x="130" y="196" fill="#432911" fillOpacity="0.6" fontSize="9" fontFamily="Inter, sans-serif" letterSpacing="3">
-                TWIN TOWERS · DEHWATHU
-              </text>
-            </svg>
+          <div className="md:col-span-4 md:col-start-9" data-reveal="fade">
+            <div className="border-t border-line pt-6">
+              <p className="eyebrow text-stone">Direct line</p>
+              <a
+                href={site.phoneHref}
+                className="link-line mt-3 block font-display text-[clamp(1.35rem,2.4vw,1.9rem)] font-bold leading-tight tracking-[-0.03em] text-crimson"
+              >
+                {site.phone}
+              </a>
+              <a
+                href={`mailto:${site.email}`}
+                className="link-line mt-2 block text-[0.92rem] font-medium text-ink/75"
+              >
+                {site.email}
+              </a>
+              <p className="mt-5 max-w-[26ch] text-[0.8rem] leading-[1.7] text-stone">
+                A real person replies — usually within the hour.
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="shell flex flex-col gap-3 py-5 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-ink/75 sm:flex-row sm:items-center sm:justify-between">
+      <div className="shell flex flex-col gap-3 border-t border-line py-5 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-stone sm:flex-row sm:items-center sm:justify-between">
         <span>{site.address}</span>
         <span>Direct bookings only — no OTAs</span>
         <a href={`https://wa.me/${site.whatsapp}`} className="link-line hover:text-ink">

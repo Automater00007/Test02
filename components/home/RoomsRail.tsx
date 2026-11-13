@@ -190,7 +190,7 @@ export default function RoomsRail() {
             >
               <div className="w-[26vw] shrink-0 self-start pt-[6vh]">
                 <p className="font-display text-[clamp(2.6rem,4.5vw,4.5rem)] leading-[0.98] tracking-[-0.04em] text-paper/90">
-                  Thirteen
+                  Twenty-five
                   <br />
                   rooms.
                   <br />

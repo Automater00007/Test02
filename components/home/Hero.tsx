@@ -9,7 +9,7 @@ import { img, site } from "@/lib/content";
 const lines = [
   { text: "Life,", italic: false },
   { text: "slowed by", italic: true },
-  { text: "the river.", italic: false },
+  { text: "the valley.", italic: false },
 ];
 
 export default function Hero() {
@@ -53,7 +53,7 @@ export default function Hero() {
       {/* <div className="shell flex items-center justify-between gap-4 py-4 md:py-5">
         <p className="eyebrow text-ink/70">Pahalgam · Jammu &amp; Kashmir</p>
         <p className="eyebrow hidden italic text-ink/65 md:block">
-          Life, slowed by the river
+          Life, slowed by the valley
         </p>
         <p className="eyebrow text-ink/70">
           <span className="text-walnut">13</span> rooms
@@ -191,7 +191,7 @@ export default function Hero() {
           data-reveal
           style={{ ["--reveal-delay" as string]: "90ms" }}
         >
-          A boutique property of thirteen rooms on the banks of the valley River.
+          A boutique property of twenty-five rooms at the edge of the valley.
           Not a hotel to tick off. A place to stay longer than you planned.
         </p>
         <a

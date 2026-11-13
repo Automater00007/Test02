@@ -20,6 +20,7 @@ export default function CoverFlowGallery() {
   const [compact, setCompact] = useState(false);
   const [paused, setPaused] = useState(false);
   const drag = useRef({ x: 0, active: false });
+  const lastChange = useRef(0);
   const count = gallery.length;
 
   useEffect(() => {
@@ -31,13 +32,21 @@ export default function CoverFlowGallery() {
   }, []);
 
   const go = useCallback(
-    (dir: number) => setActive((a) => (a + dir + count) % count),
+    (dir: number) => {
+      lastChange.current = performance.now();
+      setActive((a) => (a + dir + count) % count);
+    },
     [count],
   );
 
   useEffect(() => {
     if (reduce || paused || count < 2) return;
-    const id = window.setInterval(() => setActive((a) => (a + 1) % count), 4800);
+    const id = window.setInterval(() => {
+      // A hover/drag just moved the reel — let that transition finish.
+      if (performance.now() - lastChange.current < 2800) return;
+      lastChange.current = performance.now();
+      setActive((a) => (a + 1) % count);
+    }, 5200);
     return () => window.clearInterval(id);
   }, [reduce, paused, count]);
 
@@ -89,8 +98,15 @@ export default function CoverFlowGallery() {
             go(-1);
           }
         }}
-        onMouseEnter={() => { setPaused(true); go(1); }}
-        onMouseLeave={() => setPaused(false)}
+        onPointerEnter={(e) => {
+          if (e.pointerType === "touch") return;
+          setPaused(true);
+          go(1);
+        }}
+        onPointerLeave={(e) => {
+          if (e.pointerType === "touch") return;
+          setPaused(false);
+        }}
         onFocus={() => setPaused(true)}
         onBlur={() => setPaused(false)}
         onPointerDown={(e) => {
@@ -139,19 +155,23 @@ export default function CoverFlowGallery() {
                 className="origin-center"
                 style={{ transformStyle: "preserve-3d" }}
                 animate={{
-                  x: `${d * (compact ? 56 : 62)}%`,
-                  y: abs * (compact ? 5 : 8),
-                  z: -abs * (compact ? 110 : 170),
-                  rotateY: d * (compact ? 16 : 28),
-                  scale: 1 - abs * (compact ? 0.14 : 0.15),
-                  opacity: !visible ? 0 : isActive ? 1 : abs === 1 ? 0.64 : 0.28,
-                  filter: `blur(${isActive ? 0 : abs === 1 ? 2.2 : 5}px)`,
+                  // Every card moves along the same linear path, so the reel
+                  // reads as one continuous motion instead of cards drifting
+                  // at different speeds.
+                  x: `${d * (compact ? 58 : 56)}%`,
+                  y: `${abs * (compact ? 6 : 10)}px`,
+                  rotateY: d * (compact ? 12 : 24),
+                  scale: 1 - abs * (compact ? 0.1 : 0.12),
+                  opacity: !visible ? 0 : isActive ? 1 : abs === 1 ? 0.62 : 0.24,
                 }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
               >
                 <button
                   type="button"
-                  onClick={() => setActive(i)}
+                  onClick={() => {
+                    lastChange.current = performance.now();
+                    setActive(i);
+                  }}
                   aria-label={isActive ? `Showing: ${g.alt}` : `Show ${g.alt}`}
                   aria-current={isActive}
                   className={`group block w-full text-left ${isActive ? "cursor-default" : "cursor-pointer"}`}
@@ -206,7 +226,10 @@ export default function CoverFlowGallery() {
             <button
               key={g.src}
               type="button"
-              onClick={() => setActive(i)}
+              onClick={() => {
+                lastChange.current = performance.now();
+                setActive(i);
+              }}
               aria-label={`Go to image ${i + 1}: ${g.alt}`}
               aria-current={i === active}
               className={`h-2 rounded-full transition-all duration-500 ${

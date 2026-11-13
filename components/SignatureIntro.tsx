@@ -122,7 +122,7 @@ export default function SignatureIntro() {
           </div>
 
           <p className="intro-fade mt-5 text-center font-display text-[clamp(1.1rem,2.2vw,1.8rem)] text-paper/90">
-            Life, slowed by the river.
+            Life, slowed by the valley.
           </p>
         </div>
 

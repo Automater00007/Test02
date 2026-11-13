@@ -20,30 +20,30 @@ const practical = [
 
 export default function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden bg-forest text-paper">
+    <footer className="relative overflow-hidden border-t border-line bg-ivory text-ink">
       <div className="shell pt-20 pb-8 md:pt-28">
-        <div className="grid gap-14 md:grid-cols-12">
-          <div className="md:col-span-6" data-reveal>
-            <span className="eyebrow text-paper/65">Twin Towers by Defoy</span>
+        <div className="grid gap-12 md:grid-cols-2 md:gap-x-10 lg:grid-cols-12 lg:gap-14">
+          <div className="md:col-span-2 lg:col-span-5" data-reveal>
+            <span className="eyebrow text-crimson">Twin Towers</span>
             <p className="mt-6 max-w-[20ch] font-display text-[clamp(2.2rem,4.6vw,4.4rem)] font-bold leading-[0.98] tracking-[-0.04em]">
-              Life, slowed by the <span className="text-[#e0c9a6]">valley.</span>
+              Life, slowed by the <span className="text-crimson">valley.</span>
             </p>
-            <p className="mt-8 max-w-sm text-[0.62rem] font-semibold uppercase leading-[2.1] tracking-[0.14em] text-paper/65">
+            <p className="mt-8 max-w-sm text-[0.62rem] font-semibold uppercase leading-[2.1] tracking-[0.14em] text-stone">
               {site.address}
               <br />
               {site.coords}
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 md:col-span-4 md:col-start-8" data-reveal="zoom" style={{ ["--reveal-delay" as string]: "90ms" }}>
+          <div className="grid grid-cols-2 gap-10 md:col-span-1 lg:col-span-4 lg:col-start-7" data-reveal="zoom" style={{ ["--reveal-delay" as string]: "90ms" }}>
             <nav aria-label="Explore">
-              <p className="eyebrow mb-6 text-paper/65">Explore</p>
+              <p className="eyebrow mb-6 text-stone">Explore</p>
               <ul className="space-y-3.5">
                 {explore.map((l) => (
                   <li key={l.href}>
                     <Link
                       href={l.href}
-                      className="link-line text-[0.95rem] text-paper/70 transition-colors hover:text-paper"
+                      className="link-line text-[0.95rem] text-ink/70 transition-colors hover:text-crimson"
                     >
                       {l.label}
                     </Link>
@@ -52,13 +52,13 @@ export default function SiteFooter() {
               </ul>
             </nav>
             <nav aria-label="Practical">
-              <p className="eyebrow mb-6 text-paper/65">Practical</p>
+              <p className="eyebrow mb-6 text-stone">Practical</p>
               <ul className="space-y-3.5">
                 {practical.map((l) => (
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="link-line text-[0.95rem] text-paper/70 transition-colors hover:text-paper"
+                      className="link-line text-[0.95rem] text-ink/70 transition-colors hover:text-crimson"
                     >
                       {l.label}
                     </Link>
@@ -68,28 +68,28 @@ export default function SiteFooter() {
             </nav>
           </div>
 
-          <div className="md:col-span-2" data-reveal="zoom" style={{ ["--reveal-delay" as string]: "160ms" }}>
-            <div className="eyebrow mb-6 text-paper/65">Direct</div>
+          <div className="md:col-span-1 lg:col-span-2 lg:col-start-11" data-reveal="zoom" style={{ ["--reveal-delay" as string]: "160ms" }}>
+            <div className="eyebrow mb-6 text-stone">Direct</div>
             <ul className="space-y-6">
               <li>
                 <a
                   href={site.phoneHref}
-                  className="link-line text-[0.95rem] text-paper/75 hover:text-paper"
+                  className="link-line text-[0.95rem] text-ink/75 hover:text-crimson"
                 >
                   {site.phone}
                 </a>
-                <p className="mt-2 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-paper/65">
+                <p className="mt-2 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-stone">
                   Phone &amp; WhatsApp
                 </p>
               </li>
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="link-line text-[0.95rem] text-paper/75 hover:text-paper"
+                  className="link-line text-[0.95rem] text-ink/75 hover:text-crimson"
                 >
                   {site.email}
                 </a>
-                <p className="mt-2 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-paper/65">
+                <p className="mt-2 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-stone">
                   Direct enquiries
                 </p>
               </li>
@@ -97,10 +97,10 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col gap-4 border-t border-line-light pt-6 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-paper/65 sm:flex-row sm:items-center sm:justify-between" data-reveal="fade">
+        <div className="mt-20 flex flex-col gap-4 border-t border-line pt-6 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-stone sm:flex-row sm:items-center sm:justify-between" data-reveal="fade">
           <p>© {new Date().getFullYear()} Defoy Hotels &amp; Resorts. All rights reserved.</p>
           <div className="flex flex-wrap gap-x-8 gap-y-2">
-            <Link href="/policies" className="hover:text-paper/70">
+            <Link href="/policies" className="hover:text-ink">
               Cancellation &amp; stay
             </Link>
             <span>Direct booking only — no OTAs</span>
@@ -114,10 +114,10 @@ export default function SiteFooter() {
         style={{ marginBottom: "-0.16em" }}
       >
         <p
-          className="whitespace-nowrap text-center font-display text-[clamp(5rem,18.5vw,19rem)] font-bold leading-[0.8] tracking-[-0.055em]"
-          style={{ color: "transparent", WebkitTextStroke: "1px rgba(251,248,243,0.18)" }}
+          className="whitespace-nowrap text-center font-display text-[clamp(3.5rem,14.5vw,19rem)] font-bold leading-[0.8] tracking-[-0.055em]"
+          style={{ color: "transparent", WebkitTextStroke: "1px rgba(67,41,17,0.22)" }}
         >
-          Twin Towers by Defoy
+          Twin Towers
         </p>
       </div>
     </footer>

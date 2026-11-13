@@ -116,12 +116,14 @@ export default function SiteNav() {
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="site-hamburger group flex h-10 w-10 flex-col items-end justify-center gap-[5px] lg:hidden"
+              className="site-hamburger group relative h-11 w-11 lg:hidden"
               aria-label="Open menu"
               aria-expanded={open}
             >
-              <span className={cn("block h-px w-7 transition-all duration-500 group-hover:w-5", overHero ? "bg-paper" : "bg-charcoal")} />
-              <span className={cn("block h-px w-5 transition-all duration-500 group-hover:w-7", overHero ? "bg-paper" : "bg-charcoal")} />
+              <span className="absolute right-0 top-1/2 flex w-7 -translate-y-1/2 flex-col items-end gap-[5px]">
+                <span className={cn("block h-px w-7 transition-all duration-500 group-hover:w-5", overHero ? "bg-paper" : "bg-charcoal")} />
+                <span className={cn("block h-px w-5 transition-all duration-500 group-hover:w-7", overHero ? "bg-paper" : "bg-charcoal")} />
+              </span>
             </button>
           </div>
         </div>
@@ -143,10 +145,10 @@ export default function SiteNav() {
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="flex h-10 w-10 items-center justify-center"
+                className="relative h-11 w-11"
                 aria-label="Close menu"
               >
-                <span className="relative block h-4 w-6">
+                <span className="absolute right-0 top-1/2 block h-4 w-6 -translate-y-1/2">
                   <span className="absolute left-0 top-1/2 block h-px w-6 rotate-45 bg-paper" />
                   <span className="absolute left-0 top-1/2 block h-px w-6 -rotate-45 bg-paper" />
                 </span>

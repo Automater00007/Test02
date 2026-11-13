@@ -13,7 +13,7 @@ Home FAQ → Closing CTA
 - [x] Statement: scroll-fill statement with kinetic SplitText headline (chars), facts row, no timings
 - [x] Building Explorer (BuildingExplorer): 5-floor 3D stack, auto cycle, scroll rotation, active floor description + floating image
 - [x] Estate (The House): zoom-grow from 0.72 scale, kinetic heading, floating 3D image, perspective entrances
-- [x] Cover-flow Gallery (CoverFlowGallery): 3D concave carousel, 5 cards desktop / 3 mobile, infinite loop, drag/swipe, keyboard, dots, reduced-motion grid
+- [x] Cover-flow Gallery (CoverFlowGallery): 3D concave carousel, 5 cards desktop / 3 mobile, infinite loop, drag/swipe, keyboard, dots, reduced-motion grid, linear uniform transforms (no per-card blur or depth drift)
 - [x] Stack Carousel: scroll-driven 3D card stack, progress rail, mobile snap rail, captions inside cards
 - [x] Suites: all slide images mounted with crossfade, 3D rotateY/scale, scroll-driven tilt
 - [x] Stay Features: auto 3D amenities stack, floating depth images, progress line + dots
@@ -22,10 +22,10 @@ Home FAQ → Closing CTA
 - [x] Day Timeline (First Day): sticky 320vh 3D scene, scroll-driven active stage, timings removed, mobile stacked cards
 - [x] Guest Stories: YouTube playlist teaser
 - [x] Location: scroll-driven map rotateX/Y + scale, attractions, no overlap
-- [x] Guest Notes: 3D testimonial deck, all cards mounted, dots, pause on hover
+- [x] Guest Notes: 3D testimonial deck, all cards mounted, dots, hover advances once then holds
 - [x] Blog Teaser: asymmetric grid, tilt/flip reveal variants
 - [x] Home FAQ: connected accordion with rail + animated dots
-- [x] Closing CTA: cinematic image expansion + magnetic CTA + flip reveal on building drawing
+- [x] Closing CTA: ivory panel matching the footer, no background image or building sketch, direct-contact block
 
 ## Components
 - [x] HeroLens: raw WebGL shader (no three.js), two textures, circular mask, 9-tap blur, edge glow, cover-fit
@@ -71,7 +71,8 @@ Home FAQ → Closing CTA
 - Hero images (WebGL): exterior, facade, lawn, balcony, restaurant, lounge, entrance.
 - Cover-flow uses `gallery` from lib/content.ts (12 images).
 - `lib/imagePool.ts`: deterministic seeded picker (`pickImages(seed, count)`), 22-image pool.
-- Hero timing constants: CYCLE=3500, HOLD=150, EXPAND=250, SETTLE=600.
+- Hero timing constants: CYCLE=7000, HOLD=80, EXPAND=900, SETTLE=1200.
+- Auto scenes use `lib/useAutoRotate.ts`: timer + hover advance with a cooldown guard so a hover never double-advances. Touch input is ignored so a tap cannot freeze a scene.
 - Dev server log: /tmp/opencode/twin-dev.log
 - Headless QA scripts: /tmp/opencode/mobile-qa.mjs (390), /tmp/opencode/qa-size.mjs (parameterized).
 - Sanity content cleanup pending: delete "Why thirteen rooms is the point", "testing this blog" excerpts, seeded Jade River reviews; add YouTube env keys.

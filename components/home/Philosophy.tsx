@@ -2,7 +2,7 @@ import RiverDivider from "@/components/ui/RiverDivider";
 import { site } from "@/lib/content";
 
 const copy =
-  "Pahalgam is not a place you rush. The valley has run this valley longer than any of us. Thirteen rooms beside it — wooden walls, amber light, pine behind, water in front.";
+  "Pahalgam is not a place you rush. The mountains have run this valley longer than any of us. Twenty-five rooms beside it — wooden walls, amber light, pine behind, the valley in front.";
 
 export default function Philosophy() {
   return (
@@ -43,7 +43,7 @@ export default function Philosophy() {
               className="max-w-[16ch] text-[clamp(2.1rem,4.8vw,4.3rem)] leading-[0.98]"
               data-reveal
             >
-              A resort built around a river,{" "}
+              A resort built around the valley,{" "}
               <em className="text-clay">not a lobby.</em>
             </h2>
 
