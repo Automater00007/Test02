@@ -24,6 +24,7 @@ export default function StayFeatures() {
     select,
     advance,
     hoverProps,
+    swipeProps,
   } = useAutoRotate(features.length, 3400, reduce);
 
   return (
@@ -36,13 +37,13 @@ export default function StayFeatures() {
           <div className="md:col-span-5 md:sticky md:top-28 md:self-start">
             <div className="flex items-center gap-3" data-reveal="fade">
               <span className="block h-px w-10 bg-crimson" />
-              <span className="eyebrow text-crimson">06 — Part of every stay</span>
+              <span className="eyebrow text-crimson">05 — Part of every stay</span>
             </div>
             <SplitText
               text="Six small things, done properly."
               as="h2"
               id="features-heading"
-              className="mt-6 text-[clamp(2.2rem,4.6vw,4.4rem)] font-bold leading-[0.98] tracking-[-0.04em]"
+              className="mt-6 text-[clamp(2.1rem,3.5vw,3.5rem)] font-bold leading-[0.98] tracking-[-0.04em]"
             />
             <p className="body-copy mt-8 max-w-md" data-reveal="fade">
               The details you stop noticing after a day — because they simply work.
@@ -64,8 +65,10 @@ export default function StayFeatures() {
 
           <div className="md:col-span-6 md:col-start-7" style={{ perspective: 1600 }}>
             <div
-              className="relative h-[380px] w-full md:h-[420px]"
+              className="relative h-[360px] w-full touch-pan-y md:h-[420px]"
+              data-reveal="zoom"
               {...hoverProps(advance)}
+              {...swipeProps}
             >
               {/* floating depth layers behind the deck */}
               <motion.div

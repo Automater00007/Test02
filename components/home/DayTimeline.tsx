@@ -74,7 +74,7 @@ export default function DayTimeline() {
               text="Arrive. Exhale. Let the valley set the pace."
               as="h2"
               id="day-heading"
-              className="mt-6 text-[clamp(2.2rem,4.6vw,4.4rem)] font-bold leading-[0.98] tracking-[-0.04em]"
+              className="mt-6 text-[clamp(2.1rem,3.5vw,3.5rem)] font-bold leading-[0.98] tracking-[-0.04em]"
             />
           </div>
           <p className="body-copy md:col-span-4 md:col-start-9" data-reveal="fade">

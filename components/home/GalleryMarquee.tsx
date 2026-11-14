@@ -107,7 +107,7 @@ export default function GalleryMarquee() {
             </span>
             <h2
               id="gallery-heading"
-              className="mt-4 text-[clamp(2.3rem,5.6vw,5.4rem)] leading-[0.94]"
+              className="mt-4 text-[clamp(2.1rem,3.9vw,3.9rem)] leading-[0.94]"
               data-reveal
             >
               Frames the valley <em className="text-clay">already made.</em>

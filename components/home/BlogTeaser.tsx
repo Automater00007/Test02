@@ -13,11 +13,11 @@ export default async function BlogTeaser() {
           <div>
             <div className="flex items-center gap-3" data-reveal="fade">
               <span className="block h-px w-10 bg-crimson" />
-              <span className="eyebrow text-crimson">09 — Journal</span>
+              <span className="eyebrow text-crimson">11 — Journal</span>
             </div>
             <h2
               id="blog-heading"
-              className="mt-6 max-w-[18ch] text-[clamp(2.2rem,5vw,4.8rem)] font-bold leading-[0.95] tracking-[-0.04em]"
+              className="mt-6 max-w-[18ch] text-[clamp(2.1rem,3.9vw,3.9rem)] font-bold leading-[0.95] tracking-[-0.04em]"
               data-reveal="tilt"
             >
               Notes from the <em>slow side.</em>

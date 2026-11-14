@@ -25,7 +25,7 @@ export default function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-2 md:gap-x-10 lg:grid-cols-12 lg:gap-14">
           <div className="md:col-span-2 lg:col-span-5" data-reveal>
             <span className="eyebrow text-crimson">Twin Towers</span>
-            <p className="mt-6 max-w-[20ch] font-display text-[clamp(2.2rem,4.6vw,4.4rem)] font-bold leading-[0.98] tracking-[-0.04em]">
+            <p className="mt-6 max-w-[20ch] font-display text-[clamp(2.1rem,3.5vw,3.5rem)] font-bold leading-[0.98] tracking-[-0.04em]">
               Life, slowed by the <span className="text-crimson">valley.</span>
             </p>
             <p className="mt-8 max-w-sm text-[0.62rem] font-semibold uppercase leading-[2.1] tracking-[0.14em] text-stone">

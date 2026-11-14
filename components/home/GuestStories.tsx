@@ -35,22 +35,34 @@ export default function GuestStories({
 
   if (videos.length === 0) {
     return (
-      <section className="bg-paper py-20 md:py-28" aria-labelledby="guest-stories-title">
+      <section className="bg-paper py-16 md:py-20" aria-labelledby="guest-stories-title">
         <div className="shell">
           <div className="flex items-center gap-3" data-reveal="fade">
             <span className="block h-px w-10 bg-crimson" />
-            <span className="eyebrow text-crimson">06 — Guest stories</span>
+            <span className="eyebrow text-crimson">08 — Guest stories</span>
           </div>
-          <h2
-            id="guest-stories-title"
-            className="mt-6 max-w-[18ch] text-[clamp(2.2rem,5vw,4.6rem)] font-bold leading-[0.96] tracking-[-0.04em]"
-            data-reveal
-          >
-            {title}
-          </h2>
-          <p className="body-copy mt-6 max-w-[52ch]" data-reveal="fade">
-            Guest stories are coming soon.
-          </p>
+          <div className="mt-6 grid gap-6 md:grid-cols-12 md:items-end">
+            <h2
+              id="guest-stories-title"
+              className="max-w-[18ch] text-[clamp(2.1rem,3.7vw,3.7rem)] font-bold leading-[0.96] tracking-[-0.04em] md:col-span-7"
+              data-reveal
+            >
+              {title}
+            </h2>
+            <div className="md:col-span-4 md:col-start-9" data-reveal="fade">
+              <p className="max-w-[46ch] text-[0.95rem] leading-[1.7] text-ink/70">
+                Short films from the house are on their way — the balcony at
+                first light, the walk to the lawn, the kitchen at service.
+                Until then, the guest notes below say it better.
+              </p>
+              <a
+                href="/reviews"
+                className="link-line mt-5 inline-block text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-crimson"
+              >
+                Read guest notes →
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     );
@@ -64,11 +76,11 @@ export default function GuestStories({
             <div className="md:col-span-7">
               <div className="flex items-center gap-3" data-reveal="fade">
                 <span className="block h-px w-10 bg-crimson" />
-                <span className="eyebrow text-crimson">06 — Guest stories</span>
+                <span className="eyebrow text-crimson">08 — Guest stories</span>
               </div>
               <h2
                 id="guest-stories-title"
-                className="mt-6 max-w-[16ch] text-[clamp(2.2rem,5vw,4.6rem)] font-bold leading-[0.96] tracking-[-0.04em]"
+                className="mt-6 max-w-[16ch] text-[clamp(2.1rem,3.7vw,3.7rem)] font-bold leading-[0.96] tracking-[-0.04em]"
                 data-reveal
               >
                 {title}

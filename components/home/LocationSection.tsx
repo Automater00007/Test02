@@ -45,11 +45,11 @@ export default function LocationSection() {
           <div className="md:col-span-5">
             <div className="flex items-center gap-3" data-reveal="fade">
               <span className="block h-px w-10 bg-crimson" />
-              <span className="eyebrow text-crimson">07 — Location</span>
+              <span className="eyebrow text-crimson">09 — Location</span>
             </div>
             <h2
               id="location-heading"
-              className="mt-6 text-[clamp(2.2rem,4.8vw,4.6rem)] font-bold leading-[0.96] tracking-[-0.04em]"
+              className="mt-6 text-[clamp(2.1rem,3.7vw,3.7rem)] font-bold leading-[0.96] tracking-[-0.04em]"
               data-reveal
             >
               The road ends. <em>The valley opens.</em>

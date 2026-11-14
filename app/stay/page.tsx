@@ -3,7 +3,7 @@ import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import RoomShowcase from "@/components/rooms/RoomShowcase";
 import { JsonLd, breadcrumb } from "@/lib/schema";
-import { rooms } from "@/lib/content";
+import { rooms, site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Stay",
@@ -49,14 +49,16 @@ export default function StayPage() {
         <div className="shell grid gap-10 md:grid-cols-12 md:items-center">
           <p className="font-display text-[clamp(1.8rem,3.4vw,3.2rem)] leading-[1.05] md:col-span-7" data-reveal>
             Not sure which room? Tell us who is coming and we will{" "}
-            <em className="text-clay">place you properly.</em>
+            <em className="text-sand">place you properly.</em>
           </p>
           <div className="flex flex-wrap gap-4 md:col-span-5 md:justify-end" data-reveal="zoom" style={{ ["--reveal-delay" as string]: "100ms" }}>
             <Link href="/contact" className="btn border-paper/30 text-paper">
               Reserve directly
             </Link>
             <a
-              href="https://wa.me/9195418 98817"
+              href={`https://wa.me/${site.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="link-line self-center font-mono text-[10px] uppercase tracking-[0.2em] text-paper/70"
             >
               WhatsApp us →

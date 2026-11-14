@@ -60,13 +60,13 @@ export default function Restaurant() {
           <div className="md:col-span-5 md:col-start-8">
             <div className="flex items-center gap-3" data-reveal="fade">
               <span className="block h-px w-10 bg-crimson" />
-              <span className="eyebrow text-crimson">07 — Dining</span>
+              <span className="eyebrow text-crimson">06 — Dining</span>
             </div>
             <SplitText
               text="A small dining room that feels like a house."
               as="h2"
               id="restaurant-heading"
-              className="mt-6 text-[clamp(2.2rem,4.6vw,4.4rem)] font-bold leading-[0.98] tracking-[-0.04em]"
+              className="mt-6 text-[clamp(2.1rem,3.5vw,3.5rem)] font-bold leading-[0.98] tracking-[-0.04em]"
             />
             <p className="body-copy mt-8 max-w-md" data-reveal>
               Ask the team what is fresh from the valley. The kitchen cooks for the

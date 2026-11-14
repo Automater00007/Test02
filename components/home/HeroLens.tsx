@@ -27,7 +27,7 @@ const HERO_IMAGES = [
 ];
 
 const CYCLE = 7000;
-const HOLD = 80;
+const HOLD = 1200;
 const EXPAND = 900;
 const SETTLE = 1200;
 
@@ -101,10 +101,10 @@ void main() {
   float settleScale = mix(1.06, 1.0, uSettle);
   uvB = (uvB - 0.5) / settleScale + 0.5;
   // Liquid refraction: a subtle animated ripple inside the lens.
-  float rippleAmt = 0.022 * uBlur * (1.0 - smoothstep(0.0, radius, d * 0.9));
+  float rippleAmt = 0.012 * uBlur * (1.0 - smoothstep(0.0, radius, d * 0.9));
   uvB += (dir / max(length(dir), 0.0001)) * rippleAmt * sin(d * 34.0 - uTime * 2.8);
   uvB = coverUv(uvB, canvasAspect, uTexAspect);
-  vec3 colB = blur9(uTexB, uvB, 0.024 * uBlur);
+  vec3 colB = blur9(uTexB, uvB, 0.010 * uBlur);
 
   float ring = exp(-pow((d - radius) / 0.022, 2.0));
   vec3 glow = vec3(1.0, 0.95, 0.85) * ring * uGlow * 0.9;
@@ -133,6 +133,7 @@ function compile(gl: WebGLRenderingContext, type: number, source: string) {
 export default function HeroLens() {
   const reduce = useReducedMotion();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [painted, setPainted] = useState(false);
 
   useEffect(() => {
     if (reduce) return;
@@ -206,6 +207,7 @@ export default function HeroLens() {
     let disposed = false;
     let current = 0;
     let raf = 0;
+    let hasPainted = false;
     const start = performance.now();
     let lastCycle = -1;
 
@@ -315,6 +317,10 @@ export default function HeroLens() {
       gl.uniform1f(uniforms.uTime, now / 1000.0);
 
       gl.drawArrays(gl.TRIANGLES, 0, 6);
+      if (!hasPainted) {
+        hasPainted = true;
+        setPainted(true);
+      }
     };
 
     raf = requestAnimationFrame(frame);
@@ -353,20 +359,18 @@ export default function HeroLens() {
       />
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 h-full w-full"
+        className="absolute inset-0 h-full w-full transition-opacity duration-700"
+        style={{ opacity: painted ? 1 : 0 }}
         aria-hidden="true"
       />
-      {/* Dark left-to-right wash keeps the navigation and any overlaid copy legible. */}
+      {/* One light wash on the left for the copy, one at the bottom for the
+          headline. Kept deliberately gentle so the photograph stays visible. */}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#1d1208]/80 via-[#2a1a0e]/35 to-transparent"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#1d1208]/80 via-[#2a1a0e]/35 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#1d1208]/60 via-[#2a1a0e]/18 to-transparent"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2a1a0e]/40 via-transparent to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2a1a0e]/55 via-[#2a1a0e]/8 to-transparent"
         aria-hidden="true"
       />
       <noscript>

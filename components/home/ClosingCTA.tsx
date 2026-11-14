@@ -14,7 +14,7 @@ export default function ClosingCTA() {
           <div className="relative md:col-span-7">
             <div className="flex items-center gap-3" data-reveal="fade">
               <span className="block h-px w-10 bg-crimson/40" />
-              <span className="eyebrow text-stone">14 — Ready to arrive?</span>
+              <span className="eyebrow text-stone">13 — Ready to arrive?</span>
             </div>
 
             <SplitText
@@ -22,7 +22,7 @@ export default function ClosingCTA() {
               as="h2"
               id="cta-heading"
               split="chars"
-              className="mt-6 text-[clamp(3.4rem,11vw,10rem)] font-bold leading-[0.86] tracking-[-0.055em]"
+              className="mt-6 text-[clamp(2.9rem,7vw,6.6rem)] font-bold leading-[0.86] tracking-[-0.055em]"
             />
 
             <p
@@ -33,9 +33,9 @@ export default function ClosingCTA() {
               run the place — no booking engines in between.
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-4" data-reveal="zoom">
-              <Magnetic>
-                <Link href="/contact" className="btn">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4" data-reveal="zoom">
+              <Magnetic className="w-full sm:w-auto">
+                <Link href="/contact" className="btn w-full justify-between sm:w-auto">
                   Reserve directly
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="arrow-static">
                     <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.4" />
@@ -46,7 +46,7 @@ export default function ClosingCTA() {
                 href={`https://wa.me/${site.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-ghost border-line text-crimson hover:border-crimson"
+                className="btn btn-ghost w-full justify-between border-line text-crimson hover:border-crimson sm:w-auto"
               >
                 WhatsApp us
               </a>

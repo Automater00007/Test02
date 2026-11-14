@@ -21,13 +21,13 @@ export default function HomeFaq() {
           <div className="md:col-span-4 md:sticky md:top-28 md:self-start">
             <div className="flex items-center gap-3" data-reveal="fade">
               <span className="block h-px w-10 bg-crimson" />
-              <span className="eyebrow text-crimson">13 — Questions guests ask</span>
+              <span className="eyebrow text-crimson">12 — Questions guests ask</span>
             </div>
             <SplitText
               text="Everything, plainly."
               as="h2"
               id="home-faq-heading"
-              className="mt-6 text-[clamp(2.2rem,4.6vw,4.4rem)] font-bold leading-[0.98] tracking-[-0.04em]"
+              className="mt-6 text-[clamp(2.1rem,3.5vw,3.5rem)] font-bold leading-[0.98] tracking-[-0.04em]"
             />
             <p className="body-copy mt-8 max-w-sm" data-reveal>
               The same answers we give on the phone. If yours isn&rsquo;t here, ask us

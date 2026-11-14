@@ -40,10 +40,10 @@ export default function Statement() {
               as="h2"
               id="statement-heading"
               split="chars"
-              className="relative mt-5 text-[clamp(2.5rem,6vw,5.6rem)] font-bold leading-[0.94] tracking-[-0.045em]"
+              className="relative mt-5 text-[clamp(2.2rem,4vw,4rem)] font-bold leading-[0.95] tracking-[-0.045em]"
             />
             <p
-              className="relative mt-3 max-w-[24ch] font-display text-[clamp(1.9rem,4.3vw,3.8rem)] font-semibold leading-[1] tracking-[-0.04em] text-crimson"
+              className="relative mt-3 max-w-[24ch] font-display text-[clamp(1.8rem,3.8vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-crimson"
               data-reveal
               style={{ ["--reveal-delay" as string]: "120ms" }}
             >

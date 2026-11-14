@@ -78,7 +78,7 @@ export default function Suites() {
               text="One category. Every room with a balcony."
               as="h2"
               id="suites-heading"
-              className="mt-6 text-[clamp(2.2rem,4.8vw,4.6rem)] font-bold leading-[0.98] tracking-[-0.04em]"
+              className="mt-6 text-[clamp(2.1rem,3.7vw,3.7rem)] font-bold leading-[0.98] tracking-[-0.04em]"
             />
           </div>
           <p className="body-copy md:col-span-4 md:col-start-9" data-reveal="fade">
@@ -257,7 +257,14 @@ export default function Suites() {
                 <p className="text-[0.72rem] font-medium text-stone">per night</p>
               </div>
 
-              <Link href="/contact" className="btn mt-6 w-full justify-between">
+              <Link href={`/stay/${room.slug}`} className="btn mt-6 w-full justify-between">
+                View this room
+                <Arrow />
+              </Link>
+              <Link
+                href="/contact"
+                className="btn btn-ghost mt-3 w-full justify-between border-line text-crimson hover:border-crimson"
+              >
                 Reserve this room
                 <Arrow />
               </Link>

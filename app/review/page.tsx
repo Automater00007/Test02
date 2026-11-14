@@ -19,7 +19,7 @@ export default function ReviewPage() {
             Guest notes · Twin Towers by Defoy
           </span>
           <h1
-            className="mt-4 text-[clamp(2.6rem,6vw,5rem)] leading-[0.92] tracking-[-0.045em]"
+            className="mt-4 text-[clamp(2.3rem,4.1vw,4.1rem)] leading-[0.92] tracking-[-0.045em]"
             data-reveal
           >
             How was <em className="text-clay">your stay?</em>

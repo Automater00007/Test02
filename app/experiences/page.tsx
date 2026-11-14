@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
-import { experiences, img } from "@/lib/content";
+import { experiences, img, site } from "@/lib/content";
 import { slugify } from "@/lib/utils";
 import { JsonLd, breadcrumb } from "@/lib/schema";
 
@@ -110,7 +110,7 @@ export default function ExperiencesPage() {
               data-reveal
             >
               The best thing here is the thing we{" "}
-              <em className="text-clay">can’t schedule.</em>
+              <em className="text-sand">can’t schedule.</em>
             </p>
           </div>
           <div className="flex flex-wrap gap-4" data-reveal="zoom" style={{ ["--reveal-delay" as string]: "100ms" }}>
@@ -118,7 +118,9 @@ export default function ExperiencesPage() {
               Plan your stay
             </Link>
             <a
-              href="https://wa.me/9195418 98817"
+              href={`https://wa.me/${site.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="link-line self-center font-mono text-[10px] uppercase tracking-[0.2em] text-paper/70"
             >
               WhatsApp us →

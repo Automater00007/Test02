@@ -140,7 +140,7 @@ export const getAllPosts = cache(async (): Promise<BlogPost[]> => {
     const posts = await client.fetch<SanityPostListItem[]>(
       allPostsQuery,
       {},
-      { next: { revalidate: false, tags: ["post"] } },
+      { next: { revalidate: 300, tags: ["post"] } },
     );
     return posts.map(mapSanityPost);
   } catch {
@@ -157,7 +157,7 @@ export const getLatestPosts = cache(async (limit = 3): Promise<BlogPost[]> => {
     const posts = await client.fetch<SanityPostListItem[]>(
       latestPostsQuery,
       { limit },
-      { next: { revalidate: false, tags: ["post"] } },
+      { next: { revalidate: 300, tags: ["post"] } },
     );
     return posts.map(mapSanityPost);
   } catch {
@@ -177,7 +177,7 @@ export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null
     const post = await client.fetch<SanityPost>(
       isEnabled ? draftPostBySlugQuery : postBySlugQuery,
       { slug },
-      isEnabled ? { cache: "no-store" } : { next: { revalidate: false, tags: ["post"] } },
+      isEnabled ? { cache: "no-store" } : { next: { revalidate: 300, tags: ["post"] } },
     );
     return post ? mapSanityPost(post) : null;
   } catch {
@@ -194,7 +194,7 @@ export const getAllPostSlugs = cache(async (): Promise<string[]> => {
     const slugs = await client.fetch<{ slug: string }[]>(
       allSlugsQuery,
       {},
-      { next: { revalidate: false, tags: ["post"] } },
+      { next: { revalidate: 300, tags: ["post"] } },
     );
     return slugs.map((item) => item.slug).filter(Boolean);
   } catch {

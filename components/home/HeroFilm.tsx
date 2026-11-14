@@ -31,8 +31,13 @@ export default function HeroFilm() {
         <div className="journey-scrim" aria-hidden="true" />
 
         <div className="absolute inset-x-0 top-[68px] z-10 flex items-start justify-between p-[clamp(1rem,2.4vw,2rem)] md:top-[80px]">
-          <span className="eyebrow text-paper/80">01 — The property</span>
-          <span className="eyebrow hidden text-right leading-[1.9] text-paper/70 sm:block">
+          <span className="hero-fade eyebrow text-paper/85" style={{ ["--hero-delay" as string]: "60ms" }}>
+            The property · Pahalgam
+          </span>
+          <span
+            className="hero-fade eyebrow hidden text-right leading-[1.9] text-paper/75 sm:block"
+            style={{ ["--hero-delay" as string]: "140ms" }}
+          >
             {site.latDisplay}
             <br />
             {site.lngDisplay}
@@ -42,7 +47,7 @@ export default function HeroFilm() {
         <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-start justify-start gap-6 p-[clamp(1rem,2.6vw,2.4rem)] pb-[clamp(1.4rem,3vw,2.6rem)] lg:flex-row lg:items-end lg:justify-between lg:gap-8">
           <h1
             className="text-paper"
-            style={{ fontSize: "clamp(3.3rem, 10.4vw, 10.2rem)", lineHeight: 0.88 }}
+            style={{ fontSize: "clamp(2.8rem, 7.4vw, 6.8rem)", lineHeight: 0.9 }}
           >
             <span className="line-mask inline-block">
               <span className="line-inner" style={{ transitionDelay: "140ms" }}>
@@ -62,7 +67,10 @@ export default function HeroFilm() {
             </span>
           </h1>
 
-          <div className="w-fit self-start mr-[clamp(2.5rem,7vw,5rem)] lg:self-end">
+          <div
+            className="hero-fade w-fit self-start mr-[clamp(2.5rem,7vw,5rem)] lg:mb-12 lg:self-end"
+            style={{ ["--hero-delay" as string]: "520ms" }}
+          >
             <Link
               href="/contact"
               className="group inline-flex items-center gap-3 bg-walnut px-6 py-5 font-mono text-[11px] uppercase tracking-[0.2em] text-paper transition-colors duration-300 hover:bg-walnut-brown"
@@ -83,9 +91,14 @@ export default function HeroFilm() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 flex items-end justify-between px-[clamp(1rem,2.6vw,2.4rem)] pb-4">
-          <span className="eyebrow hidden text-paper/65 lg:block">Scroll</span>
-          <span className="relative hidden h-12 w-px overflow-hidden bg-paper/25 lg:block">
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 hidden items-end justify-between px-[clamp(1rem,2.6vw,2.4rem)] pb-4 pr-[5.5rem] lg:flex">
+          <span
+            className="hero-fade eyebrow text-paper/65"
+            style={{ ["--hero-delay" as string]: "760ms" }}
+          >
+            Scroll
+          </span>
+          <span className="relative h-12 w-px overflow-hidden bg-paper/25">
             <span className="hero-scroll-cue absolute left-0 top-0 h-5 w-px bg-copper" />
           </span>
         </div>

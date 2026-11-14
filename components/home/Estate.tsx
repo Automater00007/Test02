@@ -42,7 +42,7 @@ export default function Estate() {
               text="A house of two halves, held together by the roof."
               as="h2"
               id="estate-heading"
-              className="mt-6 text-[clamp(2.2rem,4.6vw,4.4rem)] font-bold leading-[0.98] tracking-[-0.04em]"
+              className="mt-6 text-[clamp(2.1rem,3.5vw,3.5rem)] font-bold leading-[0.98] tracking-[-0.04em]"
             />
 
             <p className="body-copy mt-8 max-w-md" data-reveal="fade">

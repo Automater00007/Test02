@@ -36,7 +36,7 @@ export default function StackCarousel() {
             </div>
             <h2
               id="stack-heading"
-              className="mt-5 max-w-[18ch] text-[clamp(2.2rem,5vw,4.8rem)] font-bold leading-[0.96] tracking-[-0.04em]"
+              className="mt-5 max-w-[18ch] text-[clamp(2.1rem,3.9vw,3.9rem)] font-bold leading-[0.96] tracking-[-0.04em]"
               data-reveal="tilt"
             >
               The house, <em>in layers.</em>

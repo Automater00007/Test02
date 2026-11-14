@@ -51,8 +51,9 @@ export default function RevealObserver() {
           timers.push(window.setTimeout(onDone, 1400));
         }
       },
-      // Low threshold and small margin so animations trigger cleanly and early on mobile scroll
-      { rootMargin: "0px 0px -3% 0px", threshold: 0.02 },
+      // Trigger just before an element reaches the fold so the motion is
+      // already playing by the time it is comfortably in view.
+      { rootMargin: "0px 0px 8% 0px", threshold: 0.01 },
     );
 
     const scan = () => {

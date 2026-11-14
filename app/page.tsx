@@ -3,12 +3,10 @@ import Statement from "@/components/home/Statement";
 import BuildingExplorer from "@/components/home/BuildingExplorer";
 import Estate from "@/components/home/Estate";
 import CoverFlowGallery from "@/components/home/CoverFlowGallery";
-import StackCarousel from "@/components/home/StackCarousel";
 import Suites from "@/components/home/Suites";
 import StayFeatures from "@/components/home/StayFeatures";
 import Restaurant from "@/components/home/Restaurant";
 import BalconyView from "@/components/home/BalconyView";
-import DayTimeline from "@/components/home/DayTimeline";
 import LocationSection from "@/components/home/LocationSection";
 import GuestNotes from "@/components/home/GuestNotes";
 import BlogTeaser from "@/components/home/BlogTeaser";
@@ -30,12 +28,10 @@ export default async function HomePage() {
       <BuildingExplorer />
       <Estate />
       <CoverFlowGallery />
-      <StackCarousel />
       <Suites />
       <StayFeatures />
       <Restaurant />
       <BalconyView />
-      <DayTimeline />
       <GuestStories videos={videos} playlistUrl={playlistUrl} />
       <LocationSection />
       <GuestNotes reviews={reviews} googleMapsUrl={mapsUrl} />

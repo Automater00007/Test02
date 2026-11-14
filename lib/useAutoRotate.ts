@@ -68,5 +68,30 @@ export function useAutoRotate(
     [],
   );
 
-  return { index, select, advance, paused, setPaused, hoverProps };
+  /**
+   * Swipe handlers for phones. A horizontal drag past a short threshold moves
+   * the deck one step and holds it; a vertical drag is left to the page scroll.
+   */
+  const swipeStart = useRef<{ x: number; y: number } | null>(null);
+  const swipeProps = {
+    onPointerDown: (event: ReactPointerEvent) => {
+      if (event.pointerType === "mouse") return;
+      swipeStart.current = { x: event.clientX, y: event.clientY };
+    },
+    onPointerUp: (event: ReactPointerEvent) => {
+      const start = swipeStart.current;
+      swipeStart.current = null;
+      if (!start) return;
+      const dx = event.clientX - start.x;
+      const dy = event.clientY - start.y;
+      if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy)) {
+        advance(dx < 0 ? 1 : -1);
+      }
+    },
+    onPointerCancel: () => {
+      swipeStart.current = null;
+    },
+  };
+
+  return { index, select, advance, paused, setPaused, hoverProps, swipeProps };
 }

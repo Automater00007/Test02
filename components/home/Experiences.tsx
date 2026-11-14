@@ -15,7 +15,7 @@ export default function Experiences() {
             </span>
             <h2
               id="experiences-heading"
-              className="mt-4 text-[clamp(2.3rem,5.6vw,5.4rem)] leading-[0.94]"
+              className="mt-4 text-[clamp(2.1rem,3.9vw,3.9rem)] leading-[0.94]"
               data-reveal
             >
               Six ways to do nothing{" "}

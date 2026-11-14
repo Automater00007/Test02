@@ -496,9 +496,9 @@
 
 @media (max-width: 767px) {
   [data-reveal] {
-    --reveal-duration: 0.74s;
-    --reveal-distance: 1.25rem;
-    --reveal-scale: 0.95;
+    --reveal-duration: 0.8s;
+    --reveal-distance: 1.6rem;
+    --reveal-scale: 0.94;
   }
 
   [data-reveal="zoom"] {
@@ -589,6 +589,37 @@ button:hover .arrow-static,
   transform: translate3d(0, 0, 0);
 }
 
+/* Hero supporting copy — fades up a beat after the headline starts lifting. */
+.hero-fade {
+  --hero-delay: 0ms;
+  opacity: 0;
+  transform: translate3d(0, 0.9rem, 0);
+  transition:
+    opacity 1s var(--ease-out-expo) var(--hero-delay),
+    transform 1s var(--ease-out-expo) var(--hero-delay);
+}
+
+.is-ready .hero-fade {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Every page gets a short entrance on navigation (app/template.tsx). */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-enter {
+  animation: page-enter 0.62s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
 /* ==========================================================================
    Kinetic marquee
    ========================================================================== */
@@ -645,10 +676,15 @@ button:hover .arrow-static,
   pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgba(42, 26, 14, 0.32) 0%,
-    rgba(42, 26, 14, 0.05) 38%,
-    rgba(33, 28, 28, 0.18) 100%
+    rgba(42, 26, 14, 0.16) 0%,
+    rgba(42, 26, 14, 0) 34%,
+    rgba(33, 28, 28, 0.12) 100%
   );
+}
+
+/* Dark image headers: the accent <em> needs to stay readable on photography. */
+.page-header-image em {
+  color: #e9ddd0;
 }
 
 /* ==========================================================================

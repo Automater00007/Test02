@@ -52,6 +52,7 @@ export default function BuildingExplorer() {
     select,
     advance,
     hoverProps,
+    swipeProps,
   } = useAutoRotate(floors.length, 3600, reduce);
 
   const { scrollYProgress } = useScroll({
@@ -80,7 +81,7 @@ export default function BuildingExplorer() {
               text="Five floors, one roof."
               as="h2"
               id="building-heading"
-              className="mt-6 text-[clamp(2.3rem,5vw,4.8rem)] font-bold leading-[0.96] tracking-[-0.04em]"
+              className="mt-6 text-[clamp(2.1rem,3.9vw,3.9rem)] font-bold leading-[0.96] tracking-[-0.04em]"
             />
             <p className="body-copy mt-8 max-w-md" data-reveal="fade">
               Two towers share a single steep roof. Walk the stack from the stone
@@ -138,15 +139,16 @@ export default function BuildingExplorer() {
 
           <div className="md:col-span-6 md:col-start-7" style={{ perspective: 1600 }}>
             <div
-              className="relative flex min-h-[420px] items-center justify-center md:min-h-[560px]"
+              className="relative flex min-h-[440px] touch-pan-y items-center justify-center md:min-h-[640px]"
               data-reveal="zoom"
               {...hoverProps(advance)}
+              {...swipeProps}
             >
               {/* soft floor shadow */}
               <div className="absolute bottom-10 left-1/2 h-10 w-[70%] -translate-x-1/2 rounded-[50%] bg-ink/10 blur-2xl" />
 
               <motion.div
-                className="relative w-full max-w-[430px]"
+                className="relative w-full max-w-[560px]"
                 style={
                   reduce
                     ? { transformStyle: "preserve-3d" }
@@ -166,32 +168,32 @@ export default function BuildingExplorer() {
                         type="button"
                         onClick={() => select(i)}
                         aria-label={`Explore the ${f.label} floor`}
-                        className="relative mx-auto block w-[82%] overflow-hidden rounded-xl border border-line bg-paper text-left"
+                        className="relative mx-auto block w-[88%] overflow-hidden rounded-xl border border-line bg-paper text-left"
                         style={{ transformStyle: "preserve-3d" }}
                         animate={{
-                          z: isActive ? 80 : 0,
-                          x: isActive ? 26 : 0,
+                          z: isActive ? 120 : 0,
+                          x: isActive ? 28 : 0,
                           rotateY: isActive ? -7 : 0,
                           scale: isActive ? 1.035 : 1,
-                          opacity: isActive ? 1 : 0.7,
+                          opacity: isActive ? 1 : 0.86,
                         }}
                         transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
                       >
-                        <div className="relative h-[58px] md:h-[66px]">
+                        <div className="relative h-[68px] md:h-[104px]">
                           <Image
                             src={f.image}
                             alt=""
                             fill
-                            sizes="(min-width: 768px) 360px, 80vw"
+                            sizes="(min-width: 768px) 520px, 88vw"
                             loading="lazy"
                             className="object-cover"
                           />
                           <div
                             className={`absolute inset-0 transition-colors duration-500 ${
-                              isActive ? "bg-paper/55" : "bg-paper/82"
+                              isActive ? "bg-paper/22" : "bg-paper/50"
                             }`}
                           />
-                          <div className="absolute inset-0 flex items-center gap-3 px-4">
+                          <div className="absolute inset-0 flex items-center gap-3 bg-gradient-to-r from-paper/90 via-paper/45 to-transparent px-4">
                             <span
                               className={`tabular text-[0.58rem] font-semibold uppercase tracking-[0.16em] ${
                                 isActive ? "text-crimson" : "text-stone"
@@ -217,27 +219,6 @@ export default function BuildingExplorer() {
                 </div>
 
               </motion.div>
-
-              {/* floating current-floor photograph */}
-              <div className="pointer-events-none absolute -bottom-2 -right-1 hidden h-28 w-40 rotate-3 overflow-hidden rounded-xl border-4 border-paper shadow-[0_24px_60px_-20px_rgba(42,26,14,0.45)] md:block">
-                {floors.map((f, i) => (
-                  <motion.div
-                    key={f.label}
-                    className="absolute inset-0"
-                    animate={{ opacity: i === active ? 1 : 0, scale: i === active ? 1 : 1.08 }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <Image
-                      src={f.image}
-                      alt=""
-                      fill
-                      sizes="160px"
-                      loading="lazy"
-                      className="object-cover"
-                    />
-                  </motion.div>
-                ))}
-              </div>
             </div>
           </div>
         </div>

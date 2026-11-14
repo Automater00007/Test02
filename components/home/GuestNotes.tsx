@@ -23,11 +23,12 @@ export default function GuestNotes({
     advance,
     setPaused,
     hoverProps,
+    swipeProps,
   } = useAutoRotate(list.length, 4800, reduce);
 
   return (
     <section
-      className="relative overflow-hidden bg-paper-2 py-20 text-ink md:py-28"
+      className="relative overflow-hidden bg-paper-2 py-16 text-ink md:py-20"
       aria-labelledby="reviews-heading"
     >
       <div className="shell">
@@ -35,11 +36,11 @@ export default function GuestNotes({
           <div className="md:col-span-7">
             <div className="flex items-center gap-3" data-reveal="fade">
               <span className="block h-px w-10 bg-crimson" />
-              <span className="eyebrow text-crimson">08 — Guest notes</span>
+              <span className="eyebrow text-crimson">10 — Guest notes</span>
             </div>
             <h2
               id="reviews-heading"
-              className="mt-6 text-[clamp(2.3rem,5.2vw,5rem)] font-bold leading-[0.94] tracking-[-0.04em]"
+              className="mt-5 text-[clamp(1.9rem,3vw,3.1rem)] font-bold leading-[0.96] tracking-[-0.04em]"
               data-reveal
             >
               Small numbers. <span className="text-ink/70">That&rsquo;s the point.</span>
@@ -54,7 +55,7 @@ export default function GuestNotes({
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-2 gap-y-10 border-y border-line py-10 md:grid-cols-4 md:gap-6">
+        <div className="mt-10 grid grid-cols-2 gap-y-8 border-y border-line py-8 md:grid-cols-4 md:gap-6">
           {stats.map((s, i) => (
             <div
               key={s.label}
@@ -62,7 +63,7 @@ export default function GuestNotes({
               data-reveal="zoom"
               style={{ ["--reveal-delay" as string]: `${i * 80}ms` }}
             >
-              <p className="tabular font-display text-[clamp(2.6rem,4.6vw,4.6rem)] font-bold leading-none tracking-[-0.04em] text-crimson">
+              <p className="tabular font-display text-[clamp(1.9rem,2.7vw,2.7rem)] font-bold leading-none tracking-[-0.04em] text-crimson">
                 <CountUp value={s.value} suffix={s.suffix} />
               </p>
               <p className="mt-3 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-stone">
@@ -74,15 +75,17 @@ export default function GuestNotes({
 
         {/* 3D testimonial deck */}
         <div
-          className="relative mx-auto mt-16 h-[440px] w-full max-w-[560px]"
+          className="relative mx-auto mt-10 h-[330px] w-full max-w-[480px] touch-pan-y"
           style={{ perspective: 1600 }}
           aria-live="polite"
+          data-reveal="zoom"
           {...hoverProps(advance)}
+          {...swipeProps}
           onFocus={() => setPaused(true)}
           onBlur={() => setPaused(false)}
         >
           {list.length === 0 ? (
-            <div className="mx-auto w-[min(92vw,480px)] rounded-3xl border border-line bg-paper p-7 text-center shadow-[0_20px_60px_rgba(42,26,14,0.12)]">
+            <div className="mx-auto w-[min(92vw,440px)] rounded-2xl border border-line bg-paper p-6 text-center shadow-[0_20px_60px_rgba(42,26,14,0.12)]">
               <p className="font-display text-[1.25rem] font-bold tracking-[-0.02em]">
                 Guest notes are being collected.
               </p>
@@ -97,17 +100,17 @@ export default function GuestNotes({
               return (
                 <motion.article
                   key={`${review.name}-${i}`}
-                  className="absolute inset-x-0 top-0 mx-auto w-[min(92vw,480px)] origin-top rounded-3xl border border-line bg-paper p-7 shadow-[0_26px_70px_rgba(42,26,14,0.16)]"
+                  className="absolute inset-x-0 top-0 mx-auto w-[min(92vw,440px)] origin-top rounded-2xl border border-line bg-paper p-6 shadow-[0_26px_70px_rgba(42,26,14,0.16)]"
                   style={{ transformStyle: "preserve-3d" }}
                   animate={{
                     opacity: hidden ? 0 : 1 - offset * 0.15,
-                    y: offset * 20,
-                    x: offset * 10,
+                    y: offset * 15,
+                    x: offset * 8,
                     scale: 1 - offset * 0.055,
-                    rotateX: offset * 4.2,
-                    rotateY: -offset * 5,
+                    rotateX: offset * 3.6,
+                    rotateY: -offset * 4.2,
                     rotateZ: offset * 1.1 * (offset % 2 === 0 ? 1 : -1),
-                    z: -offset * 85,
+                    z: -offset * 70,
                     zIndex: hidden ? 0 : list.length - offset,
                   }}
                   transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
@@ -125,16 +128,16 @@ export default function GuestNotes({
                     </span>
                   </div>
                   {review.title ? (
-                    <h3 className="mt-6 font-display text-[1.35rem] font-bold leading-[1.1] tracking-[-0.03em]">
+                    <h3 className="mt-4 font-display text-[1.12rem] font-bold leading-[1.15] tracking-[-0.03em]">
                       {review.title}
                     </h3>
                   ) : null}
                   <ReviewText
                     body={review.body}
-                    className={`${review.title ? "mt-4" : "mt-6"} text-[0.92rem] leading-[1.7] text-ink/70`}
+                    className={`${review.title ? "mt-3" : "mt-4"} text-[0.86rem] leading-[1.65] text-ink/70`}
                   />
-                  <div className="mt-8 flex items-center justify-between border-t border-line pt-4">
-                    <p className="text-[0.88rem] font-medium">{review.name}</p>
+                  <div className="mt-5 flex items-center justify-between border-t border-line pt-3">
+                    <p className="text-[0.82rem] font-medium">{review.name}</p>
                     {review.from ? (
                       <p className="text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-stone">
                         {review.from}
@@ -164,7 +167,7 @@ export default function GuestNotes({
           </div>
         ) : null}
 
-        <div className="shell mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
           <p className="max-w-md text-[0.6rem] font-semibold uppercase leading-[1.9] tracking-[0.14em] text-stone">
             Notes left by guests who stayed with us.
           </p>

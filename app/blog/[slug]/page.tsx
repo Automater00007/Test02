@@ -101,7 +101,7 @@ export default async function PostPage({
                 {post.author ? ` · ${post.author}` : ""}
               </p>
               <h1
-                className="mt-5 text-[clamp(2.6rem,6.4vw,6.4rem)] leading-[0.92] tracking-[-0.05em]"
+                className="mt-5 text-[clamp(2.3rem,4.2vw,4.2rem)] leading-[0.92] tracking-[-0.05em]"
                 data-reveal
               >
                 {post.title}
