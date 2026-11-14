@@ -43,7 +43,7 @@ export default function SiteFooter() {
                   <li key={l.href}>
                     <Link
                       href={l.href}
-                      className="link-line text-[0.95rem] text-ink/70 transition-colors hover:text-crimson"
+                      className="link-line inline-flex min-h-[44px] items-center text-[0.95rem] text-ink/70 transition-colors hover:text-crimson"
                     >
                       {l.label}
                     </Link>
@@ -58,7 +58,7 @@ export default function SiteFooter() {
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="link-line text-[0.95rem] text-ink/70 transition-colors hover:text-crimson"
+                      className="link-line inline-flex min-h-[44px] items-center text-[0.95rem] text-ink/70 transition-colors hover:text-crimson"
                     >
                       {l.label}
                     </Link>
@@ -74,7 +74,7 @@ export default function SiteFooter() {
               <li>
                 <a
                   href={site.phoneHref}
-                  className="link-line text-[0.95rem] text-ink/75 hover:text-crimson"
+                  className="link-line inline-flex min-h-[44px] items-center text-[0.95rem] text-ink/75 hover:text-crimson"
                 >
                   {site.phone}
                 </a>
@@ -85,7 +85,7 @@ export default function SiteFooter() {
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="link-line text-[0.95rem] text-ink/75 hover:text-crimson"
+                  className="link-line inline-flex min-h-[44px] items-center text-[0.95rem] text-ink/75 hover:text-crimson"
                 >
                   {site.email}
                 </a>
@@ -100,7 +100,7 @@ export default function SiteFooter() {
         <div className="mt-20 flex flex-col gap-4 border-t border-line pt-6 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-stone sm:flex-row sm:items-center sm:justify-between" data-reveal="fade">
           <p>© {new Date().getFullYear()} Defoy Hotels &amp; Resorts. All rights reserved.</p>
           <div className="flex flex-wrap gap-x-8 gap-y-2">
-            <Link href="/policies" className="hover:text-ink">
+            <Link href="/policies" className="inline-flex min-h-[44px] items-center hover:text-ink">
               Cancellation &amp; stay
             </Link>
             <span>Direct booking only — no OTAs</span>

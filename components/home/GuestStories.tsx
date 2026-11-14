@@ -180,7 +180,7 @@ export default function GuestStories({
               type="button"
               onClick={() => setActiveVideo(null)}
               aria-label="Close video"
-              className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center bg-ivory text-deep transition hover:bg-crimson hover:text-ivory"
+              className="absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center bg-ivory text-[1.1rem] text-deep transition hover:bg-crimson hover:text-ivory"
             >
               ×
             </button>

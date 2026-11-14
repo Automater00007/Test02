@@ -59,7 +59,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
-            <BackToHome className="rounded-full bg-paper/90 px-4 py-3 text-[9px] shadow-[0_10px_40px_rgba(118,0,20,0.18)] backdrop-blur transition-transform hover:-translate-y-0.5" />
+            <BackToHome className="rounded-full bg-paper/90 px-4 py-4 text-[10px] leading-none shadow-[0_10px_40px_rgba(118,0,20,0.18)] backdrop-blur transition-transform hover:-translate-y-0.5" />
           </motion.div>
         )}
       </AnimatePresence>

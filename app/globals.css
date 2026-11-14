@@ -496,15 +496,15 @@
 
 @media (max-width: 767px) {
   [data-reveal] {
-    --reveal-duration: 0.8s;
-    --reveal-distance: 1.6rem;
-    --reveal-scale: 0.94;
+    --reveal-duration: 0.9s;
+    --reveal-distance: 2rem;
+    --reveal-scale: 0.92;
   }
 
   [data-reveal="zoom"] {
-    --reveal-duration: 0.78s;
-    --reveal-distance: 1.1rem;
-    --reveal-scale: 0.9;
+    --reveal-duration: 0.82s;
+    --reveal-distance: 1.35rem;
+    --reveal-scale: 0.88;
   }
 
   [data-reveal="zoom-lg"] {

@@ -153,6 +153,9 @@ function Unit({
               ease: [0.16, 1, 0.3, 1],
               delay: at,
             },
+            transitionEnd: {
+              willChange: "auto",
+            },
           },
         }}
       >

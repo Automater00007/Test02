@@ -172,7 +172,6 @@ export default function CoverFlowGallery() {
                     lastChange.current = performance.now();
                     setActive(i);
                   }}
-                  aria-label={isActive ? `Showing: ${g.alt}` : `Show ${g.alt}`}
                   aria-current={isActive}
                   className={`group block w-full text-left ${isActive ? "cursor-default" : "cursor-pointer"}`}
                 >
@@ -194,7 +193,7 @@ export default function CoverFlowGallery() {
                     />
                     <span className="pointer-events-none absolute inset-0 rounded-[24px] ring-1 ring-inset ring-ink/10" />
                     {isActive && (
-                      <span className="absolute left-4 top-4 rounded-full bg-crimson px-2.5 py-1.5 text-[0.56rem] font-semibold uppercase tracking-[0.14em] text-ivory">
+                      <span aria-hidden="true" className="absolute left-4 top-4 rounded-full bg-deep/95 px-2.5 py-1.5 text-[0.56rem] font-semibold uppercase tracking-[0.14em] text-ivory">
                         {String(i + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
                       </span>
                     )}
@@ -203,7 +202,7 @@ export default function CoverFlowGallery() {
                     className={`mt-4 px-1 text-center transition-all duration-500 ${
                       isActive
                         ? "text-ink opacity-100"
-                        : "pointer-events-none text-ink/55 opacity-0"
+                        : "pointer-events-none text-ink/70 opacity-0"
                     }`}
                     aria-hidden={!isActive}
                   >
@@ -232,10 +231,15 @@ export default function CoverFlowGallery() {
               }}
               aria-label={`Go to image ${i + 1}: ${g.alt}`}
               aria-current={i === active}
-              className={`h-2 rounded-full transition-all duration-500 ${
-                i === active ? "w-8 bg-crimson" : "w-2 bg-ink/20 hover:bg-ink/40"
-              }`}
-            />
+              className="grid h-11 w-11 place-items-center rounded-full transition-colors hover:bg-ink/5"
+            >
+              <span
+                aria-hidden="true"
+                className={`h-2 rounded-full transition-all duration-500 ${
+                  i === active ? "w-8 bg-crimson" : "w-2 bg-ink/20"
+                }`}
+              />
+            </button>
           ))}
         </div>
 

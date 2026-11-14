@@ -134,10 +134,15 @@ export default function StayFeatures() {
                   onClick={() => select(i)}
                   aria-label={`Show ${f.title}`}
                   aria-current={i === active}
-                  className={`h-1.5 rounded-full transition-all duration-500 ${
-                    i === active ? "w-7 bg-crimson" : "w-1.5 bg-ink/20 hover:bg-ink/40"
-                  }`}
-                />
+                  className="grid h-11 w-11 place-items-center rounded-full transition-colors hover:bg-ink/5"
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`h-1.5 rounded-full transition-all duration-500 ${
+                      i === active ? "w-7 bg-crimson" : "w-1.5 bg-ink/20"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </div>

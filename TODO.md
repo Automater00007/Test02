@@ -28,6 +28,8 @@ Working checklist for the current round of fixes.
 - [x] Guest notes — smaller, tighter section
 - [x] Section eyebrows renumbered 01–13
 - [x] Guest stories empty state rewritten (no bare "coming soon")
+- [x] Floor cards: images kept rich (no paper wash); labels backed by gradient for legibility
+- [x] Lenis smooth scroll now also runs on phones (syncTouch); mobile reveal distance/duration strengthened
 
 ## Pages
 - [x] Hotel — background image header, story and numbers with CountUp, amenity grid, photo strip
@@ -43,3 +45,8 @@ Working checklist for the current round of fixes.
 - [x] Fixed the "thirteen rooms" post title to match the 25-room property
 - [x] Removed the leftover test post ("Tesing Another")
 - [x] Blog fetch revalidates every 5 minutes even without a webhook
+- [x] Lighthouse pass: software-GL hero falls back to CSS crossfade (WebGL perf on GPU machines kept)
+- [x] Hero: rest-phase draws throttled to 1fps, off-screen pause, DPR ≤1.25, shader skips blur when idle
+- [x] Accessibility: 44px tap targets, contrast fixes, gallery button name/role fixed (4.5:1+, label-content-name-mismatch resolved)
+- [x] SplitText releases will-change after entrance
+- [x] Local Lighthouse (production build, desktop): 60→93 Performance, 94→100 A11y, 100 BP, 100 SEO; TBT 13.2s→~0.15s

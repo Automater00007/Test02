@@ -113,7 +113,7 @@ export default function BalconyView() {
                     />
                     <span
                       className={`text-[0.95rem] font-medium transition-colors ${
-                        isActive ? "text-ink" : "text-ink/55 group-hover:text-ink/80"
+                        isActive ? "text-ink" : "text-ink/65 group-hover:text-ink/80"
                       }`}
                     >
                       {s.label}

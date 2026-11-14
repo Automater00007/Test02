@@ -104,7 +104,12 @@ void main() {
   float rippleAmt = 0.012 * uBlur * (1.0 - smoothstep(0.0, radius, d * 0.9));
   uvB += (dir / max(length(dir), 0.0001)) * rippleAmt * sin(d * 34.0 - uTime * 2.8);
   uvB = coverUv(uvB, canvasAspect, uTexAspect);
-  vec3 colB = blur9(uTexB, uvB, 0.010 * uBlur);
+  vec3 colB;
+  if (uBlur > 0.01) {
+    colB = blur9(uTexB, uvB, 0.010 * uBlur);
+  } else {
+    colB = texture2D(uTexB, clamp(uvB, 0.001, 0.999)).rgb;
+  }
 
   float ring = exp(-pow((d - radius) / 0.022, 2.0));
   vec3 glow = vec3(1.0, 0.95, 0.85) * ring * uGlow * 0.9;
@@ -134,6 +139,7 @@ export default function HeroLens() {
   const reduce = useReducedMotion();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [painted, setPainted] = useState(false);
+  const [softwareGL, setSoftwareGL] = useState(false);
 
   useEffect(() => {
     if (reduce) return;
@@ -148,6 +154,18 @@ export default function HeroLens() {
     });
     if (!gl) {
       canvas.style.display = "none";
+      return;
+    }
+
+    // Software rasterisers (SwiftShader, llvmpipe…) have no GPU budget for a
+    // blurred full-screen shader — fall back to the CSS crossfade, which is
+    // free. Real GPUs keep the lens reveal.
+    const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+    const renderer = debugInfo
+      ? String(gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) || "")
+      : "";
+    if (/swiftshader|llvmpipe|software|angle \(software|mesa/i.test(renderer)) {
+      setSoftwareGL(true);
       return;
     }
 
@@ -236,7 +254,7 @@ export default function HeroLens() {
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
       const w = Math.max(1, Math.floor(rect.width * dpr));
       const h = Math.max(1, Math.floor(rect.height * dpr));
       if (canvas.width !== w || canvas.height !== h) {
@@ -251,6 +269,22 @@ export default function HeroLens() {
     const observer = new ResizeObserver(resize);
     observer.observe(canvas);
 
+    // The hero is off-screen after the first viewport, so stop paying for the
+    // shader entirely while it is out of view.
+    let heroVisible = true;
+    const visibilityObserver = new IntersectionObserver(
+      (entries) => {
+        heroVisible = entries[0]?.isIntersecting ?? true;
+      },
+      { rootMargin: "0px 0px -10% 0px" },
+    );
+    visibilityObserver.observe(canvas);
+
+    // Rest-phase draw throttling. Between transitions the shader output is
+    // static (the ripple amplitude scales with blur), so re-drawing every frame
+    // is pure waste — draw at 1fps inside the rest phase.
+    let lastRestDraw = 0;
+
     const frame = (now: number) => {
       if (disposed) return;
       raf = requestAnimationFrame(frame);
@@ -260,6 +294,16 @@ export default function HeroLens() {
       const elapsed = now - start;
       const cycle = Math.floor(elapsed / CYCLE);
       const t = elapsed % CYCLE;
+
+      if (!heroVisible) {
+        // Leave at least one texture upload visible to the compositor by
+        // drawing nothing — the paused poster frame is already on screen.
+        return;
+      }
+
+      const resting = t > HOLD + EXPAND + SETTLE;
+      if (resting && now - lastRestDraw < 1000) return;
+      if (resting) lastRestDraw = now;
 
       if (cycle !== lastCycle) {
         lastCycle = cycle;
@@ -329,6 +373,7 @@ export default function HeroLens() {
       disposed = true;
       cancelAnimationFrame(raf);
       observer.disconnect();
+      visibilityObserver.disconnect();
       textures.forEach((tex) => {
         if (tex) gl.deleteTexture(tex);
       });
@@ -339,7 +384,7 @@ export default function HeroLens() {
     };
   }, [reduce]);
 
-  if (reduce) {
+  if (reduce || softwareGL) {
     return <CrossfadeHero />;
   }
 

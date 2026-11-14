@@ -107,7 +107,7 @@ export default function SiteNav() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "site-nav-link link-line text-[11px] font-semibold uppercase tracking-[0.15em] transition-colors",
+                    "site-nav-link link-line inline-flex min-h-[44px] items-center text-[11px] font-semibold uppercase tracking-[0.15em] transition-colors",
                     active
                       ? overHero
                         ? "text-paper after:scale-x-100"

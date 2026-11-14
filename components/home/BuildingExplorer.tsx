@@ -109,7 +109,7 @@ export default function BuildingExplorer() {
                     </span>
                     <span
                       className={`text-[0.95rem] font-medium transition-colors ${
-                        isActive ? "text-ink" : "text-ink/55 group-hover:text-ink/80"
+                        isActive ? "text-ink" : "text-ink/65 group-hover:text-ink/80"
                       }`}
                     >
                       {f.label} floor · {f.title}
@@ -175,7 +175,7 @@ export default function BuildingExplorer() {
                           x: isActive ? 28 : 0,
                           rotateY: isActive ? -7 : 0,
                           scale: isActive ? 1.035 : 1,
-                          opacity: isActive ? 1 : 0.86,
+                          opacity: isActive ? 1 : 0.92,
                         }}
                         transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
                       >
@@ -188,12 +188,14 @@ export default function BuildingExplorer() {
                             loading="lazy"
                             className="object-cover"
                           />
+                          {/* Half-strength espresso wash keeps the room photos rich;
+                              the label row has its own backing so text stays legible. */}
                           <div
                             className={`absolute inset-0 transition-colors duration-500 ${
-                              isActive ? "bg-paper/22" : "bg-paper/50"
+                              isActive ? "bg-transparent" : "bg-[#24150c]/22"
                             }`}
                           />
-                          <div className="absolute inset-0 flex items-center gap-3 bg-gradient-to-r from-paper/90 via-paper/45 to-transparent px-4">
+                          <div className="absolute inset-0 flex items-center gap-3 bg-gradient-to-r from-paper/88 via-paper/22 to-transparent px-4">
                             <span
                               className={`tabular text-[0.58rem] font-semibold uppercase tracking-[0.16em] ${
                                 isActive ? "text-crimson" : "text-stone"

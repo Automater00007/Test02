@@ -83,7 +83,7 @@ export default function DiningPage() {
                 book.
               </p>
               <p
-                className="mt-5 max-w-[44ch] text-[0.92rem] leading-[1.7] text-ink/60"
+                className="mt-5 max-w-[44ch] text-[0.92rem] leading-[1.7] text-ink/75"
                 data-reveal="fade"
                 style={{ ["--reveal-delay" as string]: "120ms" }}
               >
