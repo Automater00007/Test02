@@ -4,6 +4,7 @@ import Image from "next/image";
 import PageHeader from "@/components/PageHeader";
 import { site } from "@/lib/content";
 import { JsonLd, breadcrumb } from "@/lib/schema";
+import { twinImg } from "@/lib/testImages";
 
 export const metadata: Metadata = {
   title: "Dining",
@@ -28,7 +29,7 @@ export default function DiningPage() {
         ])}
       />
       <PageHeader
-        image="/images/twin/restaurant.webp"
+        image="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1600&q=80"
         fullViewport
         eyebrow="Dining · The house kitchen"
         title={
@@ -119,7 +120,7 @@ export default function DiningPage() {
                 style={{ ["--reveal-delay" as string]: `${i * 110}ms` }}
               >
                 <Image
-                  src={`/images/twin/${name}.webp`}
+                  src={twinImg(name)}
                   alt={`The ${name} at Twin Towers by Defoy`}
                   fill
                   sizes="(min-width: 768px) 33vw, 100vw"

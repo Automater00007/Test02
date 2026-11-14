@@ -18,13 +18,13 @@ import { useReducedMotion } from "framer-motion";
  */
 
 const HERO_IMAGES = [
-  "/images/twin/exterior.webp",
-  "/images/twin/facade.webp",
-  "/images/twin/lawn.webp",
-  "/images/twin/balcony.webp",
-  "/images/twin/restaurant.webp",
-  "/images/twin/lounge.webp",
-  "/images/twin/entrance.webp",
+  "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1600&q=80",
 ];
 
 const CYCLE = 7000;

@@ -13,25 +13,25 @@ const steps = [
   {
     label: "First",
     title: "Arrive",
-    image: "/images/twin/exterior.webp",
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80",
     body: "The drive ends at the stone gate. Someone is already at the door with a key and a cup of kahwa. The room is warm. The balcony is waiting.",
   },
   {
     label: "Then",
     title: "Unwind",
-    image: "/images/twin/lawn.webp",
+    image: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1600&q=80",
     body: "Rope chairs, glass tables, a pot of kahwa. The afternoon is yours; the mountain does not mind if you do nothing at all.",
   },
   {
     label: "Later",
     title: "Dine",
-    image: "/images/twin/restaurant.webp",
+    image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1600&q=80",
     body: "The restaurant opens for the evening. Ask the team what is fresh from the valley. The dining room is small, so it feels like a house.",
   },
   {
     label: "Last",
     title: "Explore",
-    image: "/images/twin/balcony.webp",
+    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1600&q=80",
     body: "Back upstairs, the timber warms the room. A last look at the balcony before the stars take over the sky.",
   },
 ];

@@ -14,15 +14,15 @@ import SplitText from "@/components/ui/SplitText";
 
 const suiteImages: Record<string, string[]> = {
   "premium-balcony-room": [
-    "/images/twin/suite-king-1.webp",
-    "/images/twin/suite-king-2.webp",
-    "/images/twin/suite-king-3.webp",
-    "/images/twin/suite-king-4.webp",
+    "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1600&q=80",
   ],
   "attic-room": [
-    "/images/twin/suite-attic-1.webp",
-    "/images/twin/suite-attic-2.webp",
-    "/images/twin/suite-attic-3.webp",
+    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1615655406736-b37c4fabf923?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1600&q=80",
   ],
 };
 

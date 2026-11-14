@@ -198,23 +198,21 @@ export default function BuildingExplorer() {
                             loading="lazy"
                             className="object-cover"
                           />
-                          {/* Small translucent chip keeps the label legible
-                              without washing the photograph. */}
-                          <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <span className="flex items-center gap-3 rounded-lg bg-paper/90 px-3 py-2 shadow-[0_2px_12px_rgba(42,26,14,0.18)] backdrop-blur-[3px]">
+                          {/* Text sits straight on the photograph — no chip or
+                              veil. A soft shadow keeps it legible. */}
+                          <div className="absolute inset-y-0 left-0 flex items-center pl-3 sm:pl-4">
+                            <span className="flex items-center gap-3 sm:gap-4">
                               <span
-                                className={`tabular text-[0.58rem] font-semibold uppercase tracking-[0.16em] ${
-                                  isActive ? "text-crimson" : "text-stone"
-                                }`}
+                                className="tabular text-[0.7rem] font-semibold uppercase leading-none tracking-[0.16em] text-ivory/90 [text-shadow:0_1px_6px_rgba(0,0,0,0.65)] sm:text-[0.58rem]"
                               >
                                 {f.label}
                               </span>
-                              <span className="text-[0.78rem] font-semibold tracking-[-0.01em] text-ink">
+                              <span className="text-[1.1rem] font-semibold leading-none tracking-[-0.01em] text-ivory [text-shadow:0_1px_8px_rgba(0,0,0,0.7)] sm:text-[0.78rem]">
                                 {f.title}
                               </span>
                               <span
-                                className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                                  isActive ? "bg-crimson" : "bg-ink/20"
+                                className={`h-1.5 w-1.5 rounded-full [box-shadow:0_1px_4px_rgba(0,0,0,0.55)] transition-colors ${
+                                  isActive ? "bg-ivory" : "bg-ivory/45"
                                 }`}
                               />
                             </span>

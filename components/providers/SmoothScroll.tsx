@@ -4,17 +4,16 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 
 /**
- * Lenis smooth scrolling on every device.
+ * Lenis smooth scrolling on desktop only.
  *
- * Phones were leaving it off because touch momentum already feels "native",
- * which is exactly why the page read as static — the reveal animations were
- * the only motion on screen. Lenis now runs on touch too (syncTouch) with
- * deliberately gentle values so the page glides instead of jump-scrolling.
+ * Phones felt worse with Lenis doing synchronous touch smoothing — image
+ * decks stopped swiping cleanly and pages felt heavier. Phones use native
+ * scroll (which is excellent); desktop keeps the glide.
  */
 export default function SmoothScroll() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const fine = window.matchMedia("(pointer: fine)");
+    const desktop = window.matchMedia("(min-width: 1024px) and (pointer: fine)");
 
     let lenis: Lenis | null = null;
     let frame = 0;
@@ -28,19 +27,15 @@ export default function SmoothScroll() {
     };
 
     const start = () => {
-      if (lenis || reduce.matches) return;
-
-      const desktop = fine.matches;
+      if (lenis || reduce.matches || !desktop.matches) return;
       lenis = new Lenis({
-        duration: desktop ? 1.2 : 0.9,
+        duration: 1.2,
         easing: (t: number) => 1 - Math.pow(1 - t, 4),
-        smoothWheel: desktop,
+        smoothWheel: true,
         wheelMultiplier: 0.85,
-        // Phones: light synchronous touch smoothing. Momentum still feels
-        // native, but the page glides instead of snapping.
-        syncTouch: !desktop,
-        touchMultiplier: 1.25,
-        lerp: desktop ? 0.085 : 0.12,
+        syncTouch: false,
+        touchMultiplier: 2,
+        lerp: 0.085,
       });
 
       const raf = (time: number) => {
@@ -58,11 +53,11 @@ export default function SmoothScroll() {
     };
 
     reduce.addEventListener("change", onChange);
-    fine.addEventListener("change", onChange);
+    desktop.addEventListener("change", onChange);
 
     return () => {
       reduce.removeEventListener("change", onChange);
-      fine.removeEventListener("change", onChange);
+      desktop.removeEventListener("change", onChange);
       stop();
     };
   }, []);

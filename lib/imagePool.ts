@@ -1,4 +1,6 @@
-const twin = (name: string) => `/images/twin/${name}.webp`;
+import { twinImg } from "@/lib/testImages";
+
+const twin = (name: string) => twinImg(name);
 
 export type PoolImage = { src: string; alt: string };
 

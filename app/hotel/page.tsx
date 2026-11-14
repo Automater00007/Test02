@@ -5,6 +5,7 @@ import PageHeader from "@/components/PageHeader";
 import CountUp from "@/components/ui/CountUp";
 import { site } from "@/lib/content";
 import { JsonLd, breadcrumb } from "@/lib/schema";
+import { twinImg } from "@/lib/testImages";
 
 export const metadata: Metadata = {
   title: "The Hotel",
@@ -43,7 +44,7 @@ export default function HotelPage() {
         ])}
       />
       <PageHeader
-        image="/images/twin/exterior.webp"
+        image="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80"
         eyebrow="The hotel · Story and numbers"
         title={
           <>
@@ -176,7 +177,7 @@ export default function HotelPage() {
                 style={{ ["--reveal-delay" as string]: `${i * 110}ms` }}
               >
                 <Image
-                  src={`/images/twin/${name}.webp`}
+                  src={twinImg(name)}
                   alt={`Twin Towers by Defoy — ${name}`}
                   fill
                   sizes="(min-width: 768px) 33vw, 100vw"

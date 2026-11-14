@@ -29,7 +29,7 @@ export default function CtaBackground() {
         style={reduce ? undefined : { scale, scaleX, opacity, borderRadius: radius } as any}
       >
         <Image
-          src="/images/twin/exterior.webp"
+          src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80"
           alt=""
           fill
           sizes="100vw"

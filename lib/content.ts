@@ -31,7 +31,9 @@ export const nav = [
   { label: "Contact", href: "/contact" },
 ];
 
-const twin = (name: string) => `/images/twin/${name}.webp`;
+import { twinImg } from "@/lib/testImages";
+
+const twin = (name: string) => twinImg(name);
 
 export const img = {
   hero: twin("exterior"),

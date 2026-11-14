@@ -45,7 +45,7 @@ export default function Restaurant() {
               }
             >
                 <ParallaxImage
-                  src="/images/twin/restaurant.webp"
+                  src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1600&q=80"
                   alt="The restaurant at Twin Towers by Defoy"
                   width={1600}
                   height={900}
