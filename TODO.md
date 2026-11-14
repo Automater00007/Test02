@@ -59,4 +59,6 @@ Working checklist for the current round of fixes.
 - [x] "04 Layers" stack animation reborn as the scrubbed card collage on "02 — The house" (Estate); mobile gets a swipeable photo strip, reduced-motion users get a plain 2×2 grid
 - [x] Estate collage: six large uniform 4/3 images filling the column in a 3×2 fan; mobile keeps swipe strip
 - [x] Cover-flow reverted to the previous depth-fade (side cards) after feedback; estate given hills-role images
+- [x] Videos removed from the repo and site: hero.mp4, film-720.mp4, /video dir, Hero.tsx, GuestStories/YouTube integration, /stories route (now redirects to /); committed locally, push left to the user
+- [x] Building explorer: full photography in the cards (no veil/blur), internet placeholder images for testing
 - [x] Cover-flow side cards no longer fade out (0.62/0.24 → 0.88/0.5)
