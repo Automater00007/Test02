@@ -13,7 +13,7 @@ export default async function BlogTeaser() {
           <div>
             <div className="flex items-center gap-3" data-reveal="fade">
               <span className="block h-px w-10 bg-crimson" />
-              <span className="eyebrow text-crimson">11 — Journal</span>
+              <span className="eyebrow text-crimson">10 — Journal</span>
             </div>
             <h2
               id="blog-heading"

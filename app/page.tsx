@@ -12,15 +12,10 @@ import GuestNotes from "@/components/home/GuestNotes";
 import BlogTeaser from "@/components/home/BlogTeaser";
 import HomeFaq from "@/components/home/HomeFaq";
 import ClosingCTA from "@/components/home/ClosingCTA";
-import GuestStories from "@/components/home/GuestStories";
-import { getPlaylistVideos, getYouTubePlaylistUrl } from "@/lib/youtube";
 import { getDisplayReviews } from "@/lib/googleReviews";
 
 export default async function HomePage() {
   const { reviews, mapsUrl } = await getDisplayReviews();
-  const videos = await getPlaylistVideos(6);
-  const playlistUrl = getYouTubePlaylistUrl();
-
   return (
     <>
       <HeroFilm />
@@ -32,7 +27,6 @@ export default async function HomePage() {
       <StayFeatures />
       <Restaurant />
       <BalconyView />
-      <GuestStories videos={videos} playlistUrl={playlistUrl} />
       <LocationSection />
       <GuestNotes reviews={reviews} googleMapsUrl={mapsUrl} />
       <BlogTeaser />

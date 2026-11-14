@@ -5,7 +5,6 @@ const explore = [
   { label: "Stay", href: "/stay" },
   { label: "Experiences", href: "/experiences" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Guest Stories", href: "/stories" },
   { label: "Blog", href: "/blog" },
   { label: "Reviews", href: "/reviews" },
 ];
@@ -20,7 +19,7 @@ const practical = [
 
 export default function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden border-t border-line bg-ivory text-ink">
+    <footer className="relative overflow-hidden border-t border-line bg-sand text-ink">
       <div className="shell pt-20 pb-8 md:pt-28">
         <div className="grid gap-12 md:grid-cols-2 md:gap-x-10 lg:grid-cols-12 lg:gap-14">
           <div className="md:col-span-2 lg:col-span-5" data-reveal>

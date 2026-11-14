@@ -662,14 +662,6 @@ button:hover .arrow-static,
   overflow: hidden;
   background: var(--color-deep);
 }
-.journey video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
 .journey-scrim {
   position: absolute;
   inset: 0;
@@ -702,6 +694,13 @@ html.lenis body {
 }
 .lenis.lenis-stopped {
   overflow: hidden;
+}
+
+/* Photographs should never look asleep. Every optimised image gets a small
+   lift — a touch of saturation, contrast and light — so the property library
+   reads alive even on cloudy days. GPU-composited, no layout impact. */
+[data-nimg] {
+  filter: saturate(1.22) contrast(1.08) brightness(1.07);
 }
 
 @media (prefers-reduced-motion: reduce) {

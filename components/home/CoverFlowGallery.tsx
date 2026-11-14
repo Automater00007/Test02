@@ -162,7 +162,7 @@ export default function CoverFlowGallery() {
                   y: `${abs * (compact ? 6 : 10)}px`,
                   rotateY: d * (compact ? 12 : 24),
                   scale: 1 - abs * (compact ? 0.1 : 0.12),
-                  opacity: !visible ? 0 : isActive ? 1 : abs === 1 ? 0.62 : 0.24,
+                  opacity: !visible ? 0 : 1,
                 }}
                 transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
               >
@@ -190,6 +190,14 @@ export default function CoverFlowGallery() {
                       quality={82}
                       loading="lazy"
                       className="object-cover"
+                    />
+                    {/* Depth wash — the side cards stay photographic but
+                        recede toward paper instead of losing their colour. */}
+                    <motion.span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 rounded-[24px] bg-paper"
+                      animate={{ opacity: isActive ? 0 : abs === 1 ? 0.3 : 0.64 }}
+                      transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
                     />
                     <span className="pointer-events-none absolute inset-0 rounded-[24px] ring-1 ring-inset ring-ink/10" />
                     {isActive && (

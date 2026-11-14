@@ -11,36 +11,46 @@ import {
 import SplitText from "@/components/ui/SplitText";
 import { useAutoRotate } from "@/lib/useAutoRotate";
 
+/* TEMP: internet test images for the floor cards. Swap back to the local
+   property library (`imagePool`) once the user is done testing. */
+const floorShots = [
+  "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80",
+];
+
 const floors = [
   {
     label: "Ground",
     title: "Arrival",
     body: "The stone drive, the glass canopy, reception and the dining room. The lawn opens immediately behind the house.",
-    image: "/images/twin/entrance.webp",
+    image: floorShots[0],
   },
   {
     label: "First",
     title: "The first rooms",
     body: "The first of the room floors. King beds, warm timber and balconies turned toward the lawn or the valley.",
-    image: "/images/twin/suite-king-1.webp",
+    image: floorShots[1],
   },
   {
     label: "Second",
     title: "The long view",
     body: "Mid-house, where the balconies sit level with the pines and the light arrives across the roof of the neighbouring wing.",
-    image: "/images/twin/suite-king-2.webp",
+    image: floorShots[2],
   },
   {
     label: "Third",
     title: "Above the lawn",
     body: "The upper rooms look over the garden, the rope chairs and the road that folds away toward Pahalgam.",
-    image: "/images/twin/suite-king-3.webp",
+    image: floorShots[3],
   },
   {
     label: "Fourth",
     title: "Under the roof",
     body: "The attic rooms sit closest to the roof, where the light arrives early and leaves late. Quiet, timber-lined, private.",
-    image: "/images/twin/suite-attic-1.webp",
+    image: floorShots[4],
   },
 ];
 
@@ -175,42 +185,39 @@ export default function BuildingExplorer() {
                           x: isActive ? 28 : 0,
                           rotateY: isActive ? -7 : 0,
                           scale: isActive ? 1.035 : 1,
-                          opacity: isActive ? 1 : 0.92,
+                          opacity: 1,
                         }}
                         transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
                       >
-                        <div className="relative h-[68px] md:h-[104px]">
+                        <div className="relative h-[68px] md:h-[116px]">
                           <Image
                             src={f.image}
                             alt=""
                             fill
-                            sizes="(min-width: 768px) 520px, 88vw"
+                            sizes="(min-width: 768px) 560px, 88vw"
                             loading="lazy"
                             className="object-cover"
                           />
-                          {/* Half-strength espresso wash keeps the room photos rich;
-                              the label row has its own backing so text stays legible. */}
-                          <div
-                            className={`absolute inset-0 transition-colors duration-500 ${
-                              isActive ? "bg-transparent" : "bg-[#24150c]/22"
-                            }`}
-                          />
-                          <div className="absolute inset-0 flex items-center gap-3 bg-gradient-to-r from-paper/88 via-paper/22 to-transparent px-4">
-                            <span
-                              className={`tabular text-[0.58rem] font-semibold uppercase tracking-[0.16em] ${
-                                isActive ? "text-crimson" : "text-stone"
-                              }`}
-                            >
-                              {f.label}
+                          {/* Small translucent chip keeps the label legible
+                              without washing the photograph. */}
+                          <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <span className="flex items-center gap-3 rounded-lg bg-paper/90 px-3 py-2 shadow-[0_2px_12px_rgba(42,26,14,0.18)] backdrop-blur-[3px]">
+                              <span
+                                className={`tabular text-[0.58rem] font-semibold uppercase tracking-[0.16em] ${
+                                  isActive ? "text-crimson" : "text-stone"
+                                }`}
+                              >
+                                {f.label}
+                              </span>
+                              <span className="text-[0.78rem] font-semibold tracking-[-0.01em] text-ink">
+                                {f.title}
+                              </span>
+                              <span
+                                className={`h-1.5 w-1.5 rounded-full transition-colors ${
+                                  isActive ? "bg-crimson" : "bg-ink/20"
+                                }`}
+                              />
                             </span>
-                            <span className="text-[0.78rem] font-semibold tracking-[-0.01em] text-ink">
-                              {f.title}
-                            </span>
-                            <span
-                              className={`ml-auto h-1.5 w-1.5 rounded-full transition-colors ${
-                                isActive ? "bg-crimson" : "bg-ink/20"
-                              }`}
-                            />
                           </div>
                         </div>
                         {/* thin slab edge */}

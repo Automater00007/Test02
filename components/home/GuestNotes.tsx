@@ -36,7 +36,7 @@ export default function GuestNotes({
           <div className="md:col-span-7">
             <div className="flex items-center gap-3" data-reveal="fade">
               <span className="block h-px w-10 bg-crimson" />
-              <span className="eyebrow text-crimson">10 — Guest notes</span>
+              <span className="eyebrow text-crimson">09 — Guest notes</span>
             </div>
             <h2
               id="reviews-heading"

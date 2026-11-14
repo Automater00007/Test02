@@ -54,3 +54,9 @@ Working checklist for the current round of fixes.
 - [x] LCP preload now carries fetchpriority=high; duplicate below-fold preloads removed
 - [x] Tried experimental.optimizeCss (inlined critical CSS) — produced no real inline, reverted
 - [x] Remaining accepted trade-offs: 18KB Next CSS chunks (render-blocking, ~400ms), dependency JS (~20 KiB unused + 12 KiB legacy)
+- [x] Building floor cards: images saturated/contrast-boosted (the "dull" fix)
+- [x] Curated bright floor picks (random seed pulled dim rooms) + taller cards + lighter label wash
+- [x] "04 Layers" stack animation reborn as the scrubbed card collage on "02 — The house" (Estate); mobile gets a swipeable photo strip, reduced-motion users get a plain 2×2 grid
+- [x] Estate collage: six large uniform 4/3 images filling the column in a 3×2 fan; mobile keeps swipe strip
+- [x] Cover-flow reverted to the previous depth-fade (side cards) after feedback; estate given hills-role images
+- [x] Cover-flow side cards no longer fade out (0.62/0.24 → 0.88/0.5)

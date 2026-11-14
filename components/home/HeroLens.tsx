@@ -412,6 +412,7 @@ export default function HeroLens() {
         aria-hidden="true"
         fill
         priority
+        fetchPriority="high"
         quality={75}
         sizes="100vw"
         className="object-cover"

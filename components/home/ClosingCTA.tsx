@@ -14,7 +14,7 @@ export default function ClosingCTA() {
           <div className="relative md:col-span-7">
             <div className="flex items-center gap-3" data-reveal="fade">
               <span className="block h-px w-10 bg-crimson/40" />
-              <span className="eyebrow text-stone">13 — Ready to arrive?</span>
+              <span className="eyebrow text-stone">12 — Ready to arrive?</span>
             </div>
 
             <SplitText

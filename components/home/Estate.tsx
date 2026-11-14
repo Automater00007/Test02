@@ -1,12 +1,17 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import ParallaxImage from "@/components/ui/ParallaxImage";
-import ZoomThrough from "@/components/ui/ZoomThrough";
-import PerspectiveEntrance from "@/components/ui/PerspectiveEntrance";
+import { useRef } from "react";
+import Image from "next/image";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import SplitText from "@/components/ui/SplitText";
 import { site } from "@/lib/content";
-import { imagePool, pickImages } from "@/lib/imagePool";
+import { imagePool } from "@/lib/imagePool";
 
 const facts = [
   { k: "Rooms", v: "25, one category" },
@@ -17,13 +22,176 @@ const facts = [
 
 const exterior = imagePool.find((i) => i.src.endsWith("exterior.webp")) ?? imagePool[0];
 const balcony = imagePool.find((i) => i.src.endsWith("balcony.webp")) ?? imagePool[6];
-const extras = pickImages(31, 4).filter(
-  (i) => i.src !== exterior.src && i.src !== balcony.src,
-);
-const shots = [exterior, balcony, ...extras].slice(0, 4);
+const facade = imagePool.find((i) => i.src.endsWith("facade.webp")) ?? imagePool[1];
+const lawn = imagePool.find((i) => i.src.endsWith("lawn.webp")) ?? imagePool[3];
+const restaurant = imagePool.find((i) => i.src.endsWith("restaurant.webp")) ?? imagePool[7];
+const lounge = imagePool.find((i) => i.src.endsWith("lounge.webp")) ?? imagePool[4];
+
+const shots = [exterior, balcony, facade, lawn, restaurant, lounge];
+
+/**
+ * Final layout of the photographic collage, and the direction each card
+ * flies in from. The user asked for the "04 Layers" stacked-card feeling to
+ * live here on The House, so the photographs scrub in from four sides as the
+ * section crosses the viewport — a deck settling onto the page rather than a
+ * static grid.
+ */
+const CARDS = [
+  {
+    src: shots[0].src,
+    alt: shots[0].alt,
+    label: "The house",
+    caption: "Against the pines",
+    left: "0%",
+    top: "2%",
+    width: "48%",
+    aspect: "aspect-[4/3]",
+    rotate: -2,
+    z: 10,
+    from: { x: -150, y: 60, rotate: -14 },
+    window: [0, 0.5] as const,
+  },
+  {
+    src: shots[1].src,
+    alt: shots[1].alt,
+    label: "From the balcony",
+    caption: "Balcony in every room",
+    left: "52%",
+    top: "2%",
+    width: "48%",
+    aspect: "aspect-[4/3]",
+    rotate: 2.5,
+    z: 20,
+    from: { x: 0, y: -160, rotate: 12 },
+    window: [0.08, 0.58] as const,
+  },
+  {
+    src: shots[2].src,
+    alt: shots[2].alt,
+    label: "The twin towers",
+    caption: "Timber and brick",
+    left: "0%",
+    top: "35%",
+    width: "48%",
+    aspect: "aspect-[4/3]",
+    rotate: 2,
+    z: 30,
+    from: { x: 0, y: 150, rotate: 10 },
+    window: [0.18, 0.66] as const,
+  },
+  {
+    src: shots[3].src,
+    alt: shots[3].alt,
+    label: "The lawn",
+    caption: "Rope chairs and valley",
+    left: "52%",
+    top: "35%",
+    width: "48%",
+    aspect: "aspect-[4/3]",
+    rotate: -1.5,
+    z: 40,
+    from: { x: 150, y: 60, rotate: 11 },
+    window: [0.28, 0.76] as const,
+  },
+  {
+    src: shots[4].src,
+    alt: shots[4].alt,
+    label: "The kitchen",
+    caption: "Wood fire and calm",
+    left: "0%",
+    top: "68%",
+    width: "48%",
+    aspect: "aspect-[4/3]",
+    rotate: -1.5,
+    z: 50,
+    from: { x: -150, y: 70, rotate: -12 },
+    window: [0.4, 0.88] as const,
+  },
+  {
+    src: shots[5].src,
+    alt: shots[5].alt,
+    label: "The lounge",
+    caption: "Warm lighting",
+    left: "52%",
+    top: "68%",
+    width: "48%",
+    aspect: "aspect-[4/3]",
+    rotate: 2,
+    z: 60,
+    from: { x: 150, y: 70, rotate: 12 },
+    window: [0.5, 0.95] as const,
+  },
+];
+
+function FanCard({
+  card,
+  progress,
+}: {
+  card: (typeof CARDS)[number];
+  progress: MotionValue<number>;
+}) {
+  const local = useTransform(
+    progress,
+    [card.window[0], card.window[1]],
+    [0, 1],
+    { clamp: true },
+  );
+  const x = useTransform(local, [0, 1], [card.from.x, 0]);
+  const y = useTransform(local, [0, 1], [card.from.y, 0]);
+  const rotate = useTransform(local, [0, 1], [card.from.rotate, card.rotate]);
+  const scale = useTransform(local, [0, 1], [0.72, 1]);
+  const opacity = useTransform(local, [0, 0.35], [0, 1]);
+
+  return (
+    <div
+      className="absolute"
+      style={{ left: card.left, top: card.top, width: card.width, zIndex: card.z }}
+    >
+      <motion.figure
+        style={{
+          x,
+          y,
+          rotate,
+          scale,
+          opacity,
+          willChange: "transform, opacity",
+        }}
+        className="relative"
+      >
+        <div
+          className={`relative ${card.aspect} overflow-hidden rounded-2xl border border-line bg-paper-2 shadow-[0_30px_70px_-28px_rgba(42,26,14,0.5)]`}
+        >
+          <Image
+            src={card.src}
+            alt={card.alt}
+            fill
+            sizes="(min-width: 768px) 34vw, 60vw"
+            quality={82}
+            loading="lazy"
+            className="object-cover "
+          />
+          <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-ink/10" />
+          <span className="pointer-events-none absolute bottom-0 left-0 right-0 bg-gradient-to-t from-deep/85 via-deep/30 to-transparent p-4 pt-14">
+            <span className="block text-[0.8rem] font-semibold leading-snug text-ivory">
+              {card.label}
+            </span>
+            <span className="mt-0.5 block truncate text-[0.58rem] font-medium uppercase tracking-[0.14em] text-ivory/70">
+              {card.caption}
+            </span>
+          </span>
+        </div>
+      </motion.figure>
+    </div>
+  );
+}
 
 export default function Estate() {
   const reduce = useReducedMotion();
+  const fanRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: fanRef,
+    offset: ["start 90%", "end 55%"],
+  });
 
   return (
     <section
@@ -74,83 +242,61 @@ export default function Estate() {
             </p>
           </div>
 
-          <div className="md:col-span-6 md:col-start-7" style={{ perspective: 1500 }}>
-            <div className="relative">
-              {/* The main photograph grows from a small card into the full panel. */}
-              <ZoomThrough
-                from={0.72}
-                radiusFrom="2rem"
-                radiusTo="1.25rem"
-                rotateXFrom={10}
-                yFrom={34}
-                className="relative overflow-hidden rounded-2xl bg-paper-2 shadow-[0_30px_80px_-40px_rgba(42,26,14,0.4)]"
-              >
-                <ParallaxImage
-                  src={shots[0].src}
-                  alt={shots[0].alt}
-                  width={1600}
-                  height={1067}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  speed={0.07}
-                  className="aspect-[4/3]"
-                />
-              </ZoomThrough>
-              <span className="absolute -left-px top-6 hidden bg-crimson px-3 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-ivory md:block">
-                Dehwathu · 2,200 m
-              </span>
-
-              <motion.div
-                className="absolute -bottom-6 -right-6 hidden h-40 w-40 overflow-hidden rounded-2xl border-4 border-paper shadow-[0_20px_60px_rgba(42,26,14,0.25)] md:block"
-                style={{ transformStyle: "preserve-3d" }}
-                animate={
-                  reduce
-                    ? undefined
-                    : { rotateY: [-12, 12], rotateZ: [-1.5, 1.5], y: [0, -10, 0] }
-                }
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <ParallaxImage
-                  src={shots[1].src}
-                  alt={shots[1].alt}
-                  width={320}
-                  height={320}
-                  sizes="160px"
-                  speed={0.05}
-                  className="h-full w-full object-cover"
-                />
-              </motion.div>
-            </div>
-
-            <div className="mt-5 grid grid-cols-2 gap-5">
-              <PerspectiveEntrance distance={60} rotateX={12}>
-                <div className="relative overflow-hidden rounded-2xl bg-paper-2" data-reveal="mask">
-                  <ParallaxImage
-                    src={shots[2].src}
-                    alt={shots[2].alt}
-                    width={800}
-                    height={600}
-                    sizes="(min-width: 768px) 25vw, 50vw"
-                    speed={0.1}
-                    className="reveal-media aspect-[4/3]"
-                  />
-                </div>
-              </PerspectiveEntrance>
-              <PerspectiveEntrance distance={60} rotateX={12}>
-                <div className="relative overflow-hidden rounded-2xl bg-paper-2" data-reveal="mask">
-                  <ParallaxImage
-                    src={shots[3].src}
-                    alt={shots[3].alt}
-                    width={800}
-                    height={600}
-                    sizes="(min-width: 768px) 25vw, 50vw"
-                    speed={0.1}
-                    className="reveal-media aspect-[4/3]"
-                  />
-                </div>
-              </PerspectiveEntrance>
-            </div>
+          {/* Desktop: scrubbed "cards settling onto the page" collage. */}
+          <div
+            ref={fanRef}
+            className="relative hidden h-[640px] md:col-span-6 md:col-start-7 md:block"
+            style={{ perspective: 1500 }}
+          >
+            {reduce ? (
+              <div className="grid h-full grid-cols-3 content-center gap-3">
+                {CARDS.map((c) => (
+                  <figure
+                    key={c.src}
+                    className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line"
+                  >
+                    <Image
+                      src={c.src}
+                      alt={c.alt}
+                      fill
+                      sizes="30vw"
+                      className="object-cover "
+                    />
+                  </figure>
+                ))}
+              </div>
+            ) : (
+              CARDS.map((card) => (
+                <FanCard key={card.src} card={card} progress={scrollYProgress} />
+              ))
+            )}
           </div>
         </div>
+      </div>
+
+      {/* Mobile: swipeable photo strip instead of the scrubbed collage. */}
+      <div className="no-scrollbar -mx-5 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 md:hidden">
+        {CARDS.map((c) => (
+          <figure
+            key={c.src}
+            className="w-[76vw] shrink-0 snap-center overflow-hidden rounded-2xl border border-line bg-paper-2"
+          >
+            <div className="relative aspect-[4/3]">
+              <Image
+                src={c.src}
+                alt={c.alt}
+                fill
+                sizes="76vw"
+                quality={82}
+                loading="lazy"
+                className="object-cover "
+              />
+            </div>
+            <figcaption className="px-4 py-3 text-[0.82rem] font-medium">
+              {c.caption}
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </section>
   );
