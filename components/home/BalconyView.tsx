@@ -171,7 +171,7 @@ export default function BalconyView() {
                           fill
                           sizes="(min-width: 768px) 60vw, 100vw"
                           quality={82}
-                          loading={i === 0 ? "eager" : "lazy"}
+                          loading="lazy"
                           className="object-cover"
                         />
                         <div
@@ -209,7 +209,7 @@ export default function BalconyView() {
                   initial={reduce ? false : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                  className="max-w-md text-[0.95rem] leading-[1.7] text-ink/70"
+                  className="max-w-md text-[0.95rem] leading-[1.7] text-ink/85"
                 >
                   {scenes[active].body}
                 </motion.p>

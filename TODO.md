@@ -50,3 +50,7 @@ Working checklist for the current round of fixes.
 - [x] Accessibility: 44px tap targets, contrast fixes, gallery button name/role fixed (4.5:1+, label-content-name-mismatch resolved)
 - [x] SplitText releases will-change after entrance
 - [x] Local Lighthouse (production build, desktop): 60→93 Performance, 94→100 A11y, 100 BP, 100 SEO; TBT 13.2s→~0.15s
+- [x] Mobile report: image delivery 500 KiB → ~8 KiB (hero poster on next/image, below-the-fold eager images made lazy so only the LCP fetchpriority hint preloads)
+- [x] LCP preload now carries fetchpriority=high; duplicate below-fold preloads removed
+- [x] Tried experimental.optimizeCss (inlined critical CSS) — produced no real inline, reverted
+- [x] Remaining accepted trade-offs: 18KB Next CSS chunks (render-blocking, ~400ms), dependency JS (~20 KiB unused + 12 KiB legacy)

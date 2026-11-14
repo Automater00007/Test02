@@ -115,6 +115,16 @@ export default function RootLayout({
       className={`${manrope.variable} ${inter.variable}`}
     >
       <head>
+        {/* LCP poster. Next's priority preload carries no fetchpriority hint,
+            so mirror it here with the hint explicitly set. Browsers dedupe
+            identical URLs — nothing is downloaded twice. */}
+        <link
+          rel="preload"
+          as="image"
+          imageSrcSet="/_next/image?url=%2Fimages%2Ftwin%2Fexterior.webp&amp;w=640&amp;q=75 640w, /_next/image?url=%2Fimages%2Ftwin%2Fexterior.webp&amp;w=750&amp;q=75 750w, /_next/image?url=%2Fimages%2Ftwin%2Fexterior.webp&amp;w=828&amp;q=75 828w, /_next/image?url=%2Fimages%2Ftwin%2Fexterior.webp&amp;w=1080&amp;q=75 1080w, /_next/image?url=%2Fimages%2Ftwin%2Fexterior.webp&amp;w=1200&amp;q=75 1200w, /_next/image?url=%2Fimages%2Ftwin%2Fexterior.webp&amp;w=1600&amp;q=75 1600w, /_next/image?url=%2Fimages%2Ftwin%2Fexterior.webp&amp;w=1920&amp;q=75 1920w"
+          imageSizes="100vw"
+          fetchPriority="high"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

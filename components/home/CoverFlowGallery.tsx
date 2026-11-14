@@ -188,7 +188,7 @@ export default function CoverFlowGallery() {
                       fill
                       sizes={compact ? "62vw" : "(min-width: 768px) 27vw, 62vw"}
                       quality={82}
-                      loading={abs <= 1 ? "eager" : "lazy"}
+                      loading="lazy"
                       className="object-cover"
                     />
                     <span className="pointer-events-none absolute inset-0 rounded-[24px] ring-1 ring-inset ring-ink/10" />

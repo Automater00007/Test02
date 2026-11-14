@@ -90,7 +90,7 @@ export default async function ReviewsPage() {
               <p className="font-display text-[clamp(1.8rem,3vw,2.8rem)] leading-[1.05]">
                 No guest notes yet.
               </p>
-              <p className="mt-4 max-w-md text-[0.95rem] leading-[1.7] text-ink/70">
+              <p className="mt-4 max-w-md text-[0.95rem] leading-[1.7] text-ink/85">
                 Be the first to leave a note about your stay.
               </p>
               <a

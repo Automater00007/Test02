@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 
 /**
@@ -242,14 +243,26 @@ export default function HeroLens() {
       loaded += 1;
     };
 
-    HERO_IMAGES.forEach((src, i) => {
-      const img = new Image();
+    const loadImage = (i: number) => {
+      const img = new window.Image();
       img.decoding = "async";
       img.onload = () => {
         if (disposed) return;
         upload(i, img);
       };
-      img.src = src;
+      img.src = HERO_IMAGES[i];
+    };
+
+    // LCP poster first. The remaining frames are fetched once the browser is
+    // idle so they never compete with the first paint on a slow connection.
+    loadImage(0);
+    const idle: (cb: () => void) => void =
+      "requestIdleCallback" in window
+        ? (cb) => window.requestIdleCallback(() => cb(), { timeout: 2500 })
+        : (cb) => window.setTimeout(cb, 1500);
+    idle(() => {
+      if (disposed) return;
+      for (let i = 1; i < HERO_IMAGES.length; i += 1) loadImage(i);
     });
 
     const resize = () => {
@@ -393,14 +406,15 @@ export default function HeroLens() {
       {/* Poster fallback. The canvas paints over this whenever WebGL is
           available, so the hero never falls back to a bare gradient on a
           device that cannot create a context. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={HERO_IMAGES[0]}
         alt=""
         aria-hidden="true"
-        loading="eager"
-        decoding="async"
-        className="absolute inset-0 h-full w-full object-cover"
+        fill
+        priority
+        quality={75}
+        sizes="100vw"
+        className="object-cover"
       />
       <canvas
         ref={canvasRef}
@@ -444,19 +458,29 @@ function CrossfadeHero() {
 
   return (
     <div className="absolute inset-0 overflow-hidden bg-deep">
-      {HERO_IMAGES.map((src, i) => (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          key={src}
-          src={src}
-          alt=""
-          aria-hidden="true"
-          loading={i === 0 ? "eager" : "lazy"}
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-out"
-          style={{ opacity: i === index ? 1 : 0 }}
-        />
-      ))}
+      {(() => {
+        const visible = new Set([
+          index,
+          (index + 1) % HERO_IMAGES.length,
+          (index - 1 + HERO_IMAGES.length) % HERO_IMAGES.length,
+        ]);
+        return HERO_IMAGES.map((src, i) =>
+          visible.has(i) ? (
+            <Image
+              key={src}
+              src={src}
+              alt=""
+              aria-hidden="true"
+              fill
+              quality={75}
+              priority={i === 0}
+              sizes="100vw"
+              className="object-cover transition-opacity duration-[1200ms] ease-out"
+              style={{ opacity: i === index ? 1 : 0 }}
+            />
+          ) : null,
+        );
+      })()}
       <div
         className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#1d1208]/80 via-[#2a1a0e]/35 to-transparent"
         aria-hidden="true"
