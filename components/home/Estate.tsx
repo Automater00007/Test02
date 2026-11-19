@@ -14,7 +14,7 @@ import { site } from "@/lib/content";
 import { imagePool } from "@/lib/imagePool";
 
 const facts = [
-  { k: "Rooms", v: "25, one category" },
+  { k: "Rooms", v: "25 — 22 premium · 3 attic" },
   { k: "Floors", v: "Ground + 4" },
   { k: "Check-in", v: "2:00 PM" },
   { k: "Check-out", v: "12:00 noon" },
@@ -167,7 +167,7 @@ function FanCard({
             alt={card.alt}
             fill
             sizes="(min-width: 768px) 34vw, 60vw"
-            quality={82}
+            quality={75}
             loading="lazy"
             className="reveal-media object-cover"
           />
@@ -289,7 +289,7 @@ export default function Estate() {
                 alt={c.alt}
                 fill
                 sizes="82vw"
-                quality={82}
+                quality={75}
                 loading="lazy"
                 className="reveal-media object-cover"
               />

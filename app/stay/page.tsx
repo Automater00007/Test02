@@ -8,7 +8,7 @@ import { rooms, site } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Stay",
   description:
-    "Twenty-five rooms at Twin Towers by Defoy, Pahalgam — all Premium Rooms with a king size bed and a private balcony. Direct booking only.",
+    "Twenty-five rooms at Twin Towers by Defoy, Pahalgam — 22 Premium Rooms with Balcony and 3 Attic Rooms on the fourth floor. Direct booking only.",
   alternates: { canonical: "/twin-towers/stay" },
 };
 
@@ -27,10 +27,10 @@ export default function StayPage() {
           <>
             Twenty-five rooms.
             <br />
-            One kind of <em className="text-clay">room.</em>
+            Three under <em className="text-clay">the roof.</em>
           </>
         }
-        intro="Every room is a Premium Room with a king size bed and a balcony of its own — a private place to watch the lawn, the pines and the light change."
+        intro="Twenty-two Premium Rooms with a king bed and a balcony of their own, plus 3 Attic Rooms tucked under the roof on the fourth floor — a private place to watch the lawn, the pines and the light change."
         aside={
           <div className="flex items-end justify-between border-t border-line pt-5">
             <div>

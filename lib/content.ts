@@ -3,7 +3,7 @@ export const site = {
   group: "Defoy Hotels & Resorts",
   tagline: "Stay closer to what matters. A quieter kind of escape in Kashmir.",
   description:
-    "A 25-room hotel on the road to Pahalgam, in Dehwathu, Kashmir. Premium Rooms with Balcony, warm timber, and the valley outside.",
+    "A 25-room hotel on the road to Pahalgam, in Dehwathu, Kashmir. 22 Premium Rooms with Balcony and 3 Attic Rooms, warm timber, and the valley outside.",
   phone: "+91 95418 98817",
   phoneHref: "tel:+919541898817",
   whatsapp: "919541898817",
@@ -73,12 +73,12 @@ export const rooms: Room[] = [
     slug: "premium-balcony-room",
     name: "Premium Room with Balcony",
     short: "Premium",
-    count: "25 rooms",
+    count: "22 rooms",
     price: 5000,
     description:
       "A calm, warm room with a king bed, a private balcony and enough space to unpack properly. Breakfast included, extra bed available on request.",
     long:
-      "All 25 rooms are Premium Rooms with Balcony — a king bed, space for an extra bed, and a private view of the lawn or the valley. The attic rooms sit on the fourth floor, closest to the roof, where the light arrives early and leaves late.",
+      "22 rooms are Premium Rooms with Balcony — a king bed, space for an extra bed, and a private view of the lawn or the valley. The 3 attic rooms sit on the fourth floor, closest to the roof, where the light arrives early and leaves late.",
     image: twin("suite-king-1"),
     gallery: [
       twin("suite-king-1"),
@@ -102,7 +102,7 @@ export const rooms: Room[] = [
     slug: "attic-room",
     name: "Attic Room",
     short: "Attic",
-    count: "Attic floor",
+    count: "3 attic rooms",
     price: 5000,
     description:
       "Fourth floor, closest to the roof. Warm timber, private balcony, and the mountain outside.",
@@ -219,7 +219,7 @@ export const faqs = [
   },
   {
     q: "How many rooms does Twin Towers by Defoy have?",
-    a: "25 rooms, all in one category: Premium Room with Balcony (king bed, sleeps 2, extra bed available). The attic rooms sit on the fourth floor, closest to the roof.",
+    a: "25 rooms in total — 22 Premium Rooms with Balcony and 3 Attic Rooms on the fourth floor, closest to the roof. Every room has a king bed and a private balcony.",
   },
   {
     q: "What are the room rates?",
@@ -240,7 +240,7 @@ export const faqs = [
 ];
 
 export const stats = [
-  { value: 25, suffix: "", label: "Rooms, one category" },
+  { value: 25, suffix: "", label: "Rooms — 22 premium · 3 attic" },
   { value: 5, suffix: " storeys", label: "Twin towers" },
   { value: 2, suffix: " towers", label: "One roof" },
   { value: 360, suffix: "°", label: "Valley views" },

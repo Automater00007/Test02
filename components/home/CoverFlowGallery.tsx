@@ -175,7 +175,7 @@ export default function CoverFlowGallery() {
                       alt={g.alt}
                       fill
                       sizes={compact ? "62vw" : "(min-width: 768px) 27vw, 62vw"}
-                      quality={82}
+                      quality={75}
                       loading="lazy"
                       className="object-cover"
                     />
@@ -253,7 +253,7 @@ function GalleryHeader() {
       <div>
         <div className="flex items-center gap-3" data-reveal="fade">
           <span className="block h-px w-10 bg-crimson" />
-          <span className="eyebrow text-crimson">03 — The grounds</span>
+          <span className="eyebrow text-crimson">06 — The grounds</span>
         </div>
         <h2
           id="gallery-heading"

@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "cdn.sanity.io" },
     ],
+    // Optimized images are cached on disk; keep them there essentially
+    // forever so redeploys don't cold-start the optimizer for every photo.
+    minimumCacheTTL: 31536000,
     // Explicit list keeps Next 16 happy and documents the only qualities used.
     qualities: [75, 82],
     // Photos ship at 1600px; never ask the optimiser to upscale past that.

@@ -195,7 +195,7 @@ export default function SiteNav() {
                           onClick={() => setOpen(false)}
                           className="group flex items-baseline justify-between py-[clamp(0.7rem,2vw,1.1rem)]"
                         >
-                          <span className="font-display text-[clamp(2.2rem,7vw,4rem)] font-bold leading-[1.02] tracking-[-0.04em] transition-colors group-hover:text-clay">
+                          <span className="font-display text-[clamp(2.2rem,7vw,4rem)] font-bold leading-[1.02] tracking-[-0.04em] transition-colors group-hover:text-sand">
                             {item.label}
                           </span>
                           <span className="tabular text-[10px] font-semibold tracking-[0.2em] text-paper/65">

@@ -77,18 +77,18 @@ export default function Suites() {
           <div className="md:col-span-7">
             <div className="flex items-center gap-3" data-reveal="fade">
               <span className="block h-px w-10 bg-crimson" />
-              <span className="eyebrow text-crimson">04 — Stay</span>
+              <span className="eyebrow text-crimson">03 — Stay</span>
             </div>
             <SplitText
-              text="One category. Every room with a balcony."
+              text="Every room with a balcony."
               as="h2"
               id="suites-heading"
               className="mt-6 text-[clamp(2.1rem,3.7vw,3.7rem)] font-bold leading-[0.98] tracking-[-0.04em]"
             />
           </div>
           <p className="body-copy md:col-span-4 md:col-start-9" data-reveal="fade">
-            All 25 rooms are Premium Rooms with Balcony — a king bed, space for an extra
-            bed and a private view of the lawn or the valley.
+            Twenty-two Premium Rooms with Balcony and 3 Attic Rooms — a king bed,
+            space for an extra bed and a private view of the lawn or the valley.
           </p>
         </div>
 
@@ -165,7 +165,7 @@ export default function Suites() {
                         width={1600}
                         height={900}
                         sizes="(min-width: 768px) 700px, 100vw"
-                        quality={82}
+                        quality={75}
                         loading="lazy"
                         className="absolute inset-0 h-full w-full object-cover"
                       />

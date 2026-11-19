@@ -171,7 +171,7 @@ export default function BalconyView() {
                           alt={`${s.label} from the balcony at Twin Towers by Defoy`}
                           fill
                           sizes="(min-width: 768px) 60vw, 100vw"
-                          quality={82}
+                          quality={75}
                           loading="lazy"
                           className="object-cover"
                         />

@@ -44,7 +44,7 @@ const floors = [
   {
     label: "Fourth",
     title: "Under the roof",
-    body: "The attic rooms sit closest to the roof, where the light arrives early and leaves late. Quiet, timber-lined, private.",
+    body: "The three attic rooms sit closest to the roof, where the light arrives early and leaves late. Quiet, timber-lined, private.",
     image: floorShots[4],
   },
 ];

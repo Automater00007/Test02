@@ -23,10 +23,10 @@ export default async function HomePage() {
       <Statement />
       <BuildingExplorer />
       <Estate />
-      <CoverFlowGallery />
       <Suites />
       <StayFeatures />
       <Restaurant />
+      <CoverFlowGallery />
       <BalconyView />
       <LocationSection />
       <GuestNotes reviews={reviews} googleMapsUrl={mapsUrl} />

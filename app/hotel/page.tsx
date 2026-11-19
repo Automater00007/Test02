@@ -28,7 +28,7 @@ const amenities = [
 ];
 
 const numbers = [
-  { value: 25, suffix: "", k: "Rooms", note: "One category only" },
+  { value: 25, suffix: "", k: "Rooms", note: "22 premium · 3 attic" },
   { value: 5, suffix: "", k: "Floors", note: "Ground plus four" },
   { value: 2, suffix: "", k: "Towers", note: "Under one roof" },
   { value: 360, suffix: "°", k: "Views", note: "Lawn and valley" },
@@ -83,9 +83,10 @@ export default function HotelPage() {
                 data-reveal="fade"
                 style={{ ["--reveal-delay" as string]: "120ms" }}
               >
-                Every room is the same category: a Premium Room with a king size
-                bed, space for an extra bed, and a balcony of its own. No suites,
-                no upgrade ladder — just twenty-five rooms that all get the view.
+                Every room has a balcony and a king size bed. The 22
+                Premium Rooms share the lawn side; the 3 Attic Rooms sit closest
+                to the roof, under the eaves. No upgrade ladder — just
+                twenty-five rooms that all get the view.
               </p>
 
               <div

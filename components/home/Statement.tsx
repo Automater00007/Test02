@@ -36,7 +36,7 @@ export default function Statement() {
             </div>
 
             <SplitText
-              text="Twenty-five rooms and one kind of room:"
+              text="Twenty-five rooms, every one with a balcony:"
               as="h2"
               id="statement-heading"
               split="chars"
@@ -47,7 +47,7 @@ export default function Statement() {
               data-reveal
               style={{ ["--reveal-delay" as string]: "120ms" }}
             >
-              a Premium Room with a king size bed and a balcony of its own.
+              22 Premium Rooms and 3 Attic Rooms — a king bed and a balcony each.
             </p>
           </div>
 

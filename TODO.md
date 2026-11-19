@@ -55,6 +55,19 @@ adapted to Twin's branding, room data and URLs (`/blog`, `/stay`).
 - [x] Pruned the `experiences` content/type and the now-unused `slugify` helper.
 - [x] Confirmed sitemap / redirects contain no deleted routes.
 
+## H. Content — room inventory, order, buttons, images
+- [x] Documented the real split everywhere: 25 rooms = 22 Premium Rooms with
+      Balcony + 3 Attic Rooms (content.ts, stay, hotel, statement, suites,
+      estate facts, building explorer, FAQ, stats, JSON-LD stays 25).
+- [x] Homepage order: building → house → STAY → part-of-every-stay → DINING →
+      grounds/gallery → balcony → location → guest notes. Eyebrows renumbered
+      01–12 sequentially.
+- [x] Buttons on dark backgrounds: mobile menu hover walnut-on-espresso was
+      illegible — now Sand (all other hovers confirmed to swap to ivory text).
+- [x] Images: optimizer cache set to ~1y TTL (`minimumCacheTTL`), quality 82→75
+      on non-LCP images, and the optimizer warmed for every image on the site
+      (437 URLs) — new `scripts/prewarm-images.mjs` does the same after deploys.
+
 ## G. Refinement — 01 / 02 sections, dark house, mask reveals
 - [x] 01 — The building: aspect ratio on mobile (4/3 → 16/10), mask reveal on the stage.
 - [x] 02 — The house: walnut background section (ivory copy, Sand accents,

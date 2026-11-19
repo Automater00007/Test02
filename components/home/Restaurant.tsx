@@ -61,7 +61,7 @@ export default function Restaurant() {
           <div className="md:col-span-5 md:col-start-8">
             <div className="flex items-center gap-3" data-reveal="fade">
               <span className="block h-px w-10 bg-crimson" />
-              <span className="eyebrow text-crimson">06 — Dining</span>
+              <span className="eyebrow text-crimson">05 — Dining</span>
             </div>
             <SplitText
               text="A small dining room that feels like a house."
