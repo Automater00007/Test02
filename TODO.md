@@ -14,6 +14,14 @@ adapted to Twin's branding, room data and URLs (`/blog`, `/stay`).
       confirmation, pre-filled WhatsApp follow-up.
 - [x] `.env.example` + `scripts/google-apps-script/booking.gs` booking setup.
 - [x] Hero `Reserve` dispatches the popup event; popup mounts on the homepage.
+- [x] Fixed: popup positioned ~5,900px below the viewport ("problem with the
+      popup"). Root cause: the `.page-enter` wrapper on every page kept
+      `transform: translateY(14px)` (and opacity 0), creating a containing
+      block for `position: fixed` descendants and hiding the page. Removed
+      `app/template.tsx` and the `.page-enter` keyframes; the booking popup is
+      now portaled to `document.body`. Verified: popup renders centred in the
+      viewport, X / Escape / backdrop close it, scroll lock engages and
+      releases.
 
 ## B. Blog, tiles and Sanity
 - [x] Sanity `post` schema: `heroImage` (alt text), separate from the cover image.
