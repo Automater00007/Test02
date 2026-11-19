@@ -136,8 +136,8 @@ export default function BuildingExplorer() {
 
           <div className="md:col-span-6 md:col-start-7">
             <div
-              className="relative h-full min-h-[400px] overflow-hidden rounded-2xl border border-line bg-deep sm:min-h-[480px] md:min-h-[640px]"
-              data-reveal="zoom"
+              className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-deep sm:aspect-[16/10] md:aspect-auto md:h-full md:min-h-[640px]"
+              data-reveal="mask"
               {...hoverProps(advance)}
               {...swipeProps}
             >
@@ -159,7 +159,7 @@ export default function BuildingExplorer() {
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"
                     loading={i === 0 ? "eager" : "lazy"}
-                    className="object-cover"
+                    className="reveal-media object-cover"
                   />
                 </motion.div>
               ))}

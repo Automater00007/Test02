@@ -55,6 +55,15 @@ adapted to Twin's branding, room data and URLs (`/blog`, `/stay`).
 - [x] Pruned the `experiences` content/type and the now-unused `slugify` helper.
 - [x] Confirmed sitemap / redirects contain no deleted routes.
 
+## G. Refinement — 01 / 02 sections, dark house, mask reveals
+- [x] 01 — The building: aspect ratio on mobile (4/3 → 16/10), mask reveal on the stage.
+- [x] 02 — The house: walnut background section (ivory copy, Sand accents,
+      light hairlines); mask-revealed fan cards; mobile strip → full-bleed
+      4/5 cards with overlay captions + index chips.
+- [x] Applied Jade's image-curtain reveal (`data-reveal="mask"` + `.reveal-media`)
+      to the photos in these sections (01 stage stage, 02 fan cards + strip);
+      observer fires on scroll as expected. Build 29/29, no console errors.
+
 ## F. Refinement — building / grounds / stay cards + footer
 - [x] 01 — The building: replaced the 3D floor-slab stack with a large
       crossfading photo stage (floor list, auto-rotate and swipe kept).

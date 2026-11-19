@@ -159,7 +159,8 @@ function FanCard({
         className="relative"
       >
         <div
-          className={`relative ${card.aspect} overflow-hidden rounded-2xl border border-line bg-paper-2 shadow-[0_30px_70px_-28px_rgba(42,26,14,0.5)]`}
+          className={`relative ${card.aspect} overflow-hidden rounded-2xl border border-ivory/15 bg-deep shadow-[0_30px_70px_-28px_rgba(10,7,4,0.7)]`}
+          data-reveal="mask"
         >
           <Image
             src={card.src}
@@ -168,9 +169,9 @@ function FanCard({
             sizes="(min-width: 768px) 34vw, 60vw"
             quality={82}
             loading="lazy"
-            className="object-cover "
+            className="reveal-media object-cover"
           />
-          <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-ink/10" />
+          <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-ivory/10" />
           <span className="pointer-events-none absolute bottom-0 left-0 right-0 bg-gradient-to-t from-deep/85 via-deep/30 to-transparent p-4 pt-14">
             <span className="block text-[0.8rem] font-semibold leading-snug text-ivory">
               {card.label}
@@ -195,49 +196,49 @@ export default function Estate() {
 
   return (
     <section
-      className="relative overflow-hidden bg-paper py-20 md:py-32"
+      className="relative overflow-hidden bg-walnut py-20 text-ivory md:py-32"
       aria-labelledby="estate-heading"
     >
       <div className="shell">
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
             <div className="flex items-center gap-3" data-reveal="fade">
-              <span className="block h-px w-10 bg-crimson" />
-              <span className="eyebrow text-crimson">02 — The house</span>
+              <span className="block h-px w-10 bg-sand" />
+              <span className="eyebrow text-sand">02 — The house</span>
             </div>
 
             <SplitText
               text="A house of two halves, held together by the roof."
               as="h2"
               id="estate-heading"
-              className="mt-6 text-[clamp(2.1rem,3.5vw,3.5rem)] font-bold leading-[0.98] tracking-[-0.04em]"
+              className="mt-6 text-[clamp(2.1rem,3.5vw,3.5rem)] font-bold leading-[0.98] tracking-[-0.04em] text-ivory"
             />
 
-            <p className="body-copy mt-8 max-w-md" data-reveal="fade">
+            <p className="mt-8 max-w-md text-[clamp(0.97rem,1.05vw,1.08rem)] leading-[1.72] text-ivory/75" data-reveal="fade">
               White render meets red brick, black steel balconies and a steep grey
               roof. The twin towers hold 25 rooms, each with a balcony turned toward
               the mountains. The lawn in front is the living room of the estate.
             </p>
 
-            <dl className="mt-10 border-t border-line">
+            <dl className="mt-10 border-t border-line-light">
               {facts.map((f, i) => (
                 <div
                   key={f.k}
-                  className="grid grid-cols-[6rem_1fr] items-baseline gap-4 border-b border-line py-3.5"
+                  className="grid grid-cols-[6rem_1fr] items-baseline gap-4 border-b border-line-light py-3.5"
                   data-reveal="fade"
                   style={{ ["--reveal-delay" as string]: `${i * 70}ms` }}
                 >
-                  <dt className="eyebrow text-stone">{f.k}</dt>
-                  <dd className="text-[0.94rem] font-medium">{f.v}</dd>
+                  <dt className="eyebrow text-sand">{f.k}</dt>
+                  <dd className="text-[0.94rem] font-medium text-ivory">{f.v}</dd>
                 </div>
               ))}
             </dl>
 
             <p
-              className="mt-8 flex items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-stone"
+              className="mt-8 flex items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-ivory/65"
               data-reveal="fade"
             >
-              <span className="block h-1.5 w-1.5 rounded-full bg-crimson" />
+              <span className="block h-1.5 w-1.5 rounded-full bg-sand" />
               {site.coordsDisplay}
             </p>
           </div>
@@ -253,7 +254,7 @@ export default function Estate() {
                 {CARDS.map((c) => (
                   <figure
                     key={c.src}
-                    className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line"
+                    className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-ivory/15"
                   >
                     <Image
                       src={c.src}
@@ -274,27 +275,40 @@ export default function Estate() {
         </div>
       </div>
 
-      {/* Mobile: swipeable photo strip instead of the scrubbed collage. */}
-      <div className="no-scrollbar -mx-5 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 md:hidden">
-        {CARDS.map((c) => (
+      {/* Mobile: full-bleed swipeable photo cards with overlay captions. */}
+      <div className="no-scrollbar -mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 md:hidden">
+        {CARDS.map((c, i) => (
           <figure
             key={c.src}
-            className="w-[76vw] shrink-0 snap-center overflow-hidden rounded-2xl border border-line bg-paper-2"
+            data-reveal="mask"
+            className="relative w-[82vw] shrink-0 snap-center overflow-hidden rounded-2xl border border-ivory/15 bg-deep shadow-[0_24px_60px_-24px_rgba(10,7,4,0.7)]"
           >
-            <div className="relative aspect-[4/3]">
+            <div className="relative aspect-[4/5]">
               <Image
                 src={c.src}
                 alt={c.alt}
                 fill
-                sizes="76vw"
+                sizes="82vw"
                 quality={82}
                 loading="lazy"
-                className="object-cover "
+                className="reveal-media object-cover"
               />
+              <span
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-deep/90 via-deep/25 to-transparent"
+                aria-hidden="true"
+              />
+              <span className="pointer-events-none absolute inset-x-0 bottom-0 p-4">
+                <span className="block text-[0.9rem] font-semibold leading-snug text-ivory">
+                  {c.label}
+                </span>
+                <span className="mt-1 block truncate text-[0.58rem] font-medium uppercase tracking-[0.14em] text-ivory/70">
+                  {c.caption}
+                </span>
+              </span>
+              <span className="pointer-events-none absolute right-4 top-4 rounded-full bg-deep/80 px-2.5 py-1.5 text-[0.55rem] font-semibold uppercase tracking-[0.16em] text-ivory/85">
+                {String(i + 1).padStart(2, "0")} / {String(CARDS.length).padStart(2, "0")}
+              </span>
             </div>
-            <figcaption className="px-4 py-3 text-[0.82rem] font-medium">
-              {c.caption}
-            </figcaption>
           </figure>
         ))}
       </div>
