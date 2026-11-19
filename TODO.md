@@ -55,6 +55,17 @@ adapted to Twin's branding, room data and URLs (`/blog`, `/stay`).
 - [x] Pruned the `experiences` content/type and the now-unused `slugify` helper.
 - [x] Confirmed sitemap / redirects contain no deleted routes.
 
+## K. Portrait crops + direct image serving
+- [x] Mobile gallery frames: std/tall → 2/3 portrait (width unchanged); grounds
+      reel and house strip → 3/4.
+- [x] Images no longer pass through the runtime optimizer (`unoptimized` in
+      `images`) — local photos are already ~90 KB WebP; every deploy was paying
+      a cold-encode hit per photo and wiping the warm cache. Now served
+      directly with `Cache-Control: public, max-age=31536000, immutable`
+      on /Twin-Tower/*, /Video/* and /images/*.
+- [x] Estate (02 — The house) images verified loading directly, no broken
+      images, console clean.
+
 ## J. Copy audit, gallery grid, house collage, dotted servers
 - [x] Removed the unnecessary Guest-notes stats band (25 rooms / 5 storeys /
       2 towers / 360°), shortened the heading and intro.

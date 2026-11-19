@@ -58,7 +58,7 @@ export default function CoverFlowGallery() {
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {gallery.map((g, i) => (
               <figure key={g.src} className="overflow-hidden rounded-3xl bg-paper">
-                <div className="relative aspect-[4/5]">
+                <div className="relative aspect-[3/4]">
                   <Image src={g.src} alt={g.alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
                 </div>
                 <figcaption className="px-5 py-4 text-[0.85rem] font-medium">{g.alt}</figcaption>
@@ -168,7 +168,7 @@ export default function CoverFlowGallery() {
                   className={`group block w-full text-left ${isActive ? "cursor-default" : "cursor-pointer"}`}
                 >
                   <div
-                    className="relative aspect-[4/5] overflow-hidden rounded-[24px] bg-paper shadow-[0_24px_60px_-28px_rgba(42,26,14,0.5)]"
+                    className="relative aspect-[3/4] overflow-hidden rounded-[24px] bg-paper shadow-[0_24px_60px_-28px_rgba(42,26,14,0.5)]"
                   >
                     <Image
                       src={g.src}

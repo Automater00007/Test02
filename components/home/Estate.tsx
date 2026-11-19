@@ -120,7 +120,7 @@ export default function Estate() {
             data-reveal="mask"
             className="relative w-[82vw] shrink-0 snap-center overflow-hidden rounded-2xl border border-ivory/15 bg-deep shadow-[0_24px_60px_-24px_rgba(10,7,4,0.7)]"
           >
-            <div className="relative aspect-[4/5]">
+            <div className="relative aspect-[3/4]">
               <Image
                 src={c.src}
                 alt={c.alt}

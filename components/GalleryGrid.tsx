@@ -52,8 +52,8 @@ export default function GalleryGrid() {
                 item.span === "wide"
                   ? "aspect-[4/3]"
                   : item.span === "tall"
-                    ? "aspect-[3/4]"
-                    : "aspect-[3/4]"
+                    ? "aspect-[2/3]"
+                    : "aspect-[2/3]"
               }`}
             >
               <Image
