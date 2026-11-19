@@ -3,13 +3,6 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
-/**
- * Lenis smooth scrolling on desktop only.
- *
- * Phones felt worse with Lenis doing synchronous touch smoothing — image
- * decks stopped swiping cleanly and pages felt heavier. Phones use native
- * scroll (which is excellent); desktop keeps the glide.
- */
 export default function SmoothScroll() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -29,13 +22,12 @@ export default function SmoothScroll() {
     const start = () => {
       if (lenis || reduce.matches || !desktop.matches) return;
       lenis = new Lenis({
-        duration: 1.2,
-        easing: (t: number) => 1 - Math.pow(1 - t, 4),
+        duration: 0.9,
+        easing: (t: number) => 1 - Math.pow(1 - t, 3),
         smoothWheel: true,
-        wheelMultiplier: 0.85,
+        wheelMultiplier: 1,
+        touchMultiplier: 1.4,
         syncTouch: false,
-        touchMultiplier: 2,
-        lerp: 0.085,
       });
 
       const raf = (time: number) => {

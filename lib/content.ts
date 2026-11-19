@@ -7,7 +7,7 @@ export const site = {
   phone: "+91 95418 98817",
   phoneHref: "tel:+919541898817",
   whatsapp: "919541898817",
-  email: "info@defoy.in",
+  email: "twintowers@defoy.in",
   address: "W7CF+W2P, Dehwathu, Pahalgam, Jammu and Kashmir 192401",
   coords: "33.92305759663491, 75.27313041534288",
   lat: 33.92305759663491,
@@ -31,27 +31,27 @@ export const nav = [
   { label: "Contact", href: "/contact" },
 ];
 
-import { twinImg } from "@/lib/testImages";
+import { photo } from "@/lib/photos";
 
-const twin = (name: string) => twinImg(name);
+const twin = (name: string) => photo(name);
 
 export const img = {
   hero: twin("exterior"),
   cabin: twin("facade"),
   valley: twin("lawn"),
   forest: twin("lawn"),
-  aerial: twin("exterior"),
-  mist: twin("lawn"),
-  green: twin("lounge"),
+  aerial: twin("poster-1"),
+  mist: twin("lawn-night"),
+  green: twin("lobby"),
   dark: twin("corridor"),
   tree: twin("lawn"),
   pines: twin("lawn"),
   dock: twin("balcony"),
   stars: twin("lounge"),
-  roomWarm: twin("poster-1"),
-  roomBed: twin("balcony"),
-  roomSuite: twin("poster-1"),
-  roomLight: twin("corridor"),
+  roomWarm: twin("suite-king-1"),
+  roomBed: twin("suite-king-2"),
+  roomSuite: twin("suite-attic-1"),
+  roomLight: twin("suite-king-5"),
 };
 
 export type Room = {
@@ -79,8 +79,15 @@ export const rooms: Room[] = [
       "A calm, warm room with a king bed, a private balcony and enough space to unpack properly. Breakfast included, extra bed available on request.",
     long:
       "All 25 rooms are Premium Rooms with Balcony — a king bed, space for an extra bed, and a private view of the lawn or the valley. The attic rooms sit on the fourth floor, closest to the roof, where the light arrives early and leaves late.",
-    image: twin("poster-1"),
-    gallery: [twin("poster-1"), twin("balcony"), twin("corridor"), twin("lounge")],
+    image: twin("suite-king-1"),
+    gallery: [
+      twin("suite-king-1"),
+      twin("suite-king-2"),
+      twin("suite-king-3"),
+      twin("balcony"),
+      twin("room-detail"),
+      twin("bathroom"),
+    ],
     amenities: [
       "King bed",
       "Private balcony",
@@ -101,8 +108,14 @@ export const rooms: Room[] = [
       "Fourth floor, closest to the roof. Warm timber, private balcony, and the mountain outside.",
     long:
       "The attic rooms sit on the fourth floor, closest to the roof, where the light arrives early and leaves late. King bed, warm panelling, private balcony, and a view that holds the valley.",
-    image: twin("poster-1"),
-    gallery: [twin("poster-1"), twin("balcony"), twin("corridor")],
+    image: twin("suite-attic-1"),
+    gallery: [
+      twin("suite-attic-1"),
+      twin("suite-attic-2"),
+      twin("suite-attic-3"),
+      twin("balcony-breakfast"),
+      twin("bathroom-2"),
+    ],
     amenities: [
       "King bed",
       "Private balcony",
@@ -115,78 +128,23 @@ export const rooms: Room[] = [
   },
 ];
 
-export type Experience = {
-  title: string;
-  subtitle: string;
-  body: string;
-  meta: string;
-  image: string;
-};
-
-export const experiences: Experience[] = [
-  {
-    title: "Bonfire Evenings",
-    subtitle: "Fire, pines, and a sky with too many stars",
-    body:
-      "Beside the lawn, after dark, we light a fire. Kashmiri nights are cold in the best way. Sit close. Stay as long as you like.",
-    meta: "Every clear evening · Lawn",
-    image: twin("lounge"),
-  },
-  {
-    title: "Valley Walks",
-    subtitle: "No guide. No schedule. No destination.",
-    body:
-      "Follow the road toward Pahalgam at your own pace. The path goes as far as you want it to. Some guests walk for twenty minutes; some disappear for three hours.",
-    meta: "Dawn to dusk · Self-guided",
-    image: twin("lawn"),
-  },
-  {
-    title: "Pahalgam Sightseeing",
-    subtitle: "Aru, Betaab, Chandanwari",
-    body:
-      "The valley keeps its famous places close. Aru meadows, the Betaab valley bend, and the road to Chandanwari all sit within a short drive.",
-    meta: "Half and full day · By road",
-    image: twin("exterior"),
-  },
-  {
-    title: "Photography",
-    subtitle: "Every corner already framed",
-    body:
-      "White render, red brick, black steel balconies, a steep grey roof, and the mountains beyond. The light changes every hour and never repeats itself.",
-    meta: "Golden hour · Across the property",
-    image: twin("facade"),
-  },
-  {
-    title: "Family Moments",
-    subtitle: "Lawns, balcony rooms, unhurried days",
-    body:
-      "Spacious lawns and a safe, enclosed property. Children run; parents sit. The balcony rooms mean everyone has a view to retreat to.",
-    meta: "All day · Lawns and balconies",
-    image: twin("lawn"),
-  },
-  {
-    title: "Quiet Luxury",
-    subtitle: "Felt, not displayed",
-    body:
-      "Warm bedding at night, hot tea before you ask, a fire already lit. Luxury here is quiet, attentive, and almost invisible.",
-    meta: "Included · Throughout your stay",
-    image: twin("lounge"),
-  },
-];
-
 export const gallery = [
-  { src: twin("exterior"), alt: "Twin Towers by Defoy exterior against the pines", span: "wide" },
-  { src: twin("facade"), alt: "Five storeys framed in timber and brick", span: "std" },
-  { src: twin("entrance"), alt: "Entrance canopy and stone drive", span: "std" },
-  { src: twin("lawn"), alt: "The lawn with rope chairs and the valley", span: "wide" },
-  { src: twin("lounge"), alt: "Lounge with warm lighting", span: "std" },
-  { src: twin("corridor"), alt: "Interior corridor with timber panelling", span: "std" },
-  { src: twin("balcony"), alt: "Private balcony facing the mountains", span: "wide" },
-  { src: twin("reception"), alt: "Reception desk in warm timber", span: "std" },
-  { src: twin("approach"), alt: "The approach to the property", span: "wide" },
-  { src: twin("poster-1"), alt: "Hero view of the hotel", span: "wide" },
-  { src: twin("poster-2"), alt: "The house in the afternoon light", span: "std" },
-  { src: twin("suite-king-2"), alt: "Premium Room in warm daylight", span: "std" },
+  { src: twin("exterior"), alt: "The two towers across the lawn", span: "wide" },
+  { src: twin("facade"), alt: "Red brick and white render against the mountains", span: "std" },
+  { src: twin("entrance"), alt: "The glass entrance and lounge", span: "std" },
+  { src: twin("lawn"), alt: "The garden walk at dusk", span: "wide" },
+  { src: twin("lounge"), alt: "The lounge, timber and deep sofas", span: "std" },
+  { src: twin("corridor"), alt: "The corridor on the room floors", span: "std" },
+  { src: twin("balcony"), alt: "A private balcony facing the valley", span: "wide" },
+  { src: twin("reception"), alt: "The reception lounge", span: "std" },
+  { src: twin("approach"), alt: "The approach and parking court", span: "wide" },
+  { src: twin("poster-1"), alt: "Twin Towers by Defoy from the lawn", span: "wide" },
+  { src: twin("poster-2"), alt: "The house under fresh snow", span: "std" },
+  { src: twin("lawn-night"), alt: "A fire on the lawn after dark", span: "std" },
+  { src: twin("restaurant"), alt: "The restaurant, with the valley in the window", span: "wide" },
+  { src: twin("suite-king-2"), alt: "A Premium Room in daylight", span: "std" },
+  { src: twin("suite-attic-1"), alt: "An attic room under the roof", span: "std" },
+  { src: twin("balcony-breakfast"), alt: "Breakfast on the balcony", span: "wide" },
 ];
 
 export const posts = [
@@ -199,6 +157,7 @@ export const posts = [
     read: "4 min",
     category: "Notes from the valley",
     image: twin("exterior"),
+    heroImage: twin("approach"),
     quote: "The first hour of the day belongs to the mountains. Everything else arrives later.",
     body: [
       "There is a moment, a little before six, when the valley is still holding its breath. The pines are black against a sky that has not decided on a colour yet, and the mountains are the loudest thing in Pahalgam.",
@@ -216,6 +175,7 @@ export const posts = [
     read: "6 min",
     category: "Field guide",
     image: twin("lawn"),
+    heroImage: twin("facade"),
     quote: "Aru is not a checklist. It is a meadow, a road, and the decision to stop walking.",
     body: [
       "Aru Valley is a short drive from the hotel, up a road that keeps folding back on itself. The climb is gentle enough to keep the window open. Pine gives way to open meadow, and then the valley widens.",
@@ -232,6 +192,7 @@ export const posts = [
     read: "5 min",
     category: "Philosophy",
     image: twin("facade"),
+    heroImage: twin("lounge"),
     quote: "Twenty-five is not a number we settled on. It is the number the property could hold without becoming something else.",
     body: [
       "A larger hotel can be many things to many people. It can have three restaurants, a spa, a business centre, a lobby that smells the same in every city. There is nothing wrong with that. It is simply not what this property was built to do.",

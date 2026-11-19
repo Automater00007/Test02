@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import SplitText from "@/components/ui/SplitText";
-import { pickImages } from "@/lib/imagePool";
 import { useAutoRotate } from "@/lib/useAutoRotate";
 
 const features = [
@@ -14,8 +12,6 @@ const features = [
   { title: "Heating", body: "Warm rooms through the cold months — central heating in every room." },
   { title: "Doctor on call", body: "Medical assistance available on request, around the clock." },
 ];
-
-const floats = pickImages(7, 2);
 
 export default function StayFeatures() {
   const reduce = useReducedMotion();
@@ -63,49 +59,27 @@ export default function StayFeatures() {
             </div>
           </div>
 
-          <div className="md:col-span-6 md:col-start-7" style={{ perspective: 1600 }}>
+          <div className="md:col-span-6 md:col-start-7">
             <div
-              className="relative h-[360px] w-full touch-pan-y md:h-[420px]"
+              className="relative h-[330px] w-full touch-pan-y md:h-[400px]"
               data-reveal="zoom"
               {...hoverProps(advance)}
               {...swipeProps}
             >
-              {/* floating depth layers behind the deck */}
-              <motion.div
-                className="pointer-events-none absolute -left-6 top-2 hidden h-28 w-36 overflow-hidden rounded-2xl border-4 border-paper shadow-[0_20px_50px_-20px_rgba(42,26,14,0.35)] md:block"
-                animate={reduce ? undefined : { y: [0, -12, 0], rotateZ: [-3, -1, -3] }}
-                transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Image src={floats[0].src} alt="" fill sizes="144px" className="object-cover opacity-70" />
-              </motion.div>
-              <motion.div
-                className="pointer-events-none absolute -right-4 bottom-4 hidden h-24 w-32 overflow-hidden rounded-2xl border-4 border-paper shadow-[0_20px_50px_-20px_rgba(42,26,14,0.35)] md:block"
-                animate={reduce ? undefined : { y: [0, 10, 0], rotateZ: [3, 1, 3] }}
-                transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Image src={floats[1].src} alt="" fill sizes="128px" className="object-cover opacity-70" />
-              </motion.div>
-
               {features.map((f, i) => {
                 const offset = (i - active + features.length) % features.length;
-                const hidden = offset > 4;
+                const hidden = offset > 3;
                 return (
                   <motion.div
                     key={f.title}
-                    className="absolute inset-x-0 top-0 mx-auto w-[min(92%,420px)] origin-top rounded-3xl border border-line bg-paper p-7 shadow-[0_24px_70px_rgba(42,26,14,0.12)]"
-                    style={{ transformStyle: "preserve-3d" }}
+                    className="absolute inset-x-0 top-0 mx-auto w-[min(92%,420px)] origin-top rounded-3xl border border-line bg-paper p-7 shadow-[0_18px_50px_-20px_rgba(42,26,14,0.28)] will-change-transform [backface-visibility:hidden]"
                     animate={{
-                      opacity: hidden ? 0 : 1 - offset * 0.15,
-                      y: offset * 16,
-                      x: offset * 9,
-                      z: -offset * 72,
-                      scale: 1 - offset * 0.055,
-                      rotateX: offset * 3.2,
-                      rotateY: -offset * 5,
-                      rotateZ: offset * 1.2 * (offset % 2 === 0 ? 1 : -1),
+                      opacity: hidden ? 0 : 1 - offset * 0.28,
+                      y: offset * 22,
+                      scale: 1 - offset * 0.07,
                       zIndex: hidden ? 0 : features.length - offset,
                     }}
-                    transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <div className="flex items-start justify-between">
                       <span className="index-figure block text-[2.2rem] opacity-60">

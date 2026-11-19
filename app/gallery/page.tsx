@@ -58,10 +58,10 @@ export default function GalleryPage() {
               Reserve directly
             </Link>
             <Link
-              href="/experiences"
+              href="/stay"
               className="link-line self-center font-mono text-[10px] uppercase tracking-[0.2em]"
             >
-              See experiences →
+              See the rooms →
             </Link>
           </div>
         </div>

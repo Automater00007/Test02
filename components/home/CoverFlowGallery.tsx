@@ -83,7 +83,6 @@ export default function CoverFlowGallery() {
 
       <div
         className="relative mx-auto mt-12 w-full max-w-[1400px] outline-none"
-        style={{ perspective: 1800 }}
         tabIndex={0}
         role="region"
         aria-roledescription="carousel"
@@ -101,7 +100,6 @@ export default function CoverFlowGallery() {
         onPointerEnter={(e) => {
           if (e.pointerType === "touch") return;
           setPaused(true);
-          go(1);
         }}
         onPointerLeave={(e) => {
           if (e.pointerType === "touch") return;
@@ -152,19 +150,13 @@ export default function CoverFlowGallery() {
                 }}
               >
               <motion.figure
-                className="origin-center"
-                style={{ transformStyle: "preserve-3d" }}
+                className="origin-center will-change-transform [backface-visibility:hidden]"
                 animate={{
-                  // Every card moves along the same linear path, so the reel
-                  // reads as one continuous motion instead of cards drifting
-                  // at different speeds.
                   x: `${d * (compact ? 58 : 56)}%`,
-                  y: `${abs * (compact ? 6 : 10)}px`,
-                  rotateY: d * (compact ? 12 : 24),
-                  scale: 1 - abs * (compact ? 0.1 : 0.12),
+                  scale: 1 - abs * (compact ? 0.08 : 0.1),
                   opacity: !visible ? 0 : 1,
                 }}
-                transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
                 <button
                   type="button"
@@ -176,11 +168,7 @@ export default function CoverFlowGallery() {
                   className={`group block w-full text-left ${isActive ? "cursor-default" : "cursor-pointer"}`}
                 >
                   <div
-                    className={`relative aspect-[4/5] overflow-hidden rounded-[24px] bg-paper ${
-                      isActive
-                        ? "shadow-[0_36px_90px_-30px_rgba(42,26,14,0.55)]"
-                        : "shadow-[0_20px_50px_-24px_rgba(42,26,14,0.45)]"
-                    }`}
+                    className="relative aspect-[4/5] overflow-hidden rounded-[24px] bg-paper shadow-[0_24px_60px_-28px_rgba(42,26,14,0.5)]"
                   >
                     <Image
                       src={g.src}
@@ -196,8 +184,8 @@ export default function CoverFlowGallery() {
                     <motion.span
                       aria-hidden="true"
                       className="pointer-events-none absolute inset-0 rounded-[24px] bg-paper"
-                      animate={{ opacity: isActive ? 0 : abs === 1 ? 0.3 : 0.64 }}
-                      transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+                      animate={{ opacity: isActive ? 0 : abs === 1 ? 0.28 : 0.6 }}
+                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     />
                     <span className="pointer-events-none absolute inset-0 rounded-[24px] ring-1 ring-inset ring-ink/10" />
                     {isActive && (
@@ -270,15 +258,15 @@ function GalleryHeader() {
         <h2
           id="gallery-heading"
           className="mt-5 max-w-[18ch] text-[clamp(2.1rem,3.9vw,3.9rem)] font-bold leading-[0.96] tracking-[-0.04em]"
-          data-reveal="tilt"
+          data-reveal="zoom"
         >
           A walk through <em>the house.</em>
         </h2>
       </div>
       <div className="flex items-end gap-6">
         <p className="hidden max-w-xs text-[0.92rem] leading-relaxed text-ink/70 md:block" data-reveal="fade">
-          A curved reel of the drive, the lawn, the rooms and the light that moves
-          through them.
+          The drive, the lawn, the rooms and the light that moves through
+          them — in one reel.
         </p>
         <Link
           href="/gallery"

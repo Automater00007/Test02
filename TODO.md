@@ -1,64 +1,67 @@
-# Twin Towers — polish round 2
+# Twin Towers — Jade River parity round
 
-Working checklist for the current round of fixes.
+Porting the fixes already shipped in `~/Office/Jade-River-Resort` to Twin Towers,
+adapted to Twin's branding, room data and URLs (`/blog`, `/stay`).
 
-## Hero
-- [x] Hero always shows a photograph (poster image under the WebGL canvas, canvas fades in once painted)
-- [x] "Twin Towers" wordmark clearly readable over the hero (nav gradient moved behind the content with `isolate` + `-z-10`)
-- [x] Hero content entrance animation (eyebrow, coords, headline lines, reserve button)
-- [x] Reserve button and scroll cue no longer collide with the WhatsApp bubble
+## A. Booking popup (home)
+- [x] `components/BookingPopup.tsx` — Jade's popup: auto-open after 4.5 s, hero
+      `Reserve` opens it, ESC/backdrop close, focus guard, honeypot, phone
+      required, sessionStorage summary, redirect to `/thank-you`.
+- [x] Room options adapted to Twin's real rooms (Premium Room with Balcony /
+      Attic Room); meal plans CP / MAP / EP.
+- [x] `app/api/booking/route.ts` — validation, rate limit, Google Apps Script forward.
+- [x] `app/thank-you/page.tsx` + `components/ThankYouActions.tsx` — noindex
+      confirmation, pre-filled WhatsApp follow-up.
+- [x] `.env.example` + `scripts/google-apps-script/booking.gs` booking setup.
+- [x] Hero `Reserve` dispatches the popup event; popup mounts on the homepage.
 
-## Motion
-- [x] Page-level entrance animation on every visit (`app/template.tsx`)
-- [x] Mobile-specific reveal polish (staggered, earlier trigger via `rootMargin: 0px 0px 8% 0px`)
-- [x] Reading-progress line pinned to the top of every page (`ScrollProgress`)
+## B. Blog, tiles and Sanity
+- [x] Sanity `post` schema: `heroImage` (alt text), separate from the cover image.
+- [x] Sanity queries/types: fetch `heroImage` for a single post + draft.
+- [x] `lib/posts.ts`: `heroImage` / `heroImageAlt` + 60 s revalidation (webhook still instant).
+- [x] `/blog` rebuilt as Jade's uniform 3-up tile grid — no featured lead tile,
+      no extra intro block, consistent card size.
+- [x] `/blog/[slug]` rebuilt as Jade's full-bleed article hero, with the
+      date/author rule, drop-capped body and next-note footer.
+- [x] Removed the excerpt/summary block from the article page.
+- [x] Static fallback posts have their own hero images.
+- [x] Repaired the cloned Jade content in Sanity: Twin posts, Twin author,
+      Twin photos, distinct cover/hero images, no Lidder/thirteen-room copy.
+- [x] `npm run seed` now seeds the Twin posts (idempotent).
 
-## Navigation
-- [x] Mobile menu: single Contact link, trimmed to Home / The hotel / Stay / Dining / Gallery / Journal / Contact
-- [x] Back button only on non-home pages, and it waits until the header copy has scrolled away so it never sits on a hero
+## C. Motion (exact Jade values)
+- [x] Replaced Twin's reveal CSS with Jade's block exactly
+      (`0.85s`, `1.4rem`, `0.97`; mobile `0.72s`, `1.2rem`, `0.95`), compositor-only.
+- [x] `RevealObserver`: `rootMargin: "0px 0px -3% 0px"`, `threshold: 0.02`.
+- [x] Removed Twin-only variants (`tilt`, `flip`, `rise`, `expand`, `blur`) and
+      converted their usages to the Jade variants.
+- [x] Lenis: Jade settings (`duration 0.9`, cubic easing, multiplier 1, touch 1.4).
 
-## Typography
-- [x] Reduced heading clamp maximums on large screens (page headers, section h2, statement, hero, CTA)
+## D. Removed unused features
+- [x] Removed `/experiences` (page, footer/gallery links, home section, content
+      data), with a permanent redirect to `/stay`.
+- [x] Removed dead components: `StackCarousel`, `DayTimeline`, `FilmSection`,
+      `GalleryHorizontal`, `GalleryMarquee`, `Philosophy`, `RoomsRail`,
+      `SignatureIntro`, `Experiences`, `CtaBackground`, `KineticMarquee`,
+      `PerspectiveEntrance`, `ZoomThrough`, `RiverDivider`.
+- [x] Pruned the `experiences` content/type and the now-unused `slugify` helper.
+- [x] Confirmed sitemap / redirects contain no deleted routes.
 
-## Home sections
-- [x] The building — larger floor imagery on desktop, removed the stray floating photo card, labels stay readable
-- [x] Removed "In layers" (StackCarousel)
-- [x] Stay — direct "View this room" link to `/stay/[slug]` plus the reserve action
-- [x] Removed "Your first day" (DayTimeline)
-- [x] Guest notes — smaller, tighter section
-- [x] Section eyebrows renumbered 01–13
-- [x] Guest stories empty state rewritten (no bare "coming soon")
-- [x] Floor cards: images kept rich (no paper wash); labels backed by gradient for legibility
-- [x] Lenis smooth scroll now also runs on phones (syncTouch); mobile reveal distance/duration strengthened
+## F. Refinement — building / grounds / stay cards + footer
+- [x] 01 — The building: replaced the 3D floor-slab stack with a large
+      crossfading photo stage (floor list, auto-rotate and swipe kept).
+- [x] 03 — The grounds: hover only pauses the reel (no advance-on-enter);
+      cards now animate x/scale/opacity with one shared easing.
+- [x] 05 — Part of every stay: deck flattened to translateY/scale/opacity only;
+      removed rotateX/Y/Z/z and the two infinite background floats.
+- [x] Footer: walnut background with ivory type tones (links, dividers,
+      oversized outline wordmark).
+- [x] Build passes; no console errors; verified transforms are compositor-only
+      and the floor selector / grounds reel / stay deck all work.
 
-## Pages
-- [x] Hotel — background image header, story and numbers with CountUp, amenity grid, photo strip
-- [x] Dining — full-viewport background image behind the header
-- [x] Removed `/offers` (page, nav, sitemap)
-- [x] Light nav text over photographic page headers (hotel, dining)
-
-## Sanity
-- [x] Blog posts come from Sanity (static fallback when credentials are absent)
-- [x] Review submissions land in Sanity and only approved reviews render
-- [x] Studio review approval flow confirmed
-- [x] Renamed the "Notes from the river" category to "Notes from the house"
-- [x] Fixed the "thirteen rooms" post title to match the 25-room property
-- [x] Removed the leftover test post ("Tesing Another")
-- [x] Blog fetch revalidates every 5 minutes even without a webhook
-- [x] Lighthouse pass: software-GL hero falls back to CSS crossfade (WebGL perf on GPU machines kept)
-- [x] Hero: rest-phase draws throttled to 1fps, off-screen pause, DPR ≤1.25, shader skips blur when idle
-- [x] Accessibility: 44px tap targets, contrast fixes, gallery button name/role fixed (4.5:1+, label-content-name-mismatch resolved)
-- [x] SplitText releases will-change after entrance
-- [x] Local Lighthouse (production build, desktop): 60→93 Performance, 94→100 A11y, 100 BP, 100 SEO; TBT 13.2s→~0.15s
-- [x] Mobile report: image delivery 500 KiB → ~8 KiB (hero poster on next/image, below-the-fold eager images made lazy so only the LCP fetchpriority hint preloads)
-- [x] LCP preload now carries fetchpriority=high; duplicate below-fold preloads removed
-- [x] Tried experimental.optimizeCss (inlined critical CSS) — produced no real inline, reverted
-- [x] Remaining accepted trade-offs: 18KB Next CSS chunks (render-blocking, ~400ms), dependency JS (~20 KiB unused + 12 KiB legacy)
-- [x] Building floor cards: images saturated/contrast-boosted (the "dull" fix)
-- [x] Curated bright floor picks (random seed pulled dim rooms) + taller cards + lighter label wash
-- [x] "04 Layers" stack animation reborn as the scrubbed card collage on "02 — The house" (Estate); mobile gets a swipeable photo strip, reduced-motion users get a plain 2×2 grid
-- [x] Estate collage: six large uniform 4/3 images filling the column in a 3×2 fan; mobile keeps swipe strip
-- [x] Cover-flow reverted to the previous depth-fade (side cards) after feedback; estate given hills-role images
-- [x] Videos removed from the repo and site: hero.mp4, film-720.mp4, /video dir, Hero.tsx, GuestStories/YouTube integration, /stories route (now redirects to /); committed locally, push left to the user
-- [x] Building explorer: full photography in the cards (no veil/blur), internet placeholder images for testing
-- [x] Cover-flow side cards no longer fade out (0.62/0.24 → 0.88/0.5)
+## E. Verify
+- [x] `npx tsc --noEmit` and `npm run build`.
+- [x] Browser pass: home popup (auto-open, ESC, hero `Reserve` re-opens), `/blog`
+      3-up grid, article heroes (distinct images, no excerpt block), reveal
+      system animating + `.is-settled` cleanup, Lenis active on desktop,
+      `/thank-you` noindex + WhatsApp follow-up. No console errors anywhere.

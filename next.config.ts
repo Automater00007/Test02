@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "cdn.sanity.io" },
     ],
     // Explicit list keeps Next 16 happy and documents the only qualities used.
@@ -20,6 +19,8 @@ const nextConfig: NextConfig = {
     return [
       // The guest-stories video section was removed; keep old links working.
       { source: "/stories", destination: "/", permanent: true },
+      // Experiences were folded into the stay and gallery pages.
+      { source: "/experiences", destination: "/stay", permanent: true },
       { source: "/rooms", destination: "/stay", permanent: true },
       { source: "/rooms/:slug", destination: "/stay/:slug", permanent: true },
       { source: "/post", destination: "/blog", permanent: true },

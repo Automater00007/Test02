@@ -32,6 +32,7 @@ export const latestPostsQuery = groq`
 export const postBySlugQuery = groq`
   *[_type == "post" && slug.current == $slug && !(_id in path("drafts.**"))][0] {
     ${listFields},
+    heroImage { asset, alt },
     body,
     author-> { name, role, image, bio },
     seo,
@@ -52,6 +53,7 @@ export const postBySlugQuery = groq`
 export const draftPostBySlugQuery = groq`
   *[_type == "post" && slug.current == $slug][0] {
     ${listFields},
+    heroImage { asset, alt },
     body,
     author-> { name, role, image, bio },
     seo,

@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import ParallaxImage from "@/components/ui/ParallaxImage";
 import SplitText from "@/components/ui/SplitText";
+import { photo } from "@/lib/photos";
 
 const timings = [
   { k: "Breakfast", v: "7:30 – 10:00 AM" },
@@ -45,7 +46,7 @@ export default function Restaurant() {
               }
             >
                 <ParallaxImage
-                  src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1600&q=80"
+                  src={photo("restaurant")}
                   alt="The restaurant at Twin Towers by Defoy"
                   width={1600}
                   height={900}

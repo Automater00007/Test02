@@ -341,14 +341,23 @@
   }
 }
 
-/* ==========================================================================
-   Reveal system — IntersectionObserver driven, compositor-only.
-   ========================================================================== */
+/* ---------- reveal system (IntersectionObserver driven) ----------
+   Compositor-only (opacity + transform) for 60/120fps silky smooth scrolling.
+   Variants:
+     data-reveal            fade + rise with subtle bloom scale (default)
+     data-reveal="zoom"     smooth zoom-in reveal (cards, quotes, callouts)
+     data-reveal="zoom-lg"  pronounced zoom (play button, hero badges)
+     data-reveal="card"     elevated card bloom + subtle travel
+     data-reveal="fade"     clean soft fade with micro-scale
+     data-reveal="left"     slide from left
+     data-reveal="right"    slide from right
+     data-reveal="mask"     clip-path curtain on .reveal-media
+   Per-element delay: style={{ "--reveal-delay": "120ms" }} */
 [data-reveal] {
   --reveal-delay: 0ms;
-  --reveal-duration: 0.9s;
-  --reveal-distance: 1.6rem;
-  --reveal-scale: 0.965;
+  --reveal-duration: 0.85s;
+  --reveal-distance: 1.4rem;
+  --reveal-scale: 0.97;
   opacity: 0;
   transform: translate3d(0, var(--reveal-distance), 0) scale(var(--reveal-scale));
   transform-origin: center center;
@@ -367,73 +376,27 @@
 
 [data-reveal="zoom"] {
   --reveal-distance: 1.2rem;
-  --reveal-scale: 0.9;
+  --reveal-scale: 0.92;
 }
 
 [data-reveal="zoom-lg"] {
   --reveal-distance: 0rem;
-  --reveal-scale: 0.8;
+  --reveal-scale: 0.84;
 }
 
 [data-reveal="card"] {
-  --reveal-distance: 1.6rem;
-  --reveal-scale: 0.92;
+  --reveal-distance: 1.5rem;
+  --reveal-scale: 0.93;
 }
 
 [data-reveal="left"] {
   --reveal-scale: 0.98;
-  transform: translate3d(-2.2rem, 0, 0) scale(var(--reveal-scale));
+  transform: translate3d(-2rem, 0, 0) scale(var(--reveal-scale));
 }
 
 [data-reveal="right"] {
   --reveal-scale: 0.98;
-  transform: translate3d(2.2rem, 0, 0) scale(var(--reveal-scale));
-}
-
-[data-reveal="tilt"] {
-  --reveal-distance: 2.4rem;
-  --reveal-scale: 0.94;
-  transform: translate3d(0, var(--reveal-distance), 0) rotateX(12deg) scale(var(--reveal-scale));
-  transform-origin: center bottom;
-}
-
-[data-reveal="tilt"].is-in {
-  transform: translate3d(0, 0, 0) rotateX(0deg) scale(1);
-}
-
-[data-reveal="flip"] {
-  --reveal-distance: 0rem;
-  --reveal-scale: 0.92;
-  transform: perspective(1200px) rotateY(-14deg) translate3d(-1.2rem, 0, 0) scale(var(--reveal-scale));
-  transform-origin: left center;
-}
-
-[data-reveal="flip"].is-in {
-  transform: perspective(1200px) rotateY(0deg) translate3d(0, 0, 0) scale(1);
-}
-
-[data-reveal="rise"] {
-  --reveal-distance: 3.2rem;
-  --reveal-scale: 1;
-}
-
-[data-reveal="expand"] {
-  --reveal-distance: 0rem;
-  --reveal-scale: 0.86;
-}
-
-[data-reveal="blur"] {
-  --reveal-distance: 1.2rem;
-  --reveal-scale: 0.98;
-  filter: blur(10px);
-  transition:
-    opacity var(--reveal-duration) var(--ease-out-expo) var(--reveal-delay),
-    transform calc(var(--reveal-duration) * 1.08) var(--ease-out-expo) var(--reveal-delay),
-    filter var(--reveal-duration) var(--ease-out-expo) var(--reveal-delay);
-}
-
-[data-reveal="blur"].is-in {
-  filter: blur(0);
+  transform: translate3d(2rem, 0, 0) scale(var(--reveal-scale));
 }
 
 [data-reveal="mask"] {
@@ -446,8 +409,8 @@
 [data-reveal="mask"] .reveal-media {
   clip-path: inset(0 0 102% 0);
   transition:
-    clip-path 1.1s cubic-bezier(0.76, 0, 0.24, 1) var(--reveal-delay),
-    transform 1.3s var(--ease-out-expo) var(--reveal-delay);
+    clip-path 1.05s cubic-bezier(0.76, 0, 0.24, 1) var(--reveal-delay),
+    transform 1.25s var(--ease-out-expo) var(--reveal-delay);
 }
 
 [data-reveal].is-in {
@@ -455,20 +418,7 @@
   transform: translate3d(0, 0, 0) scale(1);
 }
 
-/* Variant end-states must follow the base `.is-in` rule so their rotation is
-   not flattened back to a plain translate. */
-[data-reveal="tilt"].is-in {
-  transform: translate3d(0, 0, 0) rotateX(0deg) scale(1);
-}
-
-[data-reveal="flip"].is-in {
-  transform: perspective(1200px) rotateY(0deg) translate3d(0, 0, 0) scale(1);
-}
-
-[data-reveal="blur"].is-in {
-  filter: blur(0);
-}
-
+/* Once settled, release will-change to avoid GPU memory overhead on mobile */
 [data-reveal].is-settled {
   will-change: auto;
 }
@@ -482,9 +432,9 @@
 }
 
 .reveal-media {
-  transform: scale(1.12);
+  transform: scale(1.10);
   transform-origin: center center;
-  transition: transform 1.3s var(--ease-out-expo);
+  transition: transform 1.25s var(--ease-out-expo);
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -494,57 +444,62 @@
   will-change: auto;
 }
 
+/* Enhanced mobile reveal & zoom tuning:
+   Snappier duration to keep up with mobile momentum scrolling,
+   luxurious zoom scale for cards and stacked sections. */
 @media (max-width: 767px) {
   [data-reveal] {
-    --reveal-duration: 0.9s;
-    --reveal-distance: 2rem;
-    --reveal-scale: 0.92;
+    --reveal-duration: 0.72s;
+    --reveal-distance: 1.2rem;
+    --reveal-scale: 0.95;
   }
 
   [data-reveal="zoom"] {
-    --reveal-duration: 0.82s;
-    --reveal-distance: 1.35rem;
-    --reveal-scale: 0.88;
+    --reveal-duration: 0.76s;
+    --reveal-distance: 1.15rem;
+    --reveal-scale: 0.91;
   }
 
   [data-reveal="zoom-lg"] {
-    --reveal-duration: 0.8s;
+    --reveal-duration: 0.78s;
     --reveal-scale: 0.82;
   }
 
-  [data-reveal="tilt"] {
-    --reveal-distance: 1.4rem;
-    --reveal-scale: 0.96;
-    transform: translate3d(0, var(--reveal-distance), 0) rotateX(6deg) scale(var(--reveal-scale));
-  }
-
-  [data-reveal="flip"] {
-    --reveal-scale: 0.95;
-    transform: perspective(900px) rotateY(-7deg) translate3d(-0.6rem, 0, 0) scale(var(--reveal-scale));
+  [data-reveal="card"] {
+    --reveal-duration: 0.76s;
+    --reveal-distance: 1.25rem;
+    --reveal-scale: 0.92;
   }
 
   .reveal-media {
-    transform: scale(1.14);
+    transform: scale(1.12);
   }
 }
 
-/* Arrows stay still — no spinning icons. */
+/* ---------- arrows: strictly non-animated ---------- */
 .arrow,
 .arrow-static,
 [data-arrow],
 svg:has(path[d*="M2 12L12 2"]),
 svg:has(path[d*="M1 7h12"]),
+span:has(> svg):has(path[d*="M2 12L12 2"]) svg,
+a:hover svg:has(path[d*="M2 12L12 2"]),
+button:hover svg:has(path[d*="M2 12L12 2"]),
+.group:hover svg:has(path[d*="M2 12L12 2"]),
 a:hover .arrow,
 button:hover .arrow,
 .group:hover .arrow,
 a:hover .arrow-static,
 button:hover .arrow-static,
-.group:hover .arrow-static {
+.group:hover .arrow-static,
+[data-reveal] svg:has(path[d*="M2 12L12 2"]),
+[data-reveal] svg:has(path[d*="M1 7h12"]) {
   transform: none !important;
   animation: none !important;
   transition: color 0.3s ease, stroke 0.3s ease, fill 0.3s ease !important;
 }
 
+/* If scripting is unavailable, never leave content hidden. */
 @media (scripting: none) {
   [data-reveal] {
     opacity: 1;
@@ -602,22 +557,6 @@ button:hover .arrow-static,
 .is-ready .hero-fade {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-}
-
-/* Every page gets a short entrance on navigation (app/template.tsx). */
-@keyframes page-enter {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 14px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.page-enter {
-  animation: page-enter 0.62s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 /* ==========================================================================

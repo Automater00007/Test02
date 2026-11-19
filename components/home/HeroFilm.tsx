@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { site } from "@/lib/content";
-import HeroLens from "@/components/home/HeroLens";
+import HeroVideo from "@/components/home/HeroVideo";
+import { OPEN_BOOKING_EVENT } from "@/components/BookingPopup";
 
 /**
  * Hero — a single full-viewport stage with the site navigation over it.
  *
- * The background is the image-cycling circular lens reveal; the layout and
- * copy stay as they were: eyebrow and coordinates on top, the headline and
- * Reserve button along the bottom, and a quiet scroll cue.
+ * The background is the property film (poster first, video once it can play);
+ * the layout and copy stay as they were: eyebrow and coordinates on top, the
+ * headline and Reserve button along the bottom, and a quiet scroll cue.
  */
 export default function HeroFilm() {
   const [ready, setReady] = useState(false);
@@ -27,7 +27,7 @@ export default function HeroFilm() {
       aria-label="Twin Towers by Defoy"
     >
       <div className="journey-sticky">
-        <HeroLens />
+        <HeroVideo />
         <div className="journey-scrim" aria-hidden="true" />
 
         <div className="absolute inset-x-0 top-[68px] z-10 flex items-start justify-between p-[clamp(1rem,2.4vw,2rem)] md:top-[80px]">
@@ -71,9 +71,10 @@ export default function HeroFilm() {
             className="hero-fade w-fit self-start mr-[clamp(2.5rem,7vw,5rem)] lg:mb-12 lg:self-end"
             style={{ ["--hero-delay" as string]: "520ms" }}
           >
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-3 bg-walnut px-6 py-5 font-mono text-[11px] uppercase tracking-[0.2em] text-paper transition-colors duration-300 hover:bg-walnut-brown"
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent(OPEN_BOOKING_EVENT))}
+              className="group inline-flex cursor-pointer items-center gap-3 bg-walnut px-6 py-5 font-mono text-[11px] uppercase tracking-[0.2em] text-paper transition-colors duration-300 hover:bg-walnut-brown"
               style={{ width: "fit-content" }}
             >
               Reserve
@@ -87,7 +88,7 @@ export default function HeroFilm() {
               >
                 <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.2" />
               </svg>
-            </Link>
+            </button>
           </div>
         </div>
 

@@ -53,7 +53,7 @@ export default function RevealObserver() {
       },
       // Trigger just before an element reaches the fold so the motion is
       // already playing by the time it is comfortably in view.
-      { rootMargin: "0px 0px 8% 0px", threshold: 0.01 },
+      { rootMargin: "0px 0px -3% 0px", threshold: 0.02 },
     );
 
     const scan = () => {

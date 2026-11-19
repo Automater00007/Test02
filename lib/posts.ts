@@ -15,6 +15,14 @@ import type { SanityImage, SanityPost, SanityPostListItem } from "@/sanity/lib/t
 
 const FALLBACK_IMAGE = img.aerial;
 
+/**
+ * Blog fetches are cached with the `post` tag so the Sanity webhook can bust
+ * them instantly, but they also carry a short time window. Without the window
+ * a published post (and a slug that 404'd before publication) stayed cached
+ * until the next deploy whenever the webhook was missing or misconfigured.
+ */
+const POST_REVALIDATE_SECONDS = 60;
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -28,6 +36,9 @@ export type BlogPost = {
   read: string;
   image: string;
   imageAlt: string;
+  /** Wide image at the top of the article — deliberately different from `image`. */
+  heroImage: string;
+  heroImageAlt: string;
   /** Legacy paragraph array for the static fallback posts. */
   body: string[] | null;
   /** Portable Text body for CMS posts. */
@@ -74,6 +85,9 @@ function imageUrl(image?: SanityImage | null, width = 1600) {
 
 function mapSanityPost(post: SanityPostListItem | SanityPost): BlogPost {
   const full = post as SanityPost;
+  // No fallback to the cover image: the article hero stays empty until a hero
+  // image is uploaded, and the page then renders the title on a plain dark band.
+  const hero = full.heroImage?.asset ? full.heroImage : null;
   return {
     slug: post.slug,
     title: post.title,
@@ -84,6 +98,8 @@ function mapSanityPost(post: SanityPostListItem | SanityPost): BlogPost {
     read: normaliseRead(post.readTime),
     image: imageUrl(post.mainImage),
     imageAlt: post.mainImage?.alt || post.title,
+    heroImage: hero ? imageUrl(hero, 1400) : "",
+    heroImageAlt: hero?.alt || post.title,
     body: null,
     portableBody: full.body ?? null,
     author: post.author?.name,
@@ -123,6 +139,8 @@ function mapStaticPost(post: (typeof staticPosts)[number]): BlogPost {
     read: post.read,
     image: post.image,
     imageAlt: post.title,
+    heroImage: post.heroImage,
+    heroImageAlt: post.title,
     body: post.body,
     portableBody: null,
     quote: post.quote,
@@ -140,7 +158,7 @@ export const getAllPosts = cache(async (): Promise<BlogPost[]> => {
     const posts = await client.fetch<SanityPostListItem[]>(
       allPostsQuery,
       {},
-      { next: { revalidate: 300, tags: ["post"] } },
+      { next: { revalidate: POST_REVALIDATE_SECONDS, tags: ["post"] } },
     );
     return posts.map(mapSanityPost);
   } catch {
@@ -157,7 +175,7 @@ export const getLatestPosts = cache(async (limit = 3): Promise<BlogPost[]> => {
     const posts = await client.fetch<SanityPostListItem[]>(
       latestPostsQuery,
       { limit },
-      { next: { revalidate: 300, tags: ["post"] } },
+      { next: { revalidate: POST_REVALIDATE_SECONDS, tags: ["post"] } },
     );
     return posts.map(mapSanityPost);
   } catch {
@@ -177,7 +195,7 @@ export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null
     const post = await client.fetch<SanityPost>(
       isEnabled ? draftPostBySlugQuery : postBySlugQuery,
       { slug },
-      isEnabled ? { cache: "no-store" } : { next: { revalidate: 300, tags: ["post"] } },
+      isEnabled ? { cache: "no-store" } : { next: { revalidate: POST_REVALIDATE_SECONDS, tags: ["post"] } },
     );
     return post ? mapSanityPost(post) : null;
   } catch {
@@ -194,7 +212,7 @@ export const getAllPostSlugs = cache(async (): Promise<string[]> => {
     const slugs = await client.fetch<{ slug: string }[]>(
       allSlugsQuery,
       {},
-      { next: { revalidate: 300, tags: ["post"] } },
+      { next: { revalidate: POST_REVALIDATE_SECONDS, tags: ["post"] } },
     );
     return slugs.map((item) => item.slug).filter(Boolean);
   } catch {

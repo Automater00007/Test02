@@ -11,18 +11,23 @@ import {
 } from "framer-motion";
 import { rooms, site } from "@/lib/content";
 import SplitText from "@/components/ui/SplitText";
+import { photo } from "@/lib/photos";
 
 const suiteImages: Record<string, string[]> = {
   "premium-balcony-room": [
-    "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1600&q=80",
+    photo("suite-king-1"),
+    photo("suite-king-2"),
+    photo("suite-king-3"),
+    photo("balcony"),
+    photo("room-detail"),
+    photo("bathroom"),
   ],
   "attic-room": [
-    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1615655406736-b37c4fabf923?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1600&q=80",
+    photo("suite-attic-1"),
+    photo("suite-attic-2"),
+    photo("suite-attic-3"),
+    photo("balcony-breakfast"),
+    photo("bathroom-2"),
   ],
 };
 

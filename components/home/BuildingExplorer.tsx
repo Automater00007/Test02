@@ -2,23 +2,18 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import SplitText from "@/components/ui/SplitText";
 import { useAutoRotate } from "@/lib/useAutoRotate";
+import { photo } from "@/lib/photos";
 
-/* TEMP: internet test images for the floor cards. Swap back to the local
-   property library (`imagePool`) once the user is done testing. */
+/* One photograph per floor, from the arrival up to the attic rooms. */
 const floorShots = [
-  "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80",
+  photo("entrance"),
+  photo("suite-king-1"),
+  photo("balcony"),
+  photo("suite-attic-3"),
+  photo("suite-attic-1"),
 ];
 
 const floors = [
@@ -63,15 +58,7 @@ export default function BuildingExplorer() {
     advance,
     hoverProps,
     swipeProps,
-  } = useAutoRotate(floors.length, 3600, reduce);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [-12, 0, 12]);
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [8, 0, -4]);
-  const floatY = useTransform(scrollYProgress, [0, 1], [18, -18]);
+  } = useAutoRotate(floors.length, 4200, reduce);
 
   return (
     <section
@@ -147,85 +134,73 @@ export default function BuildingExplorer() {
             </div>
           </div>
 
-          <div className="md:col-span-6 md:col-start-7" style={{ perspective: 1600 }}>
+          <div className="md:col-span-6 md:col-start-7">
             <div
-              className="relative flex min-h-[440px] touch-pan-y items-center justify-center md:min-h-[640px]"
+              className="relative h-full min-h-[400px] overflow-hidden rounded-2xl border border-line bg-deep sm:min-h-[480px] md:min-h-[640px]"
               data-reveal="zoom"
               {...hoverProps(advance)}
               {...swipeProps}
             >
-              {/* soft floor shadow */}
-              <div className="absolute bottom-10 left-1/2 h-10 w-[70%] -translate-x-1/2 rounded-[50%] bg-ink/10 blur-2xl" />
-
-              <motion.div
-                className="relative w-full max-w-[560px]"
-                style={
-                  reduce
-                    ? { transformStyle: "preserve-3d" }
-                    : { rotateY, rotateX, y: floatY, transformStyle: "preserve-3d" }
-                }
-              >
-                {/* shared roof sits above the top floor */}
-                <div className="mx-auto mb-1 h-2 w-[92%] rounded-full bg-ink/15" />
-                <div className="mx-auto mb-2 h-1 w-[70%] rounded-full bg-ink/10" />
-
-                <div className="flex flex-col-reverse gap-1.5">
-                  {floors.map((f, i) => {
-                    const isActive = i === active;
-                    return (
-                      <motion.button
-                        key={f.label}
-                        type="button"
-                        onClick={() => select(i)}
-                        aria-label={`Explore the ${f.label} floor`}
-                        className="relative mx-auto block w-[88%] overflow-hidden rounded-xl border border-line bg-paper text-left"
-                        style={{ transformStyle: "preserve-3d" }}
-                        animate={{
-                          z: isActive ? 120 : 0,
-                          x: isActive ? 28 : 0,
-                          rotateY: isActive ? -7 : 0,
-                          scale: isActive ? 1.035 : 1,
-                          opacity: 1,
-                        }}
-                        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                      >
-                        <div className="relative h-[68px] md:h-[116px]">
-                          <Image
-                            src={f.image}
-                            alt=""
-                            fill
-                            sizes="(min-width: 768px) 560px, 88vw"
-                            loading="lazy"
-                            className="object-cover"
-                          />
-                          {/* Text sits straight on the photograph — no chip or
-                              veil. A soft shadow keeps it legible. */}
-                          <div className="absolute inset-y-0 left-0 flex items-center pl-3 sm:pl-4">
-                            <span className="flex items-center gap-3 sm:gap-4">
-                              <span
-                                className="tabular text-[0.7rem] font-semibold uppercase leading-none tracking-[0.16em] text-ivory/90 [text-shadow:0_1px_6px_rgba(0,0,0,0.65)] sm:text-[0.58rem]"
-                              >
-                                {f.label}
-                              </span>
-                              <span className="text-[1.1rem] font-semibold leading-none tracking-[-0.01em] text-ivory [text-shadow:0_1px_8px_rgba(0,0,0,0.7)] sm:text-[0.78rem]">
-                                {f.title}
-                              </span>
-                              <span
-                                className={`h-1.5 w-1.5 rounded-full [box-shadow:0_1px_4px_rgba(0,0,0,0.55)] transition-colors ${
-                                  isActive ? "bg-ivory" : "bg-ivory/45"
-                                }`}
-                              />
-                            </span>
-                          </div>
-                        </div>
-                        {/* thin slab edge */}
-                        <span className="absolute inset-x-0 bottom-0 h-[3px] bg-gradient-to-r from-transparent via-ink/15 to-transparent" />
-                      </motion.button>
-                    );
-                  })}
+              {floors.map((f, i) => (
+                <motion.div
+                  key={f.label}
+                  className="absolute inset-0"
+                  initial={false}
+                  animate={{
+                    opacity: i === active ? 1 : 0,
+                    scale: i === active ? 1 : 1.06,
+                  }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  aria-hidden={i !== active}
+                >
+                  <Image
+                    src={f.image}
+                    alt={`${f.label} floor — ${f.title}`}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    loading={i === 0 ? "eager" : "lazy"}
+                    className="object-cover"
+                  />
+                </motion.div>
+              ))}
+              {/* Legibility wash — photographic, never opaque */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-deep/85 via-deep/20 to-transparent"
+              />
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-5 p-5 sm:p-7">
+                <div>
+                  <p className="eyebrow text-ivory/75">
+                    {String(active + 1).padStart(2, "0")} — {floors[active].label} floor
+                  </p>
+                  <p className="mt-2 font-display text-[clamp(1.6rem,2.6vw,2.3rem)] font-bold leading-[1.02] text-ivory">
+                    {floors[active].title}
+                  </p>
                 </div>
+                <span className="tabular shrink-0 pb-1 text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-ivory/70">
+                  {String(active + 1).padStart(2, "0")} / {String(floors.length).padStart(2, "0")}
+                </span>
+              </div>
+            </div>
 
-              </motion.div>
+            {/* Slim floor ticks — a tap jumps straight to a floor */}
+            <div className="mt-3 flex items-center gap-1.5">
+              {floors.map((f, i) => (
+                <button
+                  key={f.label}
+                  type="button"
+                  onClick={() => select(i)}
+                  aria-label={`Show the ${f.label} floor`}
+                  aria-current={i === active}
+                  className="grid h-10 flex-1 place-items-center rounded-full transition-colors hover:bg-ink/5"
+                >
+                  <span
+                    className={`h-1 w-full rounded-full transition-colors duration-500 ${
+                      i === active ? "bg-crimson" : "bg-ink/15"
+                    }`}
+                  />
+                </button>
+              ))}
             </div>
           </div>
         </div>

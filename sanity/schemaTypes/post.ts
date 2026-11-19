@@ -67,6 +67,23 @@ export const post = defineType({
       ],
     }),
     defineField({
+      name: "heroImage",
+      title: "Article hero image",
+      type: "image",
+      group: "content",
+      options: { hotspot: true },
+      description:
+        "Full-width image behind the article title. Use a different photo from the cover image so the blog card and the article hero never look identical. Leave empty to show no photo at all — the title then sits on a plain dark band, so nothing is picked automatically.",
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt text",
+          type: "string",
+          description: "Describe the photo if it differs from the cover image.",
+        }),
+      ],
+    }),
+    defineField({
       name: "publishedAt",
       title: "Published at",
       type: "datetime",

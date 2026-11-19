@@ -36,5 +36,8 @@ next-env.d.ts
 .vscode/
 .idea/
 
+# media sources — the site serves the compressed hero MP4s, not this master file
+public/Video/hero.mov
+
 # os
 Thumbs.db

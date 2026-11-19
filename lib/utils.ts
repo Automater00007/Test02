@@ -20,9 +20,3 @@ export const formatPrice = (n: number) =>
   }).format(n);
 
 export const mapsHref = `https://www.google.com/maps/dir/?api=1&destination=${site.coords.replace(/\s/g, "")}`;
-
-export const slugify = (s: string) =>
-  s
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");

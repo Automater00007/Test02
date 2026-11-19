@@ -5,7 +5,7 @@ import PageHeader from "@/components/PageHeader";
 import CountUp from "@/components/ui/CountUp";
 import { site } from "@/lib/content";
 import { JsonLd, breadcrumb } from "@/lib/schema";
-import { twinImg } from "@/lib/testImages";
+import { photo } from "@/lib/photos";
 
 export const metadata: Metadata = {
   title: "The Hotel",
@@ -44,7 +44,7 @@ export default function HotelPage() {
         ])}
       />
       <PageHeader
-        image="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80"
+        image={photo("exterior")}
         eyebrow="The hotel · Story and numbers"
         title={
           <>
@@ -65,7 +65,7 @@ export default function HotelPage() {
               <h2
                 id="story-heading"
                 className="mt-5 max-w-[16ch] text-[clamp(2rem,3.4vw,3.4rem)] font-bold leading-[0.98] tracking-[-0.04em]"
-                data-reveal="tilt"
+                data-reveal="zoom"
               >
                 Built as a house first, <em className="text-clay">a hotel second.</em>
               </h2>
@@ -140,7 +140,7 @@ export default function HotelPage() {
               <h2
                 id="amenities-heading"
                 className="mt-5 text-[clamp(2rem,3.4vw,3.4rem)] font-bold leading-[1] tracking-[-0.04em]"
-                data-reveal="tilt"
+                data-reveal="zoom"
               >
                 Small things, <em className="text-clay">already included.</em>
               </h2>
@@ -177,7 +177,7 @@ export default function HotelPage() {
                 style={{ ["--reveal-delay" as string]: `${i * 110}ms` }}
               >
                 <Image
-                  src={twinImg(name)}
+                  src={photo(name)}
                   alt={`Twin Towers by Defoy — ${name}`}
                   fill
                   sizes="(min-width: 768px) 33vw, 100vw"

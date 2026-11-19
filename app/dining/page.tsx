@@ -4,7 +4,7 @@ import Image from "next/image";
 import PageHeader from "@/components/PageHeader";
 import { site } from "@/lib/content";
 import { JsonLd, breadcrumb } from "@/lib/schema";
-import { twinImg } from "@/lib/testImages";
+import { photo } from "@/lib/photos";
 
 export const metadata: Metadata = {
   title: "Dining",
@@ -29,7 +29,7 @@ export default function DiningPage() {
         ])}
       />
       <PageHeader
-        image="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1600&q=80"
+        image={photo("restaurant")}
         fullViewport
         eyebrow="Dining · The house kitchen"
         title={
@@ -51,7 +51,7 @@ export default function DiningPage() {
               <h2
                 id="dining-details"
                 className="mt-5 text-[clamp(1.9rem,3.2vw,3.2rem)] font-bold leading-[1] tracking-[-0.04em]"
-                data-reveal="tilt"
+                data-reveal="zoom"
               >
                 Three sittings, <em className="text-clay">one kitchen.</em>
               </h2>
@@ -120,7 +120,7 @@ export default function DiningPage() {
                 style={{ ["--reveal-delay" as string]: `${i * 110}ms` }}
               >
                 <Image
-                  src={twinImg(name)}
+                  src={photo(name)}
                   alt={`The ${name} at Twin Towers by Defoy`}
                   fill
                   sizes="(min-width: 768px) 33vw, 100vw"

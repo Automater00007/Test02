@@ -18,7 +18,7 @@ export default async function BlogTeaser() {
             <h2
               id="blog-heading"
               className="mt-6 max-w-[18ch] text-[clamp(2.1rem,3.9vw,3.9rem)] font-bold leading-[0.95] tracking-[-0.04em]"
-              data-reveal="tilt"
+              data-reveal="zoom"
             >
               Notes from the <em>slow side.</em>
             </h2>
@@ -43,7 +43,7 @@ export default async function BlogTeaser() {
                 <Link
                   href={`/blog/${post.slug}`}
                   className="group block"
-                  data-reveal="flip"
+                  data-reveal="left"
                   style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
                 >
                   <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-paper-2" data-reveal="mask">

@@ -33,6 +33,7 @@ export type SanityPostListItem = {
 };
 
 export type SanityPost = SanityPostListItem & {
+  heroImage?: SanityImage | null;
   body?: PortableTextBlock[] | null;
   author?: { name: string; role?: string; image?: SanityImage | null; bio?: string } | null;
   seo?: SanitySeo | null;

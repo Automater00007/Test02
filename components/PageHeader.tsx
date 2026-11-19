@@ -55,7 +55,7 @@ export default function PageHeader({
             <div className="md:col-span-8">
               <h1
                 className="text-[clamp(2.5rem,5.4vw,5.4rem)] leading-[0.9] tracking-[-0.05em]"
-                data-reveal="rise"
+                data-reveal
               >
                 {title}
               </h1>

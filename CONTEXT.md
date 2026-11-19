@@ -24,7 +24,7 @@ Marketing website for **Twin Towers by Defoy**, Pahalgam, Jammu & Kashmir — a 
 - Check-in 2 pm, check-out 12 pm.
 - Address: W7CF+W2P Dehwathu, Pahalgam, J&K 192401.
 - Coordinates: 33.92305759663491, 75.27313041534288.
-- Phone/WhatsApp: +91 95418 98817. Email: info@defoy.in.
+- Phone/WhatsApp: +91 95418 98817. Email: twintowers@defoy.in.
 - Sanity project: `tcbet7sh`, dataset `production`.
 
 ## Status

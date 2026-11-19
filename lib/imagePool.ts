@@ -1,6 +1,4 @@
-import { twinImg } from "@/lib/testImages";
-
-const twin = (name: string) => twinImg(name);
+import { photo } from "@/lib/photos";
 
 export type PoolImage = { src: string; alt: string };
 
@@ -10,52 +8,33 @@ export type PoolImage = { src: string; alt: string };
  * server render and the client hydration.
  */
 export const imagePool: PoolImage[] = [
-  { src: twin("exterior"), alt: "Twin Towers by Defoy against the pines" },
-  { src: twin("facade"), alt: "Five storeys framed in timber and brick" },
-  { src: twin("entrance"), alt: "Entrance canopy and stone drive" },
-  { src: twin("lawn"), alt: "The lawn with rope chairs and the valley" },
-  { src: twin("lounge"), alt: "Lounge with warm lighting" },
-  { src: twin("corridor"), alt: "Interior corridor with timber panelling" },
-  { src: twin("balcony"), alt: "Private balcony facing the mountains" },
-  { src: twin("restaurant"), alt: "The restaurant at Twin Towers by Defoy" },
-  { src: twin("reception"), alt: "Reception desk in warm timber" },
-  { src: twin("approach"), alt: "The approach to the property" },
-  { src: twin("elevator"), alt: "Timber-lined elevator lobby" },
-  { src: twin("poster-1"), alt: "Twin Towers by Defoy, hero view" },
-  { src: twin("poster-2"), alt: "The house in the afternoon light" },
-  { src: twin("poster-3"), alt: "Balconies above the lawn" },
-  { src: twin("poster-4"), alt: "The valley beyond the roofline" },
-  { src: twin("suite-king-1"), alt: "Premium Room with king bed" },
-  { src: twin("suite-king-2"), alt: "Premium Room in warm daylight" },
-  { src: twin("suite-king-3"), alt: "Premium Room detail" },
-  { src: twin("suite-king-4"), alt: "Premium Room balcony light" },
-  { src: twin("suite-attic-1"), alt: "Attic Room under the roof" },
-  { src: twin("suite-attic-2"), alt: "Attic Room timber panelling" },
-  { src: twin("suite-attic-3"), alt: "Attic Room window" },
+  { src: photo("exterior"), alt: "Twin Towers by Defoy from the lawn" },
+  { src: photo("facade"), alt: "The house against the mountains" },
+  { src: photo("entrance"), alt: "The glass entrance and lounge" },
+  { src: photo("approach"), alt: "The approach and parking court" },
+  { src: photo("lawn"), alt: "The garden walk at dusk" },
+  { src: photo("lawn-night"), alt: "A fire on the lawn after dark" },
+  { src: photo("lounge"), alt: "The lounge, timber and deep sofas" },
+  { src: photo("lobby"), alt: "The lobby, looking toward reception" },
+  { src: photo("reception"), alt: "The reception lounge" },
+  { src: photo("corridor"), alt: "The corridor on the room floors" },
+  { src: photo("balcony"), alt: "A private balcony facing the valley" },
+  { src: photo("balcony-breakfast"), alt: "Breakfast on the balcony" },
+  { src: photo("restaurant"), alt: "The restaurant, with the valley in the window" },
+  { src: photo("restaurant-2"), alt: "Tables laid in the dining room" },
+  { src: photo("bathroom"), alt: "A marble bathroom with a walk-in shower" },
+  { src: photo("bathroom-2"), alt: "The stone bathroom in the attic rooms" },
+  { src: photo("room-detail"), alt: "A king bed and a tray of fruit" },
+  { src: photo("poster-1"), alt: "Twin Towers by Defoy from the lawn" },
+  { src: photo("poster-2"), alt: "The house under fresh snow" },
+  { src: photo("suite-king-1"), alt: "Premium Room with king bed" },
+  { src: photo("suite-king-2"), alt: "Premium Room in warm daylight" },
+  { src: photo("suite-king-3"), alt: "Premium Room, bed and reading chair" },
+  { src: photo("suite-king-4"), alt: "Premium Room with a window seat" },
+  { src: photo("suite-king-5"), alt: "Premium Room, tufted headboard" },
+  { src: photo("suite-king-6"), alt: "Premium Room from the doorway" },
+  { src: photo("suite-king-7"), alt: "Premium Room under warm downlights" },
+  { src: photo("suite-attic-1"), alt: "Attic Room under the roof" },
+  { src: photo("suite-attic-2"), alt: "Attic Room with a window to the valley" },
+  { src: photo("suite-attic-3"), alt: "Attic Room, timber panelling" },
 ];
-
-/** Small, deterministic PRNG so seeded picks are stable across renders. */
-function mulberry32(seed: number) {
-  let a = seed >>> 0;
-  return () => {
-    a |= 0;
-    a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-/**
- * Returns `count` images, shuffled deterministically for the given seed.
- * Duplicates are avoided until the whole pool has been used.
- */
-export function pickImages(seed: number, count: number): PoolImage[] {
-  const rand = mulberry32(seed);
-  const deck = [...imagePool];
-  for (let i = deck.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(rand() * (i + 1));
-    [deck[i], deck[j]] = [deck[j], deck[i]];
-  }
-  return Array.from({ length: count }, (_, i) => deck[i % deck.length]);
-}

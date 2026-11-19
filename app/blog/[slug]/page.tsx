@@ -7,6 +7,10 @@ import { site } from "@/lib/content";
 import { getAllPostSlugs, getAllPosts, getPostBySlug } from "@/lib/posts";
 import { JsonLd, breadcrumb } from "@/lib/schema";
 
+// Articles regenerate every minute so a fresh post appears, and a slug that
+// 404'd before it was published stops 404ing, even without the webhook.
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const slugs = await getAllPostSlugs();
   return slugs.map((slug) => ({ slug }));
@@ -23,24 +27,37 @@ export async function generateMetadata({
 
   const title = post.seo?.metaTitle || post.title;
   const description = post.seo?.metaDescription || post.excerpt;
-  const image = post.seo?.ogImage || post.image;
+  // Social cards still need an image even when the article has no hero.
+  const image = post.seo?.ogImage || post.heroImage || post.image;
 
-  return {
+  const metadata: Metadata = {
     title,
     description,
-    keywords: post.seo?.keywords?.length ? post.seo.keywords : undefined,
     alternates: {
       canonical: post.seo?.canonicalUrl || `/twin-towers/blog/${post.slug}`,
     },
-    robots: post.seo?.noIndex ? { index: false, follow: false } : undefined,
     openGraph: {
       type: "article",
+      url: post.seo?.canonicalUrl || `/twin-towers/blog/${post.slug}`,
+      siteName: "Twin Towers by Defoy",
       title,
       description,
       publishedTime: post.publishedAt,
-      images: [{ url: image, width: 1200, height: 630, alt: post.imageAlt }],
+      images: [{ url: image, width: 1200, height: 630, alt: post.heroImageAlt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
     },
   };
+
+  // Avoid explicit `undefined` keys — Next treats them as overriding the
+  // root layout's values rather than "not set".
+  if (post.seo?.keywords?.length) metadata.keywords = post.seo.keywords;
+  if (post.seo?.noIndex) metadata.robots = { index: false, follow: false };
+  return metadata;
 }
 
 export default async function PostPage({
@@ -70,7 +87,7 @@ export default async function PostPage({
             "@type": "BlogPosting",
             headline: post.title,
             description: post.excerpt,
-            image: post.seo?.ogImage || post.image,
+            image: post.seo?.ogImage || post.heroImage || post.image,
             datePublished: post.publishedAt,
             dateModified: post.publishedAt,
             author: {
@@ -84,54 +101,62 @@ export default async function PostPage({
       />
 
       <article className="pt-[68px] md:pt-[80px]">
-        <header className="shell">
-          <div className="flex items-center justify-between gap-4 border-b border-line py-5">
-            <div className="flex items-center gap-5">
-              <Link href="/blog" className="eyebrow text-ink/65 hover:text-ink">
+        <header className="relative isolate w-full overflow-hidden bg-walnut">
+          {post.heroImage ? (
+            <>
+              <Image
+                src={post.heroImage}
+                alt={post.heroImageAlt}
+                title={post.heroImageAlt}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+              {/* Keeps the title legible over any photo. */}
+              <div
+                className="absolute inset-0 bg-gradient-to-t from-walnut/90 via-walnut/60 to-walnut/45"
+                aria-hidden="true"
+              />
+            </>
+          ) : null}
+
+          <div className="shell relative flex min-h-[clamp(19rem,46svh,34rem)] flex-col justify-between gap-12 py-8 md:py-10">
+            <div className="flex items-center">
+              <Link
+                href="/blog"
+                className="eyebrow text-paper/75 transition-colors hover:text-paper"
+              >
                 Blog
               </Link>
             </div>
-            <span className="eyebrow hidden shrink-0 text-ink/65 sm:inline">{post.category}</span>
-          </div>
 
-          <div className="grid gap-8 pt-12 pb-10 md:grid-cols-12 md:pt-16">
-            <div className="md:col-span-9">
-              <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink/65">
-                {post.date} · {post.read} read
-                {post.author ? ` · ${post.author}` : ""}
-              </p>
+            <div className="mx-auto flex w-fit max-w-[54rem] flex-col items-start">
+              <p className="eyebrow text-paper/70">{post.category}</p>
               <h1
-                className="mt-5 text-[clamp(2.3rem,4.2vw,4.2rem)] leading-[0.92] tracking-[-0.05em]"
+                className="mt-4 w-full text-left text-[clamp(2rem,4vw,4rem)] leading-[1.02] tracking-[-0.03em] text-paper"
                 data-reveal
               >
                 {post.title}
               </h1>
+              <h2 className="sr-only">The full note — {post.title}</h2>
             </div>
-            <p
-              className="self-end font-display text-[1.1rem] leading-snug text-ink/65 md:col-span-3"
-              data-reveal
-              style={{ ["--reveal-delay" as string]: "120ms" }}
-            >
-              {post.excerpt}
-            </p>
           </div>
         </header>
 
         <div className="shell">
-          <div className="relative aspect-[16/9] overflow-hidden bg-paper-2" data-reveal="mask">
-            <Image
-              src={post.image}
-              alt={post.imageAlt}
-              fill
-              priority
-              sizes="100vw"
-              className="reveal-media object-cover"
-            />
+          <div className="mx-auto flex max-w-[68ch] flex-wrap items-center justify-between gap-3 border-b border-line py-4">
+            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-ink/75">
+              {post.author || "Twin Towers by Defoy"}
+            </p>
+            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-ink/75">
+              {post.date} · {post.read} read
+            </p>
           </div>
         </div>
 
-        <div className="shell py-14 md:py-20">
-          <div className="mx-auto max-w-[68ch]">
+        <div className="shell pb-10 pt-5 md:pb-12 md:pt-6">
+          <div className="mx-auto max-w-[68ch] [&>*:first-child]:mt-0">
             {post.portableBody ? (
               <PostBody value={post.portableBody} />
             ) : (
@@ -183,9 +208,9 @@ export default async function PostPage({
                 href={`/blog/${next.slug}`}
                 className="group mt-4 flex items-end justify-between gap-6"
               >
-                <h2 className="max-w-[18ch] text-[clamp(1.8rem,4vw,4rem)] leading-[0.98] transition-colors duration-500 group-hover:text-clay">
+                <p className="max-w-[18ch] font-display text-[clamp(1.6rem,3.3vw,3.2rem)] leading-[0.98] transition-colors duration-500 group-hover:text-clay">
                   {next.title}
-                </h2>
+                </p>
                 <span className="mb-2 text-3xl">
                   →
                 </span>
