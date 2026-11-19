@@ -215,7 +215,7 @@ function doPost(e) {
             checkout ? "Check-out: " + checkout : "",
             guests ? "Guests:    " + guests : "",
             "",
-            "A person from the resort will reply with availability and the final rate, usually within the hour on working days. If you would like to speak now, call or message +91 95418 98820.",
+            "A person from the resort will reply with availability and the final rate, usually within the hour on working days. If you would like to speak now, call or message +91 95418 98817.",
             "",
             "Twin Towers by Defoy",
             "Pahalgam, Jammu & Kashmir",

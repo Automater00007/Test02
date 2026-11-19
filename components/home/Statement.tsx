@@ -36,7 +36,7 @@ export default function Statement() {
             </div>
 
             <SplitText
-              text="Twenty-five rooms, every one with a balcony:"
+              text="Twenty-five rooms."
               as="h2"
               id="statement-heading"
               split="chars"
@@ -47,14 +47,13 @@ export default function Statement() {
               data-reveal
               style={{ ["--reveal-delay" as string]: "120ms" }}
             >
-              22 Premium Rooms and 3 Attic Rooms — a king bed and a balcony each.
+              Every one with a balcony.
             </p>
           </div>
 
           <div className="md:col-span-4 md:col-start-9">
             <p className="body-copy" data-reveal>
-              A family-run property on the road to Pahalgam — built for slow mornings,
-              long views and the kind of hospitality that remembers your name.
+              A family-run property on the road to Pahalgam.
             </p>
 
             <dl className="mt-8 grid grid-cols-2 gap-x-5 gap-y-6 border-t border-line pt-6">

@@ -232,7 +232,9 @@
     transform: translateY(0);
   }
 
-  /* Ghost / outline button on light surfaces */
+  /* Ghost / outline button on light surfaces. The hover text must always win
+     the cascade — Tailwind's text-* utilities live in a later layer than
+     this one, so the hover colour has to be marked important. */
   .btn-ghost {
     background: transparent;
     color: var(--color-crimson);
@@ -240,7 +242,7 @@
 
   .btn-ghost:hover,
   .btn-ghost:focus-visible {
-    color: var(--color-ivory);
+    color: var(--color-ivory) !important;
     border-color: var(--color-crimson);
   }
 

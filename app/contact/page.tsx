@@ -8,7 +8,7 @@ import { JsonLd, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Contact & Direct Booking",
   description:
-    "Reserve directly with Twin Towers by Defoy, Pahalgam. Choose a room, add dates and guests, and send a pre-filled WhatsApp message to +91 95418 98817. No OTAs.",
+    "Reserve directly with Twin Towers by Defoy, Pahalgam. Choose a room, add dates and guests and send the request — the team replies directly, usually within the hour. No OTAs.",
   alternates: { canonical: "/twin-towers/contact" },
 };
 
@@ -36,7 +36,7 @@ export default async function ContactPage({
             We’ll keep the <em className="text-clay">valley ready.</em>
           </>
         }
-        intro="No booking engine, no OTA, no commission. Choose a room and send us the details — the message opens directly in WhatsApp with the resort team."
+        intro="No booking engine, no OTA, no commission. Choose a room and send the request — the reservations team gets it directly, usually within the hour."
         aside={
           <div className="flex items-end justify-between border-t border-line pt-5">
             <div>

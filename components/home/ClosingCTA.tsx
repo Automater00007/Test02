@@ -29,8 +29,7 @@ export default function ClosingCTA() {
               className="mt-8 max-w-[34ch] text-[1rem] leading-[1.7] text-ink/70"
               data-reveal="fade"
             >
-              Twenty-five rooms. One valley. A direct line to the people who actually
-              run the place — no booking engines in between.
+              Twenty-five rooms, one valley, a direct line — no booking engines.
             </p>
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4" data-reveal="zoom">
@@ -46,7 +45,7 @@ export default function ClosingCTA() {
                 href={`https://wa.me/${site.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-ghost w-full justify-between border-line text-crimson hover:border-crimson sm:w-auto"
+                className="btn btn-ghost w-full justify-between border-line hover:border-crimson sm:w-auto"
               >
                 WhatsApp us
               </a>

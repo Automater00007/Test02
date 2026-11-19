@@ -17,7 +17,7 @@ const scenes = [
     key: "sunrise",
     label: "Sunrise",
     note: "First light",
-    body: "The valley wakes before the house does. The balcony is the first place the sun reaches.",
+    body: "First light reaches the balconies before the house wakes.",
     image: photo("balcony"),
     wash: "from-[#b25b2a]/55 via-[#e9a15c]/20 to-transparent",
     tint: "#d98a4a",
@@ -26,7 +26,7 @@ const scenes = [
     key: "midday",
     label: "Midday",
     note: "Clear light",
-    body: "The pines hold still, the lawn goes bright, and the mountains sit sharply against the sky.",
+    body: "The lawn goes bright against the pines.",
     image: photo("lawn"),
     wash: "from-[#432911]/25 via-transparent to-transparent",
     tint: "#7b6a4f",
@@ -35,7 +35,7 @@ const scenes = [
     key: "golden",
     label: "Golden hour",
     note: "Last warmth",
-    body: "The light turns amber and everything on the balcony — the railing, the chair, the cup — goes warm.",
+    body: "The light turns amber; the balcony goes warm.",
     image: photo("facade"),
     wash: "from-[#9c4f1f]/60 via-[#dda04a]/22 to-transparent",
     tint: "#c47a32",
@@ -44,7 +44,7 @@ const scenes = [
     key: "night",
     label: "Night",
     note: "After dark",
-    body: "The valley disappears into the dark and the sky takes over. A last look before the door closes.",
+    body: "The valley disappears; the sky takes over.",
     image: photo("lawn-night"),
     wash: "from-[#1b2238]/70 via-[#2a1a0e]/35 to-transparent",
     tint: "#4a5068",
@@ -91,8 +91,7 @@ export default function BalconyView() {
               className="mt-6 text-[clamp(2.1rem,3.7vw,3.7rem)] font-bold leading-[0.97] tracking-[-0.04em]"
             />
             <p className="body-copy mt-8 max-w-md" data-reveal="fade">
-              Every room has one. The view does the rest. Watch the same balcony
-              change from first light to after dark.
+              Each room has one. Watch it change from first light to after dark.
             </p>
 
             <div className="mt-10 border-t border-line">

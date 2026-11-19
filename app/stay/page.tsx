@@ -30,7 +30,7 @@ export default function StayPage() {
             Three under <em className="text-clay">the roof.</em>
           </>
         }
-        intro="Twenty-two Premium Rooms with a king bed and a balcony of their own, plus 3 Attic Rooms tucked under the roof on the fourth floor — a private place to watch the lawn, the pines and the light change."
+        intro="22 premium rooms and 3 attics — king beds, balconies and the lawn outside."
         aside={
           <div className="flex items-end justify-between border-t border-line pt-5">
             <div>

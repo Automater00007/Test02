@@ -56,9 +56,7 @@ export default function LocationSection() {
             </h2>
 
             <p className="body-copy mt-8 max-w-md" data-reveal>
-              Pahalgam sits at 2,200 metres on the road to the valley. Srinagar Airport is
-              95 km away — roughly two and a half to three hours by road, and a different
-              world by the time you arrive.
+              Srinagar Airport is 95 km away — about three hours by road.
             </p>
 
             <dl className="mt-10 border-t border-line">

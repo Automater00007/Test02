@@ -55,6 +55,30 @@ adapted to Twin's branding, room data and URLs (`/blog`, `/stay`).
 - [x] Pruned the `experiences` content/type and the now-unused `slugify` helper.
 - [x] Confirmed sitemap / redirects contain no deleted routes.
 
+## J. Copy audit, gallery grid, house collage, dotted servers
+- [x] Removed the unnecessary Guest-notes stats band (25 rooms / 5 storeys /
+      2 towers / 360°), shortened the heading and intro.
+- [x] Shortened headings and body copy across the homepage sections
+      (statement, suites, building, restaurant, balcony, location, FAQ,
+      closing CTA, stay page intro, balcony scene notes).
+- [x] Estate desktop: replaced the overlapping rotated fan cards with a calm
+      3×2 grid — every caption fully visible, mask-revealed, no overlap.
+- [x] /gallery on mobile: 2-column masonry, standard frames now 3/4 portrait
+      (was 1 col of giant squares).
+- [x] Killed all test dev servers; only the user's review server stays up.
+
+## I. Booking forms — contact form wired to /api/booking
+- [x] Contact form now POSTs to /api/booking (name + email + phone + room slug),
+      validates, honeypot, then lands on /thank-you#room=<slug>. WhatsApp remains
+      a one-tap fallback. `/contact?room=<slug>` still preselects (used by /stay).
+- [x] API verified end-to-end: honeypot→201, missing contact→422, bad email→422,
+      bad dates→422, unknown room→422, bad popup category→422, rate-limit→429,
+      valid without webhook→503 (friendly "not connected yet" message).
+- [x] Script `scripts/google-apps-script/booking.gs` is Twin-branded (emails
+      twintowers@defoy.in, phones +91 95418 98817, Bookings/Popup sheet tabs).
+- [x] Re-fixed ghost-button hover cascade bug (utilities layer beat components;
+      .btn-ghost:hover now forces ivory text) — "Reserve this room" etc.
+
 ## H. Content — room inventory, order, buttons, images
 - [x] Documented the real split everywhere: 25 rooms = 22 Premium Rooms with
       Balcony + 3 Attic Rooms (content.ts, stay, hotel, statement, suites,

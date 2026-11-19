@@ -99,7 +99,7 @@ export default function DiningPage() {
                   href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Hello Twin Towers by Defoy, I would like to ask about dining.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-ghost border-line text-crimson hover:border-crimson"
+                  className="btn btn-ghost border-line hover:border-crimson"
                 >
                   Ask on WhatsApp
                 </a>

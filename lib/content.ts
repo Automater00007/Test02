@@ -239,13 +239,6 @@ export const faqs = [
   },
 ];
 
-export const stats = [
-  { value: 25, suffix: "", label: "Rooms — 22 premium · 3 attic" },
-  { value: 5, suffix: " storeys", label: "Twin towers" },
-  { value: 2, suffix: " towers", label: "One roof" },
-  { value: 360, suffix: "°", label: "Valley views" },
-];
-
 export const policies = [
   {
     title: "Check-in & check-out",

@@ -2,9 +2,7 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { stats } from "@/lib/content";
 import type { Review } from "@/lib/googleReviews";
-import CountUp from "@/components/ui/CountUp";
 import ReviewText from "@/components/ReviewText";
 import { useAutoRotate } from "@/lib/useAutoRotate";
 
@@ -40,43 +38,23 @@ export default function GuestNotes({
             </div>
             <h2
               id="reviews-heading"
-              className="mt-5 text-[clamp(1.9rem,3vw,3.1rem)] font-bold leading-[0.96] tracking-[-0.04em]"
+              className="mt-5 text-[clamp(2.2rem,3.4vw,3.4rem)] font-bold leading-[0.96] tracking-[-0.04em]"
               data-reveal
             >
-              Small numbers. <span className="text-ink/70">That&rsquo;s the point.</span>
+              What guests <em className="text-clay">say.</em>
             </h2>
           </div>
           <p
-            className="max-w-sm text-[0.98rem] leading-[1.75] text-ink/70 md:col-span-4 md:col-start-9"
+            className="max-w-sm text-[0.95rem] leading-[1.65] text-ink/60 md:col-span-4 md:col-start-9"
             data-reveal="fade"
           >
-            Twenty-five rooms, a handful of staff, and guests who tend to stay longer
-            than they planned. These are their notes.
+            Notes from people who stayed.
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-y-8 border-y border-line py-8 md:grid-cols-4 md:gap-6">
-          {stats.map((s, i) => (
-            <div
-              key={s.label}
-              className="md:border-l md:border-line md:pl-6 md:first:border-l-0 md:first:pl-0"
-              data-reveal="zoom"
-              style={{ ["--reveal-delay" as string]: `${i * 80}ms` }}
-            >
-              <p className="tabular font-display text-[clamp(1.9rem,2.7vw,2.7rem)] font-bold leading-none tracking-[-0.04em] text-crimson">
-                <CountUp value={s.value} suffix={s.suffix} />
-              </p>
-              <p className="mt-3 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-stone">
-                {s.label}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* 3D testimonial deck */}
+        {/* Testimonial deck */}
         <div
           className="relative mx-auto mt-10 h-[330px] w-full max-w-[480px] touch-pan-y"
-          style={{ perspective: 1600 }}
           aria-live="polite"
           data-reveal="zoom"
           {...hoverProps(advance)}
@@ -103,17 +81,12 @@ export default function GuestNotes({
                   className="absolute inset-x-0 top-0 mx-auto w-[min(92vw,440px)] origin-top rounded-2xl border border-line bg-paper p-6 shadow-[0_26px_70px_rgba(42,26,14,0.16)]"
                   style={{ transformStyle: "preserve-3d" }}
                   animate={{
-                    opacity: hidden ? 0 : 1 - offset * 0.15,
-                    y: offset * 15,
-                    x: offset * 8,
-                    scale: 1 - offset * 0.055,
-                    rotateX: offset * 3.6,
-                    rotateY: -offset * 4.2,
-                    rotateZ: offset * 1.1 * (offset % 2 === 0 ? 1 : -1),
-                    z: -offset * 70,
+                    opacity: hidden ? 0 : 1 - offset * 0.25,
+                    y: offset * 18,
+                    scale: 1 - offset * 0.06,
                     zIndex: hidden ? 0 : list.length - offset,
                   }}
-                  transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="flex items-center justify-between">
                     <span

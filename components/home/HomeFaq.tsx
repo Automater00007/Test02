@@ -30,8 +30,7 @@ export default function HomeFaq() {
               className="mt-6 text-[clamp(2.1rem,3.5vw,3.5rem)] font-bold leading-[0.98] tracking-[-0.04em]"
             />
             <p className="body-copy mt-8 max-w-sm" data-reveal>
-              The same answers we give on the phone. If yours isn&rsquo;t here, ask us
-              directly.
+              The same answers we give on the phone.
             </p>
             <Link href="/faq" className="link-line mt-6 inline-block text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-crimson" data-reveal="fade">
               All questions →

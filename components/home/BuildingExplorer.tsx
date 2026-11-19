@@ -81,8 +81,7 @@ export default function BuildingExplorer() {
               className="mt-6 text-[clamp(2.1rem,3.9vw,3.9rem)] font-bold leading-[0.96] tracking-[-0.04em]"
             />
             <p className="body-copy mt-8 max-w-md" data-reveal="fade">
-              Two towers share a single steep roof. Walk the stack from the stone
-              drive to the attic rooms and see how the house is put together.
+              Walk the stack from the stone drive to the attic rooms.
             </p>
 
             <div className="mt-10 border-t border-line">

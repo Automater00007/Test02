@@ -70,8 +70,7 @@ export default function Restaurant() {
               className="mt-6 text-[clamp(2.1rem,3.5vw,3.5rem)] font-bold leading-[0.98] tracking-[-0.04em]"
             />
             <p className="body-copy mt-8 max-w-md" data-reveal>
-              Ask the team what is fresh from the valley. The kitchen cooks for the
-              house, not for a crowd — and it shows.
+              Ask what&rsquo;s fresh from the valley. The kitchen cooks for the house.
             </p>
 
             <dl className="mt-10 border-t border-line">

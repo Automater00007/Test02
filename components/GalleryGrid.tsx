@@ -36,7 +36,7 @@ export default function GalleryGrid() {
 
   return (
     <>
-      <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4">
+      <div className="columns-2 gap-3 sm:columns-2 sm:gap-4 lg:columns-3 [&>*]:mb-3 sm:[&>*]:mb-4">
         {gallery.map((item, i) => (
           <button
             key={item.src + i}
@@ -53,7 +53,7 @@ export default function GalleryGrid() {
                   ? "aspect-[4/3]"
                   : item.span === "tall"
                     ? "aspect-[3/4]"
-                    : "aspect-square"
+                    : "aspect-[3/4]"
               }`}
             >
               <Image

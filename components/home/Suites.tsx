@@ -87,8 +87,7 @@ export default function Suites() {
             />
           </div>
           <p className="body-copy md:col-span-4 md:col-start-9" data-reveal="fade">
-            Twenty-two Premium Rooms with Balcony and 3 Attic Rooms — a king bed,
-            space for an extra bed and a private view of the lawn or the valley.
+            Twenty-two premium rooms and three attics — a king bed and a balcony each.
           </p>
         </div>
 
@@ -268,7 +267,7 @@ export default function Suites() {
               </Link>
               <Link
                 href="/contact"
-                className="btn btn-ghost mt-3 w-full justify-between border-line text-crimson hover:border-crimson"
+                className="btn btn-ghost mt-3 w-full justify-between border-line hover:border-crimson"
               >
                 Reserve this room
                 <Arrow />
